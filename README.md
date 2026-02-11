@@ -74,5 +74,4 @@ NoraFit ofrece una solución completamente gratuita para que cualquier persona p
 * `/assets`: Recursos gráficos y logotipos de Drive Control.
 
 ---
-© 2026 NoraFit - Entrena. Registra. Progresa.
-Proyectos Académicos | Pontificia Universidad Javeriana.
+© 2026 NoraFit | Pontificia Universidad Javeriana.
