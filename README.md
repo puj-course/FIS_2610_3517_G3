@@ -1,118 +1,78 @@
-# fis_boilerplate
-## Descripción de cada directorio y archivos
-```bash
-project-name/
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   │   ├── bug_report.md
-│   │   ├── feature_request.md
-│   ├── PULL_REQUEST_TEMPLATE.md
-│   └── workflows/
-│       ├── ci.yml
-│       └── cd.yml
-├── conf/
-│   ├── config.yaml
-│   └── settings.json
-├── docs/
-│   ├── api/
-│   ├── architecture/
-│   └── user_guide/
-├── jupyter/
-│   ├── notebooks/
-│   │   ├── exploration.ipynb
-│   │   └── analysis.ipynb
-│   └── datasets/
-│       ├── data1.csv
-│       └── data2.csv
-├── scripts/
-│   ├── setup.sh
-│   ├── deploy.sh
-│   └── test.sh
-├── src/
-│   ├── main/
-│   │   ├── java/ (o python/, etc. según el lenguaje)
-│   │   └── resources/
-│   ├── test/
-│   │   ├── java/ (o python/, etc. según el lenguaje)
-│   │   └── resources/
-├── temp/
-│   ├── temp_file.txt
-│   └── temp_data/
-│       ├── temp1.tmp
-│       └── temp2.tmp
-├── .gitignore
-├── README.md
-├── LICENSE
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── Dockerfile
-├── docker-compose.yml
-└── Makefile
-```
+# NoraFit — Entrena. Registra. Progresa.
 
 
-### .github/
-Contiene configuraciones específicas para GitHub, como plantillas para problemas (issues) y solicitudes de extracción (pull requests), y flujos de trabajo de GitHub Actions para integración continua (CI) y despliegue continuo (CD).
 
-- `ISSUE_TEMPLATE/`: Plantillas para reportar bugs y solicitar nuevas características.
-- `workflows/`: Archivos YAML para definir los flujos de trabajo de CI/CD.
 
-### docs/
-Documentación del proyecto.
+> **Propuesta de Valor:** NoraFit es una aplicación móvil gratuita que permite a los usuarios registrar, organizar y analizar sus entrenamientos de gimnasio sin suscripciones ni funciones bloqueadas.
 
-- `api/`: Documentación de la API.
-- `architecture/`: Diagramas y documentación de la arquitectura.
-- `user_guide/`: Guías para usuarios.
+---
 
-### src/
-Código fuente del proyecto.
+##  ¿Qué es NoraFit?
 
-- `main/`: Código fuente principal.
-  - `java/` (o `python/`, etc.): Código fuente del proyecto según el lenguaje utilizado.
-  - `resources/`: Archivos de recursos como configuraciones y otros archivos necesarios.
-- `test/`: Código de pruebas.
-  - `java/` (o `python/`, etc.): Código de pruebas unitarias y de integración.
-  - `resources/`: Archivos de recursos para las pruebas.
+NoraFit es una aplicación móvil enfocada en el seguimiento de rutinas de entrenamiento.  
+Permite registrar ejercicios, peso, repeticiones y tiempos de descanso, facilitando el monitoreo del progreso a largo plazo.
 
-### scripts/
-Scripts útiles para tareas comunes como configuración, despliegue y pruebas.
+A diferencia de otras aplicaciones fitness, NoraFit elimina las barreras económicas y se centra únicamente en la funcionalidad esencial para progresar.
 
-- `setup.sh`: Script para configurar el entorno de desarrollo.
-- `deploy.sh`: Script para despliegue.
-- `test.sh`: Script para ejecutar pruebas.
+##  ¿Qué problema resuelve?
 
-### conf/
-Carpeta para archivos de configuración.
+Muchas aplicaciones de entrenamiento bloquean funciones básicas como:
 
-- `config.yaml`: Archivo de configuración en formato YAML.
-- `settings.json`: Archivo de configuración en formato JSON.
+- Historial de ejercicios
+- Seguimiento de progreso
+- Registro ilimitado de rutinas
 
-### jupyter/
-Carpeta para los notebooks de Jupyter y datasets utilizados.
+Esto obliga a los usuarios a pagar suscripciones mensuales.
 
-- `notebooks/`: Carpeta para los notebooks de Jupyter.
-  - `exploration.ipynb`: Notebook para la exploración de datos.
-  - `analysis.ipynb`: Notebook para el análisis de datos.
-- `datasets/`: Carpeta para los datasets utilizados en los notebooks.
-  - `data1.csv`: Ejemplo de dataset en formato CSV.
-  - `data2.csv`: Otro ejemplo de dataset en formato CSV.
+NoraFit ofrece una solución completamente gratuita para que cualquier persona pueda llevar un control real de su progreso sin restricciones.
 
-### temp/
-Carpeta para archivos temporales.
+---
 
-- `temp_file.txt`: Archivo temporal de ejemplo.
-- `temp_data/`: Subcarpeta para datos temporales.
-  - `temp1.tmp`: Archivo temporal de ejemplo.
-  - `temp2.tmp`: Otro archivo temporal de ejemplo.
+##  Información General del Proyecto 
 
-### Archivos en la raíz del proyecto
+| Elemento | Detalle |
+| :--- | :--- |
+| **Nombre de la App** | NoraFit |
+| **Empresa** | NoraHealth |
+| **Propuesta** | Aplicación móvil para el seguimiento gratuito de rutinas de entrenamiento y progreso físico. |
+| **Usuarios** | Personas que entrenan en gimnasio, deportistas, principiantes y usuarios interesados en HIIT y calistenia. |
+| **Interfaz** | Aplicación móvil desarrollada en Flutter con backend en Java (Spring Boot). |
+| **Modelo** | Freemium (funciones principales completamente gratuitas). |
+| **Entregables** | Lean Canvas, Documentación, Repositorio de Código y Prototipo Funcional. |
 
-- `.gitignore`: Archivo para especificar qué archivos y directorios deben ser ignorados por Git.
-- `README.md`: Descripción general del proyecto, instrucciones de instalación, uso, contribución, etc.
-- `LICENSE`: Información sobre la licencia del proyecto.
-- `CHANGELOG.md`: Registro de cambios en el proyecto.
-- `CONTRIBUTING.md`: Guía para contribuir al proyecto.
-- `Dockerfile`: Archivo para construir la imagen Docker del proyecto.
-- `docker-compose.yml`: Archivo de configuración para Docker Compose.
-- `Makefile`: Archivo para automatizar tareas mediante comandos `make`.
+---
 
+## Roles y Responsabilidades (Equipo SYNTIX)
+
+| Miembro | GitHub | Rol |
+| :--- | :--- | :--- |
+| **Juan Pablo Peña** | [@jpenab02](https://github.com/jpenab02) | Scrum Master |
+| **Juan José Mendoza Marquez** | [@Juanvil1840](https://github.com/Juanvil1840) | Configuration Manager |
+| **Santiago Martinez Cuellar** | [@Pochicard](https://github.com/Pochicard) | Quality Assurance Lead (QA Lead) |
+| **Santiago Bautista Velasquez** | [@Santiago1213bv](https://github.com/Santiago1213bv) | DevOps Engineer |
+| **Santiago Alvarez Serrano** | [@AlvarezSS](https://github.com/AlvarezSS) | Product Owner y Sprint Planner |
+
+---
+
+##  Alcance y Funcionalidad de la Demo
+
+**NoraFit** Presenta una solución técnica enfocada en el seguimiento eficiente del progreso físico:
+
+1.  **Gestión de Rutinas:** Creación y organización de rutinas personalizadas.
+2.  **Registro de Ejercicios:** Seguimiento de peso, repeticiones y tiempos de descanso.
+3.  **Modo HIIT:** Temporizador configurable por intervalos (trabajo / descanso).
+4.  **Historial y Progreso:** Visualización del avance a lo largo del tiempo.
+5.  **Interfaz Minimalista:** Diseño sin distracciones ni funciones sociales innecesarias.
+
+---
+
+##  Estructura del Repositorio
+
+* `/backend`: Lógica de negocio y API REST.
+* `/frontend`: Dashboard interactivo (React/Vue/Angular).
+* `/docs`: Especificaciones de Ingeniería de Software y Lean Canvas.
+* `/assets`: Recursos gráficos y logotipos de Drive Control.
+
+---
+© 2026 NoraFit - Entrena. Registra. Progresa.
+Proyectos Académicos | Pontificia Universidad Javeriana.
