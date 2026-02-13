@@ -1,3 +1,5 @@
+ ![Image Alt](https://github.com/puj-course/FIS_2610_3517_G3/blob/main/docs/Nora.png?raw=true)
+
 # NoraFit — Entrena. Registra. Progresa.
 
 
