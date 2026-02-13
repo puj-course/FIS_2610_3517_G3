@@ -1,4 +1,4 @@
-k# NoraFit — Entrena. Registra. Progresa.
+# NoraFit — Entrena. Registra. Progresa.
 
 
 
