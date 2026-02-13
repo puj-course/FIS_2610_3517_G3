@@ -1,4 +1,4 @@
-# NoraFit — Entrena. Registra. Progresa.
+k# NoraFit — Entrena. Registra. Progresa.
 
 
 
@@ -7,7 +7,7 @@
 
 ---
 
-##  ¿Qué es NoraFit?
+##  Descripción
 
 NoraFit es una aplicación móvil enfocada en el seguimiento de rutinas de entrenamiento.  
 Permite registrar ejercicios, peso, repeticiones y tiempos de descanso, facilitando el monitoreo del progreso a largo plazo.
@@ -28,50 +28,58 @@ NoraFit ofrece una solución completamente gratuita para que cualquier persona p
 
 ---
 
-##  Información General del Proyecto 
+## Miembros
 
-| Elemento | Detalle |
-| :--- | :--- |
-| **Nombre de la App** | NoraFit |
-| **Empresa** | NoraHealth |
-| **Propuesta** | Aplicación móvil para el seguimiento gratuito de rutinas de entrenamiento y progreso físico. |
-| **Usuarios** | Personas que entrenan en gimnasio, deportistas, principiantes y usuarios interesados en HIIT y calistenia. |
-| **Interfaz** | Aplicación móvil desarrollada en Flutter con backend en Java (Spring Boot). |
-| **Modelo** | Freemium (funciones principales completamente gratuitas). |
-| **Entregables** | Lean Canvas, Documentación, Repositorio de Código y Prototipo Funcional. |
-
----
-
-## Roles y Responsabilidades (Equipo SYNTIX)
-
-| Miembro | GitHub | Rol |
+| Nombre | Rol | GitHub / Perfil |
 | :--- | :--- | :--- |
-| **Juan Pablo Peña** | [@jpenab02](https://github.com/jpenab02) | Scrum Master |
-| **Juan José Mendoza Marquez** | [@Juanvil1840](https://github.com/Juanvil1840) | Configuration Manager |
-| **Santiago Martinez Cuellar** | [@Pochicard](https://github.com/Pochicard) | Quality Assurance Lead (QA Lead) |
-| **Santiago Bautista Velasquez** | [@Santiago1213bv](https://github.com/Santiago1213bv) | DevOps Engineer |
-| **Santiago Alvarez Serrano** | [@AlvarezSS](https://github.com/AlvarezSS) | Product Owner y Sprint Planner |
+| **Juan Pablo Peña** | Scrum Master | [@jpenab02](https://github.com/jpenab02) |
+| **Juan José Mendoza Marquez** | Configuration Manager | [@Juanvil1840](https://github.com/Juanvil1840) |
+| **Santiago Martinez Cuellar** | Quality Assurance Lead (QA Lead) | [@Pochicard](https://github.com/Pochicard) |
+| **Santiago Bautista Velasquez** | DevOps Engineer | [@Santiago1213bv](https://github.com/Santiago1213bv) |
+| **Santiago Alvarez Serrano** | Product Owner y Sprint Planner | [@AlvarezSS](https://github.com/AlvarezSS) |
 
 ---
 
-##  Alcance y Funcionalidad de la Demo
+##  Tecnologías Utilizadas
 
-**NoraFit** Presenta una solución técnica enfocada en el seguimiento eficiente del progreso físico:
-
-1.  **Gestión de Rutinas:** Creación y organización de rutinas personalizadas.
-2.  **Registro de Ejercicios:** Seguimiento de peso, repeticiones y tiempos de descanso.
-3.  **Modo HIIT:** Temporizador configurable por intervalos (trabajo / descanso).
-4.  **Historial y Progreso:** Visualización del avance a lo largo del tiempo.
-5.  **Interfaz Minimalista:** Diseño sin distracciones ni funciones sociales innecesarias.
+* `Frontend`: Flutter
+* `Backend`: Java – Spring Boot
+* `Base de Datos`: PostgreSQL
+* `Control de versiones`: Git
 
 ---
 
-##  Estructura del Repositorio
-
-* `/backend`: Lógica de negocio y API REST.
-* `/frontend`: Dashboard interactivo (React/Vue/Angular).
-* `/docs`: Especificaciones de Ingeniería de Software y Lean Canvas.
-* `/assets`: Recursos gráficos y logotipos de Drive Control.
+##  Contexto Académico
+- **Asignatura:** Fundamentos de Ingeniería de Software
+- **Docente:** Luis Gabriel Moreno Sandoval, PhD
 
 ---
-© 2026 NoraFit | Pontificia Universidad Javeriana.
+
+## Contacto
+
+**Equipo de desarrollo:**
+
+**Juan José Mendoza Marquez**  
+Estudiante de Ingeniería en Sistemas, Pontificia Universidad Javeriana  
+📧 mendoza_@javeriana.edu.co
+
+**Juan Pablo Peña Bernal**  
+Estudiante de Ingeniería de Sistemas, Pontificia Universidad Javeriana  
+📧 jp.penab@javeriana.edu.co  
+
+**Santiago Bautista Velasquez**  
+Estudiante de Ingeniería en Sistemas, Pontificia Universidad Javeriana  
+📧 bautista_s@javeriana.edu.co
+
+**Santiago Alvarez Serrano**  
+Estudiante de Ingeniería en Sistemas, Pontificia Universidad Javeriana  
+📧 alvarezs.s@javeriana.edu.co
+
+**Santiago Martinez Cuellar**  
+Estudiante de Ingeniería en Sistemas, Pontificia Universidad Javeriana  
+📧 martinezcs@javeriana.edu.co
+
+---
+
+## Licencia
+Proyecto desarrollado con fines académicos.
