@@ -1,4 +1,4 @@
- ![Image Alt](https://github.com/puj-course/FIS_2610_3517_G3/blob/main/docs/Nora.png?raw=true)
+<img src="./docs/Nora.png" alt="drawing" width="50"/>
 
 # NoraFit — Entrena. Registra. Progresa.
 
