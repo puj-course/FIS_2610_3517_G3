@@ -34,11 +34,11 @@ NoraFit ofrece una solución completamente gratuita para que cualquier persona p
 
 | Nombre | Rol | GitHub / Perfil |
 | :--- | :--- | :--- |
-| **Juan Pablo Peña** | Scrum Master | [@jpenab02](https://github.com/jpenab02) |
-| **Juan José Mendoza Marquez** | Configuration Manager | [@Juanvil1840](https://github.com/Juanvil1840) |
-| **Santiago Martinez Cuellar** | Quality Assurance Lead (QA Lead) | [@Pochicard](https://github.com/Pochicard) |
-| **Santiago Bautista Velasquez** | DevOps Engineer | [@Santiago1213bv](https://github.com/Santiago1213bv) |
-| **Santiago Alvarez Serrano** | Product Owner y Sprint Planner | [@AlvarezSS](https://github.com/AlvarezSS) |
+| **Juan Pablo Peña** | Scrum Master & Management | [@jpenab02](https://github.com/jpenab02) |
+| **Juan José Mendoza Marquez** | Configuration Manager & Frontend Developer | [@Juanvil1840](https://github.com/Juanvil1840) |
+| **Santiago Martinez Cuellar** | Quality Assurance Lead (QA Lead) & Databases| [@Pochicard](https://github.com/Pochicard) |
+| **Santiago Bautista Velasquez** | DevOps Engineer & Backend Developer | [@Santiago1213bv](https://github.com/Santiago1213bv) |
+| **Santiago Alvarez Serrano** | Product Owner / Sprint Planner & Backend Developer | [@AlvarezSS](https://github.com/AlvarezSS) |
 
 ---
 
