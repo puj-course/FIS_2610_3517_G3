@@ -82,6 +82,9 @@ Estudiante de Ingeniería en Sistemas, Pontificia Universidad Javeriana
 📧 martinezcs@javeriana.edu.co
 
 ---
+## Integrantes
 
+Santiago Martínez  
+GitHub: https://github.com/Pochicard
 ## Licencia
 Proyecto desarrollado con fines académicos.
