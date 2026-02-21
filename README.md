@@ -38,7 +38,7 @@ NoraFit ofrece una solución completamente gratuita para que cualquier persona p
 | **Juan José Mendoza Marquez** | Configuration Manager & Frontend Developer | [@Juanvil1840](https://github.com/Juanvil1840) |
 | **Santiago Martinez Cuellar** | Quality Assurance Lead (QA Lead) & Databases| [@Pochicard](https://github.com/Pochicard) |
 | **Santiago Bautista Velasquez** | DevOps Engineer & Backend Developer | [@Santiago1213bv](https://github.com/Santiago1213bv) |
-| **Santiago Alvarez Serrano** | Product Owner / Sprint Planner & Backend Developer | [@AlvarezSS](https://github.com/AlvarezSS) |
+| **Santiago Álvarez Serrano** | Product Owner / Sprint Planner & Backend Developer | [@AlvarezSS](https://github.com/AlvarezSS) |
 
 ---
 
@@ -82,6 +82,12 @@ Estudiante de Ingeniería en Sistemas, Pontificia Universidad Javeriana
 📧 martinezcs@javeriana.edu.co
 
 ---
+## Integrantes
 
+Santiago Martínez  
+GitHub: https://github.com/Pochicard
+
+Santiago Alvarez
+GitHub: https://github.com/AlvarezSS
 ## Licencia
 Proyecto desarrollado con fines académicos.
