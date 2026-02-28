@@ -1,0 +1,8 @@
+ALTER TABLE exercises
+  ADD COLUMN ordering INT DEFAULT 0,
+  ADD COLUMN duration_seconds INT DEFAULT NULL,
+  ADD COLUMN default_rest_seconds INT DEFAULT 60;
+
+ALTER TABLE series
+  ADD COLUMN weight DECIMAL(6,2) DEFAULT NULL,
+  ADD COLUMN completed TINYINT(1) DEFAULT 0;
