@@ -1,0 +1,46 @@
+* [33md9d378b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature-sBautistaV-auth-security[m[33m, [m[1;31morigin/feature-sBautistaV-auth-security[m[33m)[m docs: analizar requerimientos de seguridad para autenticación. Closes #35
+[31m|[m * [33ma769198[m[33m ([m[1;31morigin/feature-sBautistaV-readme[m[33m)[m Update README.md
+[31m|[m * [33m23d3182[m Update README.md
+[31m|[m * [33m2aea38b[m Update README.md
+[31m|[m * [33m0363933[m Update README.md
+[31m|[m * [33m420e2d9[m[33m ([m[1;32mfeature-sBautistaV-readme[m[33m)[m docs: actualizar README con sección de integrante. Closes #59
+[31m|[m[31m/[m  
+*   [33m3f9116d[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m Merge pull request #58 from puj-course/feature-martinez
+[33m|[m[34m\[m  
+[33m|[m * [33m728bcbf[m docs: agregar integrante Martinez al README. Closes #57
+[33m|[m[33m/[m  
+[33m|[m * [33mc50a052[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Update README.md
+[33m|[m * [33m943a282[m 15 Historias de Usuario Preliminares
+[33m|[m * [33m376a14a[m Update Integrantes section in README.md
+[33m|[m * [33mb8ab25c[m Update README with team member details
+[33m|[m[33m/[m  
+* [33m0f1d5f3[m fix: eliminar carpeta duplicada Scripts
+* [33m7b657c9[m fix: corregir estructura de carpetas con espacios invalidos
+* [33mea34689[m Cambio de nombre por espacio
+* [33m00d1529[m Update README.md
+* [33m72ac433[m Update image syntax in README.md
+* [33m29162d8[m Add image to README for visual enhancement
+* [33m3533bba[m Add files via upload
+* [33m350a4ab[m Delete docs/sprints/sprint1 directory
+* [33m03d007f[m Delete docs/sprint directory
+* [33maefba06[m src, carpeta de codigo fuente (#3)
+* [33m8415441[m Scripts: creación carpeta scripts (#3)
+* [33m002f77a[m carpetas: Create data1.csv (#3)
+* [33m0836899[m Delete jupyter /prueba
+* [33mdd85e7e[m Add new file 'prueba' in jupyter directory
+* [33m204a79b[m Update
+* [33m9fa3fe7[m Update
+* [33m8260768[m crear carpeta de jupyter (#3)
+* [33mc6db66d[m Docs: Requisitos (#8)
+* [33m06b82f7[m docs: prueba sprint1 (#3)
+* [33m241139d[m docs: Add sprint documentation for sprint x (#3)
+* [33m456997d[m Docs: carpetas para Sprints (#3)
+* [33m503b098[m Docs:  Stack y Setup de desarrollo (#7)
+* [33m1370d74[m Update README with project description
+* [33m4ca91e3[m Create quality criteria document for NoraFit MVP
+* [33m88e7ed8[m Update README with project description
+* [33me579fb4[m Add documentation structure folders
+* [33madec521[m Setup full project structure according to template
+* [33m7991bba[m Docs Update
+* [33mbcff201[m Docs Update
+* [33m6ca3167[m Initial commit
