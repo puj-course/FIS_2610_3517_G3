@@ -36,3 +36,22 @@ public class RoutineService {
         return routine;
     }
 
+    
+    public Exercises getExercise(Routine routine, int exerciseId) {
+        if (routine == null) throw new IllegalArgumentException("Routine no puede ser null.");
+
+        List<Exercises> exercises = routine.getExercises();
+        if (exercises == null) return null;
+
+        for (Exercises ex : exercises) {
+            if (ex != null && ex.getExerciseId() == exerciseId) {
+                return ex;
+            }
+        }
+        return null;
+    }
+
+  
+    
+
+
