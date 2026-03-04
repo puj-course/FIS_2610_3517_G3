@@ -4,7 +4,7 @@ public class Series {
     private int seriesNumber;
     private int repetitions;
     private int restTimeSeconds;
-    private int durationSeconds;
+    private float durationSeconds;
     
      // Constructor vacío 
     public Series() {
