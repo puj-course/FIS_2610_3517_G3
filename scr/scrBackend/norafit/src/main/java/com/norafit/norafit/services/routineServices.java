@@ -51,6 +51,24 @@ public class RoutineService {
         return null;
     }
 
+      public void addExercise(Routine routine, Exercises exercise) {
+        if (routine == null) throw new IllegalArgumentException("Routine no puede ser null.");
+        if (exercise == null) throw new IllegalArgumentException("Exercise no puede ser null.");
+
+        if (routine.getExercises() == null) {
+            routine.setExercises(new ArrayList<>());
+        }
+
+        routine.getExercises().add(exercise);
+
+        // Mantener total_time_seconds consistente
+        routine.setTotalTimeSeconds(calculateTotalTimeSeconds(routine));
+    }
+
+  
+
+
+
   
     
 
