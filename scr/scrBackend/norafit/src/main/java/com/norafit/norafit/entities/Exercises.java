@@ -8,7 +8,7 @@ public class Exercises {
     private String exerciseName;
     private String description;
     private List<Series> series = new ArrayList<>();
-    private int durationSeconds;
+    
 
     // Constructor vacío 
     public Exercises() {
