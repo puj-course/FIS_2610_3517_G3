@@ -15,6 +15,7 @@ public class Series {
         this.seriesNumber = seriesNumber;
         this.repetitions = repetitions;
         this.restTimeSeconds = restTimeSeconds;
+        this.durationSeconds = durationSeconds
     }
 
     //getters y setters
