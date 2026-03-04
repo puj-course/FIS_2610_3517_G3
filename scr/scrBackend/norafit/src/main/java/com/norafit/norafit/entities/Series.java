@@ -15,7 +15,6 @@ public class Series {
         this.seriesNumber = seriesNumber;
         this.repetitions = repetitions;
         this.restTimeSeconds = restTimeSeconds;
-        this.durationSeconds = durationSeconds
     }
 
     //getters y setters
@@ -38,6 +37,29 @@ public class Series {
     public int getRestTimeSeconds() {
         return restTimeSeconds;
     }
+
+    public void setRestTimeSeconds(int restTimeSeconds) {
+    this.restTimeSeconds = restTimeSeconds;
+    }
+    
+
+    public int getDurationSeconds()
+    {
+        return durationSeconds;
+    }
+
+     public void setDurationSeconds (int durationSeconds) {
+         this.durationSeconds = durationSeconds;
+     }
+    
+
+
+
+
+
+
+
+    
 
     public void setRestTimeSeconds(int restTimeSeconds) {
         this.restTimeSeconds = restTimeSeconds;
