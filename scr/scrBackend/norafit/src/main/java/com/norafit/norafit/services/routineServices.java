@@ -67,20 +67,28 @@ public class RoutineService {
 
   public float calculateTotalTimeSeconds(Routine routine) {
 
+    if (routine == null) {
+        throw new IllegalArgumentException("Routine no puede ser null.");
+    }
+
+    if (routine.getExercises() == null || routine.getExercises().isEmpty()) {
+        return 0;
+    }
+
     int total = 0;
 
     for (Exercises ex : routine.getExercises()) {
+        if (ex == null || ex.getSeries() == null) continue;
 
         for (Series s : ex.getSeries()) {
+            if (s == null) continue;
 
-            total += s.getDurationSeconds();
-            total += s.getRestTimeSeconds();
-
+            total += Math.max(0, s.getDurationSeconds());
+            total += Math.max(0, s.getRestTimeSeconds());
         }
-
     }
 
-    return total;
+    return (float) total;
 }
   
 
