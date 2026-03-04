@@ -65,6 +65,23 @@ public class RoutineService {
         routine.setTotalTimeSeconds(calculateTotalTimeSeconds(routine));
     }
 
+  public float calculateTotalTimeSeconds(Routine routine) {
+
+    int total = 0;
+
+    for (Exercises ex : routine.getExercises()) {
+
+        for (Series s : ex.getSeries()) {
+
+            total += s.getDurationSeconds();
+            total += s.getRestTimeSeconds();
+
+        }
+
+    }
+
+    return total;
+}
   
 
 
