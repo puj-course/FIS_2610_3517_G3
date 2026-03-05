@@ -84,33 +84,43 @@ Estudiante de Ingeniería en Sistemas, Pontificia Universidad Javeriana
 ---
 ---
 
-##  Despliegue y Ejecución de la Aplicación
+---
+
+Despliegue y ejecución de la aplicación
 
 Esta sección describe los pasos necesarios para configurar y ejecutar el backend de NoraFit en un entorno local o remoto.
 
----
-
-###  Prerrequisitos
+Prerrequisitos
 
 Para ejecutar el backend del proyecto es necesario contar con:
 
-- **Java JDK 17**
-- **Git**
-- **Maven** (o Maven Wrapper incluido en el proyecto)
-- **IDE recomendado**: IntelliJ IDEA o Visual Studio Code
-- **Cuenta y proyecto en Supabase** (PostgreSQL)
+- Java JDK 17
+- Git
+- Maven (o Maven Wrapper incluido en el proyecto)
+- IDE recomendado: IntelliJ IDEA o Visual Studio Code
+- Cuenta y proyecto en Supabase (PostgreSQL)
 
-El proyecto utiliza **Spring Boot** y **PostgreSQL** como base de datos.
+El proyecto utiliza Spring Boot y PostgreSQL como base de datos.
 
----
+Configuración de base de datos
 
-###  Configuración de Base de Datos
+La aplicación utiliza PostgreSQL alojado en Supabase.
 
-La aplicación utiliza **PostgreSQL alojado en Supabase**.
+La conexión a la base de datos se encuentra configurada en el archivo:
 
-La conexión a la base de datos se encuentra configurada en el archivo: 
-srcBackend/norafit/src/main/resources/application.properties
----
+`srcBackend/norafit/src/main/resources/application.properties`
+
+Ejemplo de configuración:
+
+```properties
+spring.application.name=norafit
+
+spring.datasource.url=jdbc:postgresql://<HOST>:<PORT>/<DATABASE>
+spring.datasource.username=<USERNAME>
+spring.datasource.password=<PASSWORD>
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 ## Licencia
 Proyecto desarrollado con fines académicos.
 
