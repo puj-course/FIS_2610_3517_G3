@@ -83,4 +83,10 @@ public class Routine {
     public void setExercises(List<Exercises> exercises) {
         this.exercises = exercises;
     }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

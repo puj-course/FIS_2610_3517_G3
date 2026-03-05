@@ -1,15 +1,9 @@
 package com.norafit.norafit.console;
-
-
-
-
-import java.util.Scanner;
-
-import org.springframework.stereotype.Component;
-
 import com.norafit.norafit.entities.User;
 import com.norafit.norafit.services.AuthService;
+import org.springframework.stereotype.Component;
 
+import java.util.Scanner;
 
 @Component
 public class consoleApp {
@@ -159,5 +153,3 @@ public class consoleApp {
        System.out.println("Contraseña actualizada para: " + actualizado.getEmail());
    }
 }
-
-
