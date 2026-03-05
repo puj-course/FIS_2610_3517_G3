@@ -12,7 +12,7 @@ import com.norafit.norafit.entities.Series;
 import com.norafit.norafit.entities.User;
 
 @Service
-public class RoutineService {
+public class routineServices {
 
   
     public Routine create(String routineName, User user) {
@@ -27,12 +27,8 @@ public class RoutineService {
         routine.setRoutineName(routineName.trim());
         routine.setCreatedAt(LocalDate.now());
         routine.setExercises(new ArrayList<>());
-
-      
-        routine.setUser(user);
-
-
         routine.setTotalTimeSeconds(0f);
+        routine.setUser(user);
         return routine;
     }
 
@@ -90,11 +86,5 @@ public class RoutineService {
 
     return (float) total;
 }
-  
 
-
-
-  
-    
-
-
+}
