@@ -59,9 +59,5 @@ public class Series {
 
 
 
-    
 
-    public void setRestTimeSeconds(int restTimeSeconds) {
-        this.restTimeSeconds = restTimeSeconds;
-    }
 }
