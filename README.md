@@ -97,7 +97,7 @@ Para ejecutar el backend del proyecto es necesario contar con:
 - Cuenta y proyecto en Supabase (PostgreSQL)
 
 El proyecto utiliza Spring Boot y PostgreSQL como base de datos.
--
+
 Configuración de base de datos
 ---
 La aplicación utiliza PostgreSQL alojado en Supabase.
