@@ -1,4 +1,4 @@
-# 📌 NoraFit – Criterios de Calidad (MVP)
+# 📌 NoraFit – Criterios de Calidad (MVP) (Actualizado)
 
 ## 1. Propósito
 
