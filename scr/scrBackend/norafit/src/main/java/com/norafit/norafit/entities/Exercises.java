@@ -33,7 +33,6 @@ public class Exercises {
     public int getExerciseId() {
         return exerciseId;
     }
-
     public void setExerciseId(int exerciseId) {
         this.exerciseId = exerciseId;
     }
@@ -41,7 +40,6 @@ public class Exercises {
     public String getExerciseName() {
         return exerciseName;
     }
-
     public void setExerciseName(String exerciseName) {
         this.exerciseName = exerciseName;
     }
@@ -49,7 +47,6 @@ public class Exercises {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -57,8 +54,28 @@ public class Exercises {
     public List<Series> getSeries() {
         return series;
     }
-
     public void setSeries(List<Series> series) {
         this.series = series;
+    }
+
+    //metodos
+
+    //crear ejercicio
+    public Exercises create(int exerciseId, String exerciseName, String description) {
+        return new Exercises(exerciseId, exerciseName, description);
+    }
+
+    //agregar serie al ejercicio
+    public void addSeries(int reps, double weight, int restSec) {
+        if (reps <= 0) {
+            throw new IllegalArgumentException("Las repeticiones deben ser mayores que 0");
+        }
+
+        if (weight < 0) {
+            throw new IllegalArgumentException("El peso no puede ser negativo");
+        }
+
+        Series newSeries = new Series(reps, weight, restSec);
+        this.series.add(newSeries);
     }
 }
