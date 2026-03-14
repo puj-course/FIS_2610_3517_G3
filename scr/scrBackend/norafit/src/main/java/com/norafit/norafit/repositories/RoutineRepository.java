@@ -5,4 +5,6 @@ import com.norafit.norafit.entities.Routine;
 
 public interface RoutineRepository extends JpaRepository<Routine, Integer> {
 
+  //Necesasrio para guardar en la base de datos
+
 }
