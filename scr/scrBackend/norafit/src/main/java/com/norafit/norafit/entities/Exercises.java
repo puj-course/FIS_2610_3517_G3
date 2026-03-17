@@ -57,25 +57,4 @@ public class Exercises {
     public void setSeries(List<Series> series) {
         this.series = series;
     }
-
-    //metodos
-
-    //crear ejercicio
-    public Exercises create(int exerciseId, String exerciseName, String description) {
-        return new Exercises(exerciseId, exerciseName, description);
-    }
-
-    //agregar serie al ejercicio
-    public void addSeries(int reps, double weight, int restSec) {
-        if (reps <= 0) {
-            throw new IllegalArgumentException("Las repeticiones deben ser mayores que 0");
-        }
-
-        if (weight < 0) {
-            throw new IllegalArgumentException("El peso no puede ser negativo");
-        }
-
-        Series newSeries = new Series(reps, weight, restSec);
-        this.series.add(newSeries);
-    }
 }
