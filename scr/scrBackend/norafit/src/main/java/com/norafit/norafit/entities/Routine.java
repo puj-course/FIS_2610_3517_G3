@@ -4,7 +4,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "routines")
@@ -16,9 +24,7 @@ public class Routine {
     private Integer routineId;
 
     private String routineName;
-
     private float totalTimeSeconds;
-
     private LocalDate created_at;
 
     @Transient
@@ -27,8 +33,10 @@ public class Routine {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     public Routine() {
     }
+
     public Routine(Integer routineId, String routineName, float totalTimeSeconds, LocalDate created_at) {
         this.routineId = routineId;
         this.routineName = routineName;
