@@ -12,6 +12,8 @@ import com.norafit.norafit.entities.User;
 import com.norafit.norafit.repositories.RoutineRepository;
 import com.norafit.norafit.entities.Routine;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RoutineServices {
 
@@ -37,6 +39,19 @@ public class RoutineServices {
         routine.setUser(user);
 
         return routineRepository.save(routine);
+    }
+
+    //MÉTODO NUEVO
+    @Transactional
+    public void rename(Integer id, String newName) {
+        if (id == null) {
+            throw new IllegalArgumentException("El id no puede ser null.");
+        }
+        if (newName == null || newName.isBlank()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        }
+
+        routineRepository.renameRoutine(id, newName.trim());
     }
 
     public Exercises getExercise(Routine routine, int exerciseId) {
