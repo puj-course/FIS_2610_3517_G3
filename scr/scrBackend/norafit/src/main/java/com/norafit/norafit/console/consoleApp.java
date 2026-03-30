@@ -2,6 +2,10 @@ package com.norafit.norafit.console;
 import com.norafit.norafit.entities.User;
 import com.norafit.norafit.services.AuthService;
 import org.springframework.stereotype.Component;
+import com.norafit.norafit.services.RoutineServices;
+import com.norafit.norafit.entities.Routine;
+import com.norafit.norafit.entities.Exercises;
+import java.util.List;
 
 import java.util.Scanner;
 
@@ -10,12 +14,14 @@ public class consoleApp {
   
    private final AuthService authService;
    private User usuarioActual;
+   private final RoutineServices routineServices;
 
 
-   public consoleApp(AuthService authService) {
-       this.authService = authService;
-       this.usuarioActual = null;
-   }
+   public consoleApp(AuthService authService, RoutineServices routineServices) {
+    this.authService = authService;
+    this.routineServices = routineServices;
+    this.usuarioActual = null;
+}
 
 
    public void start(){
@@ -112,7 +118,7 @@ public class consoleApp {
 
    private boolean menuLogueado(Scanner sc) {
        System.out.println("\n=== MENÚ (Usuario: " + usuarioActual.getUsername() + ") ===");
-       System.out.println("1) Rutinas (pendiente)");
+       System.out.println("1) Ver rutinas");
        System.out.println("2) Cerrar sesión");
        System.out.println("0) Salir");
        System.out.print("Opción: ");
@@ -122,7 +128,7 @@ public class consoleApp {
 
 
        switch (op) {
-           case "1" -> System.out.println("Rutinas: cuando se tenga routineService.");
+           case "1" -> handleRutinas(sc);
            case "2" -> {
                usuarioActual = null;
                System.out.println("✅ Sesión cerrada.");
@@ -152,4 +158,34 @@ public class consoleApp {
        User actualizado = authService.changePassword(email, newPassword);
        System.out.println("Contraseña actualizada para: " + actualizado.getEmail());
    }
+
+private void handleRutinas(Scanner sc) {
+    System.out.println("\n--- RUTINAS ---");
+
+    System.out.print("Ingrese el ID de la rutina: ");
+    String input = sc.nextLine().trim();
+
+    try {
+        Integer routineId = Integer.parseInt(input);
+
+        Routine routine = routineServices.getRoutineWithExercises(routineId);
+
+        System.out.println("\nRutina: " + routine.getRoutineName());
+        System.out.println("Ejercicios:");
+
+        List<Exercises> exercises = routine.getExercises();
+
+        if (exercises == null || exercises.isEmpty()) {
+            System.out.println("  (Sin ejercicios)");
+            return;
+        }
+
+        for (Exercises ex : exercises) {
+            System.out.println(" - " + ex.getExerciseName());
+        }
+
+    } catch (NumberFormatException e) {
+        System.out.println("ID inválido.");
+    }
+}
 }
