@@ -119,4 +119,34 @@ public class RoutineServices {
 
         return (float) total;
     }
+
+    public Exercises addExerciseToRoutine(Integer routineId, Exercises exercise) {
+    if (routineId == null) {
+        throw new IllegalArgumentException("El id de la rutina no puede ser null.");
+    }
+
+    if (exercise == null) {
+        throw new IllegalArgumentException("El ejercicio no puede ser null.");
+    }
+
+    if (exercise.getExerciseName() == null || exercise.getExerciseName().isBlank()) {
+        throw new IllegalArgumentException("El nombre del ejercicio es obligatorio.");
+    }
+
+    Routine routine = routineRepository.findById(routineId)
+            .orElseThrow(() -> new IllegalArgumentException("Rutina no encontrada."));
+
+    exercise.setRoutineId(routineId);
+
+    Exercises savedExercise = exerciseRepository.save(exercise);
+
+    if (routine.getExercises() == null) {
+        routine.setExercises(new ArrayList<>());
+    }
+
+    routine.getExercises().add(savedExercise);
+
+    return savedExercise;
 }
+}
+
