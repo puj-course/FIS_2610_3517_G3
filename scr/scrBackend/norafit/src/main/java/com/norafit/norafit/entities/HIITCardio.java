@@ -31,4 +31,32 @@ public class HIITCardio extends CardioExercise {
         this.restTime = restTime;
     }
 
+    //getters y setters
+    public String getHiitIntensity() {
+        return hiitIntensity;
+    }
+    public void setHiitIntensity(String hiitIntensity) {
+        this.hiitIntensity = hiitIntensity;
+    }
+
+    public int getRounds() {
+        return rounds;
+    }
+    public void setRounds(int rounds) {
+        this.rounds = rounds;
+    }
+
+    public int getWorkTime() {
+        return workTime;
+    }
+    public void setWorkTime(int workTime) {
+        this.workTime = workTime;
+    }
+
+    public int getRestTime() {
+        return restTime;
+    }
+    public void setRestTime(int restTime) {
+        this.restTime = restTime;
+    }
 }
