@@ -31,4 +31,32 @@ public class SimpleCardio extends CardioExercise {
         this.recordedIncline = recordedIncline;
     }
 
+    //getters y setters
+    public Time getRecordedTime() {
+        return recordedTime;
+    }
+    public void setRecordedTime(Time recordedTime) {
+        this.recordedTime = recordedTime;
+    }
+
+    public Float getRecordedVelocity() {
+        return recordedVelocity;
+    }
+    public void setRecordedVelocity(Float recordedVelocity) {
+        this.recordedVelocity = recordedVelocity;
+    }
+
+    public String getCardioMachine() {
+        return cardioMachine;
+    }
+    public void setCardioMachine(String cardioMachine) {
+        this.cardioMachine = cardioMachine;
+    }
+
+    public Float getRecordedIncline() {
+        return recordedIncline;
+    }
+    public void setRecordedIncline(Float recordedIncline) {
+        this.recordedIncline = recordedIncline;
+    }
 }
