@@ -14,4 +14,11 @@ public abstract class CardioExercise extends Exercises {
 
     @Column(name = "is_hiit")
     private boolean isHIIT;
+
+    //constructores
+    public CardioExercise() {}
+
+    public CardioExercise(boolean isHIIT) {
+        this.isHIIT = isHIIT;
+    }
 }
