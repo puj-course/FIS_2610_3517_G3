@@ -19,4 +19,12 @@ public class StrengthExercise extends Exercises {
     public StrengthExercise(boolean hasWeight) {
         this.hasWeight = hasWeight;
     }
+
+    //getters y setters
+    public boolean isHasWeight() {
+        return hasWeight;
+    }
+    public void setHasWeight(boolean hasWeight) {
+        this.hasWeight = hasWeight;
+    }
 }
