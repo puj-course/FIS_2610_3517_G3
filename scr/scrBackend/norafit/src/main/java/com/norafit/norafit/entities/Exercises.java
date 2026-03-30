@@ -10,11 +10,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 
 @Entity
 @Table(name = "exercises")
+@Inheritance(strategy = InheritanceType.JOINED)
 
-public class Exercises {
+public abstract class Exercises {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -41,9 +44,6 @@ public class Exercises {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-
-    @Transient
-    private List<Series> series = new ArrayList<>();
     
     // Constructor vacío 
     public Exercises() {
