@@ -3,8 +3,6 @@
 # NoraFit — Entrena. Registra. Progresa.
 
 
-
-
 > **Propuesta de Valor:** NoraFit es una aplicación móvil gratuita que permite a los usuarios registrar, organizar y analizar sus entrenamientos de gimnasio sin suscripciones ni funciones bloqueadas.
 
 ---
@@ -106,6 +104,4 @@ La conexión a la base de datos se encuentra configurada en el archivo:
 
 `srcBackend/norafit/src/main/resources/application.properties`
 ## Licencia
-Proyecto desarrollado con fines académicos.
-
-
+Proyecto desarrollado con fines académicos
