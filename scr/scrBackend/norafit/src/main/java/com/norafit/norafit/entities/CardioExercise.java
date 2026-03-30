@@ -21,4 +21,12 @@ public abstract class CardioExercise extends Exercises {
     public CardioExercise(boolean isHIIT) {
         this.isHIIT = isHIIT;
     }
+
+    //getters y setters
+    public boolean isHIIT() {
+        return isHIIT;
+    }
+    public void setHIIT(boolean isHIIT) {
+        this.isHIIT = isHIIT;
+    }
 }
