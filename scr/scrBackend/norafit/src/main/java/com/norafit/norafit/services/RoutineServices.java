@@ -11,17 +11,20 @@ import com.norafit.norafit.entities.Series;
 import com.norafit.norafit.entities.User;
 import com.norafit.norafit.repositories.RoutineRepository;
 import com.norafit.norafit.entities.Routine;
+import com.norafit.norafit.repositories.ExerciseRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class RoutineServices {
-
+    
     private final RoutineRepository routineRepository;
+    private final ExerciseRepository exerciseRepository;
 
-    public RoutineServices(RoutineRepository routineRepository) {
-        this.routineRepository = routineRepository;
-    }
+    public RoutineServices(RoutineRepository routineRepository, ExerciseRepository exerciseRepository) {
+    this.routineRepository = routineRepository;
+    this.exerciseRepository = exerciseRepository;
+}
 
     public Routine create(String routineName, User user) {
         if (routineName == null || routineName.isBlank()) {
@@ -40,6 +43,19 @@ public class RoutineServices {
 
         return routineRepository.save(routine);
     }
+
+    public Routine getRoutineWithExercises(Integer routineId) {
+    if (routineId == null) {
+        throw new IllegalArgumentException("El id de la rutina no puede ser null.");
+    }
+
+    Routine routine = routineRepository.findById(routineId).orElseThrow(() -> new IllegalArgumentException("Rutina no encontrada."));
+
+    List<Exercises> exercises = exerciseRepository.findByRoutineId(routineId);
+    routine.setExercises(exercises);
+
+    return routine;
+}
 
     //MÉTODO NUEVO
     @Transactional
