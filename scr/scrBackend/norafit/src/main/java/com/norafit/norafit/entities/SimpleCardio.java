@@ -21,4 +21,14 @@ public class SimpleCardio extends CardioExercise {
     @Column(name = "recorded_incline")
     private Float recordedIncline;
 
+    //comstructores
+    public SimpleCardio() {}
+
+    public SimpleCardio(Time recordedTime, Float recordedVelocity, String cardioMachine, Float recordedIncline) {
+        this.recordedTime = recordedTime;
+        this.recordedVelocity = recordedVelocity;
+        this.cardioMachine = cardioMachine;
+        this.recordedIncline = recordedIncline;
+    }
+
 }
