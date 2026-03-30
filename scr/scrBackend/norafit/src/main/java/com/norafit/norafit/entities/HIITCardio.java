@@ -21,4 +21,14 @@ public class HIITCardio extends CardioExercise {
     @Column(name = "rest_time")
     private int restTime;
 
+    //constructores
+    public HIITCardio() {}
+
+    public HIITCardio(String hiitIntensity, int rounds, int workTime, int restTime) {
+        this.hiitIntensity = hiitIntensity;
+        this.rounds = rounds;
+        this.workTime = workTime;
+        this.restTime = restTime;
+    }
+
 }
