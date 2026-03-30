@@ -46,19 +46,31 @@ public class ExerciseService {
         return exerciseRepository.findByRoutineId(routineId);
     }
 
-    public Exercises updateExercise(Integer id, Exercises updatedExercise) {
-        Exercises existing = exerciseRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Ejercicio no encontrado."));
-
-        existing.setExerciseName(updatedExercise.getExerciseName());
-        existing.setDescription(updatedExercise.getDescription());
-        existing.setDurationSeconds(updatedExercise.getDurationSeconds());
-        existing.setDefaultRestSeconds(updatedExercise.getDefaultRestSeconds());
-        existing.setOrdering(updatedExercise.getOrdering());
-        existing.setRoutineId(updatedExercise.getRoutineId());
-
-        return exerciseRepository.save(existing);
+   public Exercises updateExercise(Integer id, Exercises updatedExercise) {
+    if (id == null) {
+        throw new IllegalArgumentException("El id del ejercicio no puede ser null.");
     }
+
+    if (updatedExercise == null) {
+        throw new IllegalArgumentException("Los datos actualizados no pueden ser null.");
+    }
+
+    Exercises existing = exerciseRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Ejercicio no encontrado."));
+
+    if (updatedExercise.getExerciseName() == null || updatedExercise.getExerciseName().isBlank()) {
+        throw new IllegalArgumentException("El nombre del ejercicio es obligatorio.");
+    }
+
+    existing.setExerciseName(updatedExercise.getExerciseName());
+    existing.setDescription(updatedExercise.getDescription());
+    existing.setDurationSeconds(updatedExercise.getDurationSeconds());
+    existing.setDefaultRestSeconds(updatedExercise.getDefaultRestSeconds());
+    existing.setOrdering(updatedExercise.getOrdering());
+    existing.setRoutineId(updatedExercise.getRoutineId());
+
+    return exerciseRepository.save(existing);
+}
 
     public void deleteExercise(Integer id) {
         if (!exerciseRepository.existsById(id)) {
@@ -68,3 +80,4 @@ public class ExerciseService {
         exerciseRepository.deleteById(id);
     }
 }
+
