@@ -1,101 +1,87 @@
 package com.norafit.norafit.services;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.norafit.norafit.entities.Exercises;
 import com.norafit.norafit.entities.Routine;
-import com.norafit.norafit.entities.Series;
 import com.norafit.norafit.entities.User;
+import com.norafit.norafit.repositories.RoutineRepository;
+
 
 @Service
 public class RoutineService {
 
-  
-    public Routine create(String routineName, User user) {
-        if (routineName == null || routineName.isBlank()) {
-            throw new IllegalArgumentException("El nombre de la rutina es obligatorio.");
-        }
-        if (user == null) {
-            throw new IllegalArgumentException("La rutina debe tener un usuario.");
-        }
-
-        Routine routine = new Routine();
-        routine.setRoutineName(routineName.trim());
-        routine.setCreatedAt(LocalDate.now());
-        routine.setExercises(new ArrayList<>());
-
-      
-        routine.setUser(user);
-
-
-        routine.setTotalTimeSeconds(0f);
-        return routine;
-    }
-
-    
-    public Exercises getExercise(Routine routine, int exerciseId) {
-        if (routine == null) throw new IllegalArgumentException("Routine no puede ser null.");
-
-        List<Exercises> exercises = routine.getExercises();
-        if (exercises == null) return null;
-
-        for (Exercises ex : exercises) {
-            if (ex != null && ex.getExerciseId() == exerciseId) {
-                return ex;
-            }
-        }
-        return null;
-    }
-
-      public void addExercise(Routine routine, Exercises exercise) {
-        if (routine == null) throw new IllegalArgumentException("Routine no puede ser null.");
-        if (exercise == null) throw new IllegalArgumentException("Exercise no puede ser null.");
-
-        if (routine.getExercises() == null) {
-            routine.setExercises(new ArrayList<>());
-        }
-
-        routine.getExercises().add(exercise);
-
-        // Mantener total_time_seconds consistente
-        routine.setTotalTimeSeconds(calculateTotalTimeSeconds(routine));
-    }
-
-  public float calculateTotalTimeSeconds(Routine routine) {
-
-    if (routine == null) {
-        throw new IllegalArgumentException("Routine no puede ser null.");
-    }
-
-    if (routine.getExercises() == null || routine.getExercises().isEmpty()) {
-        return 0;
-    }
-
-    int total = 0;
-
-    for (Exercises ex : routine.getExercises()) {
-        if (ex == null || ex.getSeries() == null) continue;
-
-        for (Series s : ex.getSeries()) {
-            if (s == null) continue;
-
-            total += Math.max(0, s.getDurationSeconds());
-            total += Math.max(0, s.getRestTimeSeconds());
-        }
-    }
-
-    return (float) total;
-}
-}
-  
-
-
-
-  
+    private final RoutineRepository routineRepository;
     
 
+    public RoutineService(RoutineRepository routineRepository) {
+        this.routineRepository = routineRepository;
+    }
 
+    // MÉTODO CLAVE: Aquí es donde el usuario "crea" la rutina
+    public Routine createRoutine(String name, User user) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("El nombre de la rutina no puede estar vacío.");
+        }
+
+        Routine newRoutine = new Routine();
+        newRoutine.setRoutineName(name);
+        newRoutine.setUser(user); 
+        newRoutine.setCreatedAt(LocalDate.now());
+        newRoutine.setTotalTimeSeconds(0);
+
+        return routineRepository.save(newRoutine);
+    }
+    
+    public List<Routine> getRoutinesByUser(User user) {
+        return routineRepository.findByUser_Id(Long.valueOf(user.getId())); 
+    } 
+
+
+    @Transactional
+    public void removeRoutine(Long routineId, User user) {
+    // 1. se busca la rutina primero
+    Routine routine = routineRepository.findById(routineId)
+        .orElseThrow(() -> new IllegalArgumentException("La rutina con ID " + routineId + " no existe."));
+
+    // 2. Verificamos que la rutina pertenezca al usuario (Seguridad)
+    if (routine.getUser().getId() != user.getId()) {
+    throw new IllegalArgumentException("No tienes permiso para eliminar esta rutina.");
+    }
+
+    // 3. Eliminamos
+    routineRepository.delete(routine);
+    }
+    @Transactional
+public Routine renameRoutine(Long routineId, String newName, User user) {
+    if (newName == null || newName.isBlank()) {
+        throw new IllegalArgumentException("El nuevo nombre no puede estar vacío.");
+    }
+
+    // 1. Buscamos la rutina
+    Routine routine = routineRepository.findById(routineId)
+        .orElseThrow(() -> new IllegalArgumentException("La rutina no existe."));
+
+    // 2. Validación de seguridad (que sea del usuario logueado)
+    if (routine.getUser().getId() != user.getId()) {
+        throw new IllegalArgumentException("No tienes permiso para editar esta rutina.");
+    }
+
+    // 3. Cambiamos el nombre y guardamos
+    routine.setRoutineName(newName);
+    return routineRepository.save(routine);
+ }
+    @Transactional(readOnly = true)
+    public Routine getRoutineById(Long id) {
+        Routine routine = routineRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("La rutina con ID " + id + " no existe."));
+    
+    routine.getExercises().size(); 
+    
+    return routine;
+}
+}
+    
