@@ -141,7 +141,45 @@ public class consoleApp {
        return true;
    }
 
+-------1) SUBMENÚ DE RUTINAS (DESPUÉS DE LOGUEARSE) ----------------- 
 
+   private void menuRutinas(Scanner sc) { 
+        System.out.println("\n--- GESTIÓN DE RUTINAS ---"); 
+        System.out.println("1) Crear nueva rutina"); 
+        System.out.println("2) Ver mis rutinas"); 
+        System.out.println("3) Eliminar una rutina");  
+        System.out.println("4) Renombrar rutina"); 
+        System.out.println("5) Seleccionar rutina para gestionar ejercicios");  
+        System.out.println("0) Volver al menú principal"); 
+        System.out.print("Opción: "); 
+        String op = sc.nextLine().trim(); 
+        switch (op) { 
+            case "1" -> handleCreateRoutine(sc); 
+            case "2" -> handleListRoutines(); 
+            case "3" -> handleDeleteRoutine(sc); 
+            case "4" -> handleRenameRoutine(sc); 
+            case "5" -> handleSelectRoutine(sc); 
+            case "0" -> { /* No hace nada, vuelve solo */ } 
+            default -> System.out.println("Opción inválida."); 
+        } 
+    } 
+
+    private Routine rutinaSeleccionada; 
+
+//------------------1) CREAR RUTINA ----------------- 
+    private void handleCreateRoutine(Scanner sc) { 
+        System.out.println("\n--- NUEVA RUTINA ---"); 
+        System.out.print("Nombre de la rutina (ej. Día de Pecho): "); 
+        String nombre = sc.nextLine(); 
+        try { 
+            // Llamamos al método que creamos en el RoutineService 
+            Routine nueva = routineService.createRoutine(nombre, usuarioActual); 
+            System.out.println("✅ Rutina '" + nueva.getRoutineName() + "' creada con éxito."); 
+        } catch (Exception e) { 
+            System.out.println("X Error al crear rutina: " + e.getMessage()); 
+        } 
+    }
+  
    //cambiar contraseña
    private void handleChangePassword(Scanner sc) {
        System.out.println("\n--- CAMBIAR CONTRASEÑA ---");
