@@ -362,6 +362,24 @@ private void handleRenameExercise(Scanner sc) {
     }
 }
 
+private void handleRenameRoutine(Scanner sc) 
+{
+  handleListRoutines(); // Mostramos IDs
+        System.out.print("\nIngresa el ID de la rutina a renombrar: ");
+        
+        try {
+            Long id = Long.parseLong(sc.nextLine());
+            System.out.print("Nuevo nombre: ");
+            String nuevoNombre = sc.nextLine();
+
+            routineService.renameRoutine(id, nuevoNombre, usuarioActual);
+            System.out.println(" Rutina actualizada con éxito.");
+        } catch (Exception e) {
+            System.out.println("X Error: " + e.getMessage());
+        }
+}
+
+
 
 
 
