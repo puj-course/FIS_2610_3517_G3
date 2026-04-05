@@ -1,62 +1,44 @@
-package com.norafit.norafit.entities;
+package com.norafit.norafit.entities; 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import java.sql.Time;
+import jakarta.persistence.Entity; 
+import jakarta.persistence.PrimaryKeyJoinColumn; 
+import jakarta.persistence.Table; 
+@Entity 
+@Table(name = "simple_cardio") 
+@PrimaryKeyJoinColumn(name = "cardio_exercise_id") 
 
-@Entity
-@Table(name = "simple_cardio")
-  
-public class SimpleCardio extends CardioExercise {
-    @Column(name = "recorded_time")
-    private Time recordedTime;
+public class SimpleCardio extends CardioExercise { 
 
-    @Column(name = "recorded_velocity")
-    private Float recordedVelocity;
+    private float distanceKm; 
+    private float averageSpeed; 
+    private int inclineLevel; 
 
-    @Column(name = "cardio_machine")
-    private String cardioMachine;
+    public SimpleCardio() { 
+        super(); 
+    } 
 
-    @Column(name = "recorded_incline")
-    private Float recordedIncline;
+    // Getters y Setters 
+    public float getDistanceKm() { 
+         return distanceKm; 
+         } 
 
-    //comstructores
-    public SimpleCardio() {}
+    public void setDistanceKm(float distanceKm) {  
+        this.distanceKm = distanceKm;  
+    } 
 
-    public SimpleCardio(Time recordedTime, Float recordedVelocity, String cardioMachine, Float recordedIncline) {
-        this.recordedTime = recordedTime;
-        this.recordedVelocity = recordedVelocity;
-        this.cardioMachine = cardioMachine;
-        this.recordedIncline = recordedIncline;
-    }
+    public float getAverageSpeed() {  
+        return averageSpeed;  
+    } 
 
-    //getters y setters
-    public Time getRecordedTime() {
-        return recordedTime;
-    }
-    public void setRecordedTime(Time recordedTime) {
-        this.recordedTime = recordedTime;
-    }
+    public void setAverageSpeed(float averageSpeed) {  
+        this.averageSpeed = averageSpeed;  
+    } 
 
-    public Float getRecordedVelocity() {
-        return recordedVelocity;
-    }
-    public void setRecordedVelocity(Float recordedVelocity) {
-        this.recordedVelocity = recordedVelocity;
-    }
+    public int getInclineLevel() {  
+        return inclineLevel;  
+    } 
 
-    public String getCardioMachine() {
-        return cardioMachine;
-    }
-    public void setCardioMachine(String cardioMachine) {
-        this.cardioMachine = cardioMachine;
-    }
-
-    public Float getRecordedIncline() {
-        return recordedIncline;
-    }
-    public void setRecordedIncline(Float recordedIncline) {
-        this.recordedIncline = recordedIncline;
-    }
-}
+    public void setInclineLevel(int inclineLevel) {  
+        this.inclineLevel = inclineLevel;  
+    } 
+} 
