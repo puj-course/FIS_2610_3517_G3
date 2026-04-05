@@ -19,6 +19,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "routines")
 public class Routine {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
@@ -105,6 +106,9 @@ private List<Exercise> exercises = new ArrayList<>();
         this.exercises.remove(e);
         e.setRoutine(null); // Desvinculamos el ejercicio de esta rutina
     }
+    this.exercises.add(e);
+    e.setRoutine(this); // se vincula el ejercicio a ESTA rutina
+   }
 }
 
 

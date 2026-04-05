@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Component;
+import com.norafit.norafit.services.RoutineServices;
+import com.norafit.norafit.entities.Routine;
+import com.norafit.norafit.entities.Exercises;
+import java.util.List;
 
 import com.norafit.norafit.entities.Exercise;
 import com.norafit.norafit.entities.Routine;
@@ -19,6 +23,7 @@ public class consoleApp {
    private final ExerciseService exerciseService;
 
    private User usuarioActual;
+   private final RoutineServices routineServices;
 
 
    public consoleApp(AuthService authService, RoutineService routineService, ExerciseService exerciseService) {
@@ -400,3 +405,25 @@ private void handleRenameExercise(Scanner sc) {
     }
 }
 }
+
+private void handleRenameRoutine(Scanner sc) 
+{
+  handleListRoutines(); // Mostramos IDs
+        System.out.print("\nIngresa el ID de la rutina a renombrar: ");
+        
+        try {
+            Long id = Long.parseLong(sc.nextLine());
+            System.out.print("Nuevo nombre: ");
+            String nuevoNombre = sc.nextLine();
+
+            routineService.renameRoutine(id, nuevoNombre, usuarioActual);
+            System.out.println(" Rutina actualizada con éxito.");
+        } catch (Exception e) {
+            System.out.println("X Error: " + e.getMessage());
+        }
+}
+
+
+
+
+

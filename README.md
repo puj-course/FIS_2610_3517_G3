@@ -3,8 +3,6 @@
 # NoraFit — Entrena. Registra. Progresa.
 
 
-
-
 > **Propuesta de Valor:** NoraFit es una aplicación móvil gratuita que permite a los usuarios registrar, organizar y analizar sus entrenamientos de gimnasio sin suscripciones ni funciones bloqueadas.
 
 ---
@@ -82,7 +80,28 @@ Estudiante de Ingeniería en Sistemas, Pontificia Universidad Javeriana
 📧 martinezcs@javeriana.edu.co
 
 ---
+Despliegue y ejecución de la aplicación
+---
+Esta sección describe los pasos necesarios para configurar y ejecutar el backend de NoraFit en un entorno local o remoto.
+
+Prerrequisitos
+---
+Para ejecutar el backend del proyecto es necesario contar con:
+
+- Java JDK 17
+- Git
+- Maven (o Maven Wrapper incluido en el proyecto)
+- IDE recomendado: IntelliJ IDEA o Visual Studio Code
+- Cuenta y proyecto en Supabase (PostgreSQL)
+
+El proyecto utiliza Spring Boot y PostgreSQL como base de datos.
+
+Configuración de base de datos
+---
+La aplicación utiliza PostgreSQL alojado en Supabase.
+
+La conexión a la base de datos se encuentra configurada en el archivo:
+
+`srcBackend/norafit/src/main/resources/application.properties`
 ## Licencia
-Proyecto desarrollado con fines académicos.
-
-
+Proyecto desarrollado con fines académicos
