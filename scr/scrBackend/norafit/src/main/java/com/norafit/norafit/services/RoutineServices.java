@@ -39,6 +39,10 @@ public class RoutineServices {
         return routineRepository.save(newRoutine); 
     } 
 
+    public List<Routine> getRoutinesByUser(User user) { 
+        return routineRepository.findByUser_Id(Long.valueOf(user.getId()));  
+    }  
+
   @Transactional
     public void removeRoutine(Long routineId, User user) {
     // 1. se busca la rutina primero
