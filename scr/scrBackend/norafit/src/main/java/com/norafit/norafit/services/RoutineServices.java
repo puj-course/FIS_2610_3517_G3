@@ -26,22 +26,22 @@ public class RoutineServices {
     this.exerciseRepository = exerciseRepository;
 }
 
-  public Routine createRoutine(String name, User user) { 
-        if (name == null || name.isBlank()) { 
-            throw new IllegalArgumentException("El nombre de la rutina no puede estar vacío."); 
-        } 
-        Routine newRoutine = new Routine(); 
-        newRoutine.setRoutineName(name); 
-        newRoutine.setUser(user);  
-        newRoutine.setCreatedAt(LocalDate.now()); 
-        newRoutine.setTotalTimeSeconds(0); 
-
-        return routineRepository.save(newRoutine); 
+public Routine createRoutine(String name, User user) { 
+    if (name == null || name.isBlank()) { 
+        throw new IllegalArgumentException("El nombre de la rutina no puede estar vacío."); 
     } 
+    Routine newRoutine = new Routine(); 
+    newRoutine.setRoutineName(name); 
+    newRoutine.setUser(user);  
+    newRoutine.setCreatedAt(LocalDate.now()); 
+    newRoutine.setTotalTimeSeconds(0); 
 
-    public List<Routine> getRoutinesByUser(User user) { 
-        return routineRepository.findByUser_Id(Long.valueOf(user.getId()));  
-    }  
+    return routineRepository.save(newRoutine); 
+} 
+
+public List<Routine> getRoutinesByUser(User user) { 
+    return routineRepository.findByUser_Id(Long.valueOf(user.getId()));  
+}  
 
   @Transactional
     public void removeRoutine(Long routineId, User user) {
