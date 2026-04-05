@@ -38,110 +38,16 @@ public class RoutineServices {
 
         return routineRepository.save(newRoutine); 
     } 
-    
-    public Routine getRoutineWithExercises(Integer routineId) {
-    if (routineId == null) {
-        throw new IllegalArgumentException("El id de la rutina no puede ser null.");
-    }
 
-    Routine routine = routineRepository.findById(routineId).orElseThrow(() -> new IllegalArgumentException("Rutina no encontrada."));
-
-    List<Exercises> exercises = exerciseRepository.findByRoutineId(routineId);
-    routine.setExercises(exercises);
-
-    return routine;
-}
-
-    //MÉTODO NUEVO
-    @Transactional
-    public void rename(Integer id, String newName) {
-        if (id == null) {
-            throw new IllegalArgumentException("El id no puede ser null.");
-        }
-        if (newName == null || newName.isBlank()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío.");
-        }
-
-        routineRepository.renameRoutine(id, newName.trim());
-    }
-
-    public Exercises getExercise(Routine routine, int exerciseId) {
-        if (routine == null) throw new IllegalArgumentException("Routine no puede ser null.");
-
-        List<Exercises> exercises = routine.getExercises();
-        if (exercises == null) return null;
-
-        for (Exercises ex : exercises) {
-            if (ex != null && ex.getExerciseId() == exerciseId) {
-                return ex;
-            }
-        }
-        return null;
-    }
-
-    public void addExercise(Routine routine, Exercises exercise) {
-        if (routine == null) throw new IllegalArgumentException("Routine no puede ser null.");
-        if (exercise == null) throw new IllegalArgumentException("Exercise no puede ser null.");
-
-        if (routine.getExercises() == null) {
-            routine.setExercises(new ArrayList<>());
-        }
-
-        routine.getExercises().add(exercise);
-        routine.setTotalTimeSeconds(calculateTotalTimeSeconds(routine));
-    }
-
-    public float calculateTotalTimeSeconds(Routine routine) {
-        if (routine == null) {
-            throw new IllegalArgumentException("Routine no puede ser null.");
-        }
-
-        if (routine.getExercises() == null || routine.getExercises().isEmpty()) {
-            return 0f;
-        }
-
-        int total = 0;
-
-        for (Exercises ex : routine.getExercises()) {
-            if (ex == null || ex.getSeries() == null) continue;
-
-            for (Series s : ex.getSeries()) {
-                if (s == null) continue;
-                total += Math.max(0, s.getDurationSeconds());
-                total += Math.max(0, s.getRestTimeSeconds());
-            }
-        }
-
-        return (float) total;
-    }
-
-    public Exercises addExerciseToRoutine(Integer routineId, Exercises exercise) {
-    if (routineId == null) {
-        throw new IllegalArgumentException("El id de la rutina no puede ser null.");
-    }
-
-    if (exercise == null) {
-        throw new IllegalArgumentException("El ejercicio no puede ser null.");
-    }
-
-    if (exercise.getExerciseName() == null || exercise.getExerciseName().isBlank()) {
-        throw new IllegalArgumentException("El nombre del ejercicio es obligatorio.");
-    }
-
+  @Transactional
+    public void removeRoutine(Long routineId, User user) {
+    // 1. se busca la rutina primero
     Routine routine = routineRepository.findById(routineId)
-            .orElseThrow(() -> new IllegalArgumentException("Rutina no encontrada."));
+        .orElseThrow(() -> new IllegalArgumentException("La rutina con ID " + routineId + " no existe."));
 
-    exercise.setRoutineId(routineId);
-
-    Exercises savedExercise = exerciseRepository.save(exercise);
-
-    if (routine.getExercises() == null) {
-        routine.setExercises(new ArrayList<>());
+    // 2. se verifica que la rutina pertenezca al usuario (Seguridad)
+    if (routine.getUser().getId() != user.getId()) {
+    throw new IllegalArgumentException("No tienes permiso para eliminar esta rutina.");
     }
-
-    routine.getExercises().add(savedExercise);
-
-    return savedExercise;
-}
 }
 
