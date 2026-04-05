@@ -242,5 +242,81 @@ private void handleRutinas(Scanner sc) {
     } catch (NumberFormatException e) {
         System.out.println("ID inválido.");
     }
+ }
+//-------------------5) SELECCIONAR RUTINA PARA GESTIONAR EJERCICIOS -----------------
+
+    private void handleSelectRoutine(Scanner sc) {
+        handleListRoutines(); // Muestra las rutinas
+        System.out.print("\nIngrese el ID de la rutina que desea gestionar: ");
+        
+        String input = sc.nextLine().trim(); // Leemos como String para evitar errores
+        if (input.isEmpty()) return;
+
+        try {
+            Long id = Long.parseLong(input);
+            // 1. Buscamos la rutina
+            Routine encontrada = routineService.getRoutineById(id);
+            
+            if (encontrada != null) {
+                // 2. LA ASIGNAMOS A LA VARIABLE GLOBAL
+                this.rutinaSeleccionada = encontrada;
+                // 3. ENTRAMOS AL SUBMENÚ
+                menuDetalleRutina(sc);
+            } else {
+                System.out.println("❌ No se encontró la rutina con ese ID.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Error: Por favor ingresa un número válido.");
+        } catch (Exception e) {
+            // Imprime el error real para saber qué pasa
+            System.out.println("❌ Error inesperado: " + e.getMessage());
+            e.printStackTrace(); // Esto te dirá la línea exacta del error en la consola
+        }
+    }
+//------------------- SUBMENÚ PARA GESTIONAR EJERCICIOS DE LA RUTINA SELECCIONADA -----------------
+    private void menuDetalleRutina(Scanner sc) {
+        boolean volver = false;
+        while (!volver) {
+            System.out.println("\n--- GESTIONANDO RUTINA: " + rutinaSeleccionada.getRoutineName() + " ---");
+            System.out.println("1) Añadir ejercicio de fuerza");
+            System.out.println("2) Ver ejercicios");
+            System.out.println("3) Eliminar ejercicio");
+            System.out.println("4) Renombrar ejercicio");
+            System.out.println("0) Volver");
+            System.out.print("Seleccione una opción: ");
+
+            String opcion = sc.nextLine();
+            switch (opcion) {
+                case "1" -> handleAddStrengthExercise(sc);
+                case "2" -> handleShowExercises();
+                case "3" -> handleRemoveExercise(sc);
+                case "4" -> handleRenameExercise(sc);
+                case "0" -> volver = true;
+                default -> System.out.println("Opción no válida.");
+            }
+        }
+    }
+//------------------- AÑADIR EJERCICIO DE FUERZA A LA RUTINA SELECCIONADA -----------------
+    private void handleAddStrengthExercise(Scanner sc) {
+        System.out.println("\n--- NUEVO EJERCICIO DE FUERZA ---");
+        System.out.print("Nombre del ejercicio: ");
+        String nombre = sc.nextLine();
+        
+        System.out.print("Descripción: ");
+        String desc = sc.nextLine();
+        
+        System.out.print("¿Usa peso adicional? (S/N): ");
+        boolean tienePeso = sc.nextLine().equalsIgnoreCase("S");
+
+        try {
+            exerciseService.addStrengthExercise(rutinaSeleccionada.getId(), nombre, desc, tienePeso);
+            this.rutinaSeleccionada = routineService.getRoutineById(rutinaSeleccionada.getId());
+            
+            System.out.println("✅ Ejercicio añadido correctamente a " + rutinaSeleccionada.getRoutineName());
+        } catch (Exception e) {
+            System.out.println("❌ Error al guardar: " + e.getMessage());
+        }  
+    }  
 }
-}
+
+
