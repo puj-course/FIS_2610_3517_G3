@@ -184,6 +184,7 @@ public class consoleApp {
     private Routine rutinaSeleccionada; 
 
 //------------------1) CREAR RUTINA ----------------- 
+
     private void handleCreateRoutine(Scanner sc) { 
         System.out.println("\n--- NUEVA RUTINA ---"); 
         System.out.print("Nombre de la rutina (ej. Día de Pecho): "); 
@@ -196,7 +197,26 @@ public class consoleApp {
             System.out.println("X Error al crear rutina: " + e.getMessage()); 
         } 
     }
+
+//-------------------2) VER RUTINAS ----------------- 
+
+    private void handleListRoutines() { 
+    System.out.println("\n--- TUS RUTINAS ---"); 
+     
+    var rutinas = routineService.getRoutinesByUser(usuarioActual);  
+
+    if (rutinas == null || rutinas.isEmpty()) { 
+        System.out.println("Aún no tienes rutinas creadas."); 
+    } else { 
+        // Añadimos r.getId() al principio para que sea fácil de identificar 
+        rutinas.forEach(r -> System.out.println( 
+            "[" + r.getId() + "] " + r.getRoutineName() + " (Creada el: " + r.getCreatedAt() + ")" 
+        )); 
+      } 
+    } 
+
 //-------------------3) ELIMINAR RUTINA -----------------
+
 private void handleDeleteRoutine(Scanner sc) {
         handleListRoutines(); // Primero se las mostramos para que vea los IDs
         System.out.print("\nIngresa el ID de la rutina que deseas eliminar: ");
