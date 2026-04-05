@@ -26,24 +26,19 @@ public class RoutineServices {
     this.exerciseRepository = exerciseRepository;
 }
 
-    public Routine create(String routineName, User user) {
-        if (routineName == null || routineName.isBlank()) {
-            throw new IllegalArgumentException("El nombre de la rutina es obligatorio.");
-        }
-        if (user == null) {
-            throw new IllegalArgumentException("La rutina debe tener un usuario.");
-        }
+  public Routine createRoutine(String name, User user) { 
+        if (name == null || name.isBlank()) { 
+            throw new IllegalArgumentException("El nombre de la rutina no puede estar vacío."); 
+        } 
+        Routine newRoutine = new Routine(); 
+        newRoutine.setRoutineName(name); 
+        newRoutine.setUser(user);  
+        newRoutine.setCreatedAt(LocalDate.now()); 
+        newRoutine.setTotalTimeSeconds(0); 
 
-        Routine routine = new Routine();
-        routine.setRoutineName(routineName.trim());
-        routine.setCreatedAt(LocalDate.now());
-        routine.setExercises(new ArrayList<>());
-        routine.setTotalTimeSeconds(0f);
-        routine.setUser(user);
-
-        return routineRepository.save(routine);
-    }
-
+        return routineRepository.save(newRoutine); 
+    } 
+    
     public Routine getRoutineWithExercises(Integer routineId) {
     if (routineId == null) {
         throw new IllegalArgumentException("El id de la rutina no puede ser null.");
