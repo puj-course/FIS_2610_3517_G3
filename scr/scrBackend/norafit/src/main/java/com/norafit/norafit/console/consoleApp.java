@@ -115,6 +115,23 @@ public class consoleApp {
        System.out.println("Login OK. Bienvenido/a, " + usuarioActual.getUsername());
    }
 
+     //cambiar contraseña
+   private void handleChangePassword(Scanner sc) {
+       System.out.println("\n--- CAMBIAR CONTRASEÑA ---");
+
+
+       System.out.print("Email: ");
+       String email = sc.nextLine();
+
+
+       System.out.print("Nueva contraseña: ");
+       String newPassword = sc.nextLine();
+
+
+       User actualizado = authService.changePassword(email, newPassword);
+       System.out.println("Contraseña actualizada para: " + actualizado.getEmail());
+   }
+
 
    private boolean menuLogueado(Scanner sc) {
        System.out.println("\n=== MENÚ (Usuario: " + usuarioActual.getUsername() + ") ===");
@@ -179,23 +196,23 @@ public class consoleApp {
             System.out.println("X Error al crear rutina: " + e.getMessage()); 
         } 
     }
+//-------------------3) ELIMINAR RUTINA -----------------
+private void handleDeleteRoutine(Scanner sc) {
+        handleListRoutines(); // Primero se las mostramos para que vea los IDs
+        System.out.print("\nIngresa el ID de la rutina que deseas eliminar: ");
+        
+        try {
+            Long id = Long.parseLong(sc.nextLine());
+            routineService.removeRoutine(id, usuarioActual);
+            System.out.println("✅ Rutina eliminada correctamente.");
+        } catch (NumberFormatException e) {
+            System.out.println("X El ID debe ser un número válido.");
+        } catch (Exception e) {
+            System.out.println("X Error: " + e.getMessage());
+        }
+    }
   
-   //cambiar contraseña
-   private void handleChangePassword(Scanner sc) {
-       System.out.println("\n--- CAMBIAR CONTRASEÑA ---");
 
-
-       System.out.print("Email: ");
-       String email = sc.nextLine();
-
-
-       System.out.print("Nueva contraseña: ");
-       String newPassword = sc.nextLine();
-
-
-       User actualizado = authService.changePassword(email, newPassword);
-       System.out.println("Contraseña actualizada para: " + actualizado.getEmail());
-   }
 
 private void handleRutinas(Scanner sc) {
     System.out.println("\n--- RUTINAS ---");
