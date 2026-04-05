@@ -18,10 +18,22 @@ public abstract class CardioExercise extends Exercise {
     }
 
     // Getters y Setters básicos
-    public int getDurationMinutes() { return durationMinutes; }
-    public void setDurationMinutes(int durationMinutes) { this.durationMinutes = durationMinutes; }
-    public String getIntensity() { return intensity; }
-    public void setIntensity(String intensity) { this.intensity = intensity; }
-    public String getMachineType() { return machineType; }
-    public void setMachineType(String machineType) { this.machineType = machineType; }
+    public int getDurationMinutes() { 
+        return durationMinutes; 
+    }
+    public void setDurationMinutes(int durationMinutes) { 
+        this.durationMinutes = durationMinutes; 
+    }
+    public String getIntensity() { 
+        return intensity; 
+    }
+    public void setIntensity(String intensity) { 
+        this.intensity = intensity; 
+    }
+    public String getMachineType() { 
+        return machineType; 
+    }
+    public void setMachineType(String machineType) { 
+        this.machineType = machineType; 
+    }
 }

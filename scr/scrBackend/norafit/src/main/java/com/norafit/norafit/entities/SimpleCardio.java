@@ -18,10 +18,22 @@ public class SimpleCardio extends CardioExercise {
     }
 
     // Getters y Setters
-    public float getDistanceKm() { return distanceKm; }
-    public void setDistanceKm(float distanceKm) { this.distanceKm = distanceKm; }
-    public float getAverageSpeed() { return averageSpeed; }
-    public void setAverageSpeed(float averageSpeed) { this.averageSpeed = averageSpeed; }
-    public int getInclineLevel() { return inclineLevel; }
-    public void setInclineLevel(int inclineLevel) { this.inclineLevel = inclineLevel; }
+    public float getDistanceKm() {
+         return distanceKm;
+         }
+    public void setDistanceKm(float distanceKm) { 
+        this.distanceKm = distanceKm; 
+    }
+    public float getAverageSpeed() { 
+        return averageSpeed; 
+    }
+    public void setAverageSpeed(float averageSpeed) { 
+        this.averageSpeed = averageSpeed; 
+    }
+    public int getInclineLevel() { 
+        return inclineLevel; 
+    }
+    public void setInclineLevel(int inclineLevel) { 
+        this.inclineLevel = inclineLevel; 
+    }
 }

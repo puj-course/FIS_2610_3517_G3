@@ -26,7 +26,7 @@ public class Routine {
     private String routineName;
     private float totalTimeSeconds;
     
-    @Column(name = "created_at") // Así la base de datos mantiene el guion bajo
+    @Column(name = "created_at") 
     private LocalDate createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,8 +34,8 @@ public class Routine {
     private User user;
 
    
-    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
-    private List<Exercise> exercises = new ArrayList<>();
+@OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
+private List<Exercise> exercises = new ArrayList<>();
     
 
     // Constructor vacío (Requerido por JPA)
@@ -52,7 +52,6 @@ public class Routine {
     }
 
     public float calculateTotalTime() {
-        // Aquí podrías sumar la duración de todos los ejercicios de la lista
         return this.totalTimeSeconds;
     }
 
@@ -93,12 +92,20 @@ public class Routine {
     }
 
 
-    //poner este método en la entidad asegura que la "madre" (Rutina) siempre sepa qué "hijos" (Ejercicios) tiene en memoria, manteniendo ambos lados de la relación conectados automáticamente.
+    //se debe colocar este método en la entidad (Routine) porque es la que tiene la lista de ejercicios (exercises). Es la que "conoce" a los ejercicios, no al revés.
     public void addExercise(Exercise e) {
     if (this.exercises == null) {
         this.exercises = new ArrayList<>();
     }
     this.exercises.add(e);
     e.setRoutine(this); // se vincula el ejercicio a ESTA rutina
+   }
+   public void removeExercise(Exercise e) {
+    if (this.exercises != null && e != null) {
+        this.exercises.remove(e);
+        e.setRoutine(null); // Desvinculamos el ejercicio de esta rutina
+    }
 }
+
+
 }

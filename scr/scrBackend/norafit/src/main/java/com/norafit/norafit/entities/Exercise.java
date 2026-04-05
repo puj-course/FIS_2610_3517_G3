@@ -13,24 +13,24 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "exercises")
-@Inheritance(strategy = InheritanceType.JOINED) // Estrategia para manejar Strength y Cardio
-public abstract class Exercise { //como abstracta según el diagrama
+@Inheritance(strategy = InheritanceType.JOINED) 
+public abstract class Exercise { 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Sincronizado: Long id en lugar de int exerciseId
+    private Long id; 
 
     private String exerciseName;
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "routine_id")
-    private Routine routine; // Relación con Routine
+    private Routine routine; 
 
-    // Constructor vacío requerido por JPA
+    
     public Exercise() {}
 
-    // Métodos del diagrama
+    
     public void updateBaseInfo(String name, String desc) {
         this.exerciseName = name;
         this.description = desc;
@@ -61,4 +61,6 @@ public abstract class Exercise { //como abstracta según el diagrama
     public void setRoutine(Routine routine) { 
         this.routine = routine; 
     }
+
+    
 }

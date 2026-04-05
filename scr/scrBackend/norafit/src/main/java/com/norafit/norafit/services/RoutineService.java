@@ -21,7 +21,7 @@ public class RoutineService {
         this.routineRepository = routineRepository;
     }
 
-    // MÉTODO CLAVE: Aquí es donde el usuario "crea" la rutina
+    // Aquí es donde el usuario "crea" la rutina
     public Routine createRoutine(String name, User user) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("El nombre de la rutina no puede estar vacío.");
@@ -47,12 +47,12 @@ public class RoutineService {
     Routine routine = routineRepository.findById(routineId)
         .orElseThrow(() -> new IllegalArgumentException("La rutina con ID " + routineId + " no existe."));
 
-    // 2. Verificamos que la rutina pertenezca al usuario (Seguridad)
+    // 2. se verifica que la rutina pertenezca al usuario (Seguridad)
     if (routine.getUser().getId() != user.getId()) {
     throw new IllegalArgumentException("No tienes permiso para eliminar esta rutina.");
     }
 
-    // 3. Eliminamos
+    // 3. se elimina 
     routineRepository.delete(routine);
     }
     @Transactional
@@ -61,7 +61,7 @@ public Routine renameRoutine(Long routineId, String newName, User user) {
         throw new IllegalArgumentException("El nuevo nombre no puede estar vacío.");
     }
 
-    // 1. Buscamos la rutina
+    // 1. se busca la rutina
     Routine routine = routineRepository.findById(routineId)
         .orElseThrow(() -> new IllegalArgumentException("La rutina no existe."));
 
@@ -83,5 +83,7 @@ public Routine renameRoutine(Long routineId, String newName, User user) {
     
     return routine;
 }
+
+
 }
     

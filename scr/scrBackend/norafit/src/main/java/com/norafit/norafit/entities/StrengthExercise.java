@@ -16,11 +16,11 @@ public class StrengthExercise extends Exercise {
 
     private boolean hasWeight;
 
-    // Relación de Composición: Si borras el ejercicio, se borran sus series
+    // Relación con StrengthSeries (1 a muchos)
     @OneToMany(mappedBy = "strengthExercise", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StrengthSeries> series = new ArrayList<>();
 
-    // Constructor vacío requerido por JPA
+    // Constructor vacío para JPA
     public StrengthExercise() {
         super();
     }
