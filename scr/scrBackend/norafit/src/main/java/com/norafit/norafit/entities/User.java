@@ -3,7 +3,14 @@ package com.norafit.norafit.entities;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import jakarta.persistence.*; //importante para base de datos 
+
+import jakarta.persistence.Column; 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity // se marca que es una entidad para la base de datos
