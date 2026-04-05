@@ -54,4 +54,19 @@ public List<Routine> getRoutinesByUser(User user) {
     throw new IllegalArgumentException("No tienes permiso para eliminar esta rutina.");
     }
 }
+    @Transactional
+public Routine renameRoutine(Long routineId, String newName, User user) {
+    if (newName == null || newName.isBlank()) {
+        throw new IllegalArgumentException("El nuevo nombre no puede estar vacío.");
+    }
+
+    // 1. se busca la rutina
+    Routine routine = routineRepository.findById(routineId)
+        .orElseThrow(() -> new IllegalArgumentException("La rutina no existe."));
+
+    // 2. Validación de seguridad (que sea del usuario logueado)
+    if (routine.getUser().getId() != user.getId()) {
+        throw new IllegalArgumentException("No tienes permiso para editar esta rutina.");
+    }
+
 
