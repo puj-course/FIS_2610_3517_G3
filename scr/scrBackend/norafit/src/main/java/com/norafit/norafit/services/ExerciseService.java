@@ -37,5 +37,23 @@ public class ExerciseService {
         // JPA se encarga de llenar la tabla 'exercises' y 'strength_exercises'
         return exerciseRepository.save(sExercise);
     }
+
+    @Transactional
+    public Exercise renameExercise(Long exerciseId, String newName) {
+        // 1. Se busca el ejercicio
+        Exercise exercise = exerciseRepository.findById(exerciseId)
+                .orElseThrow(() -> new RuntimeException("No existe el ejercicio con ID " + exerciseId));
+
+        // 2. LA LÓGICA DE VALIDACIÓN SE QUEDA AQUÍ
+        if (newName == null || newName.isBlank()) {
+            throw new IllegalArgumentException("El nombre del ejercicio no puede estar vacío.");
+        }
+
+        // 3. se usa el setter estándar
+        exercise.setExerciseName(newName);
+
+        // 4. Persistir
+        return exerciseRepository.save(exercise);
+    }
 }
 
