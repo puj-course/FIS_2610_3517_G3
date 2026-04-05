@@ -1,32 +1,39 @@
 package com.norafit.norafit.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cardio_exercises")
-@Inheritance(strategy = InheritanceType.JOINED)
-  
-public abstract class CardioExercise extends Exercises {
+@PrimaryKeyJoinColumn(name = "exercise_id")
+public abstract class CardioExercise extends Exercise {
 
-    @Column(name = "is_hiit")
-    private boolean isHIIT;
+    private int durationMinutes;
+    private String intensity;
+    private String machineType;
 
-    //constructores
-    public CardioExercise() {}
-
-    public CardioExercise(boolean isHIIT) {
-        this.isHIIT = isHIIT;
+    public CardioExercise() {
+        super();
     }
 
-    //getters y setters
-    public boolean isHIIT() {
-        return isHIIT;
+    // Getters y Setters básicos
+    public int getDurationMinutes() { 
+        return durationMinutes; 
     }
-    public void setHIIT(boolean isHIIT) {
-        this.isHIIT = isHIIT;
+    public void setDurationMinutes(int durationMinutes) { 
+        this.durationMinutes = durationMinutes; 
+    }
+    public String getIntensity() { 
+        return intensity; 
+    }
+    public void setIntensity(String intensity) { 
+        this.intensity = intensity; 
+    }
+    public String getMachineType() { 
+        return machineType; 
+    }
+    public void setMachineType(String machineType) { 
+        this.machineType = machineType; 
     }
 }
