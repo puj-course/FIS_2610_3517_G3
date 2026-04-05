@@ -1,45 +1,39 @@
-package com.norafit.norafit.entities; 
+package com.norafit.norafit.entities;
 
-import jakarta.persistence.Entity; 
-import jakarta.persistence.PrimaryKeyJoinColumn; 
-import jakarta.persistence.Table; 
-@Entity 
-@Table(name = "hiit_cardio") 
-@PrimaryKeyJoinColumn(name = "cardio_exercise_id") 
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 
-public class HIITCardio extends CardioExercise { 
-    private int rounds; 
-    private int workTimeSeconds; 
-    private int restTimeSeconds; 
+@Entity
+@Table(name = "hiit_cardio")
+@PrimaryKeyJoinColumn(name = "cardio_exercise_id")
+public class HIITCardio extends CardioExercise {
 
-    public HIITCardio() { 
-        super(); 
-    } 
-    // Getters y Setters 
-    public int getRounds() {  
-        return rounds;  
+    private int rounds;
+    private int workTimeSeconds;
+    private int restTimeSeconds;
 
-    } 
+    public HIITCardio() {
+        super();
+    }
 
-    public void setRounds(int rounds) {  
-
-        this.rounds = rounds;  
-
-    } 
-
-    public int getWorkTimeSeconds() {  
-        return workTimeSeconds;  
-    } 
-
-    public void setWorkTimeSeconds(int workTimeSeconds) {  
-        this.workTimeSeconds = workTimeSeconds;  
-    } 
-
-    public int getRestTimeSeconds() {  
-        return restTimeSeconds;  
-    } 
-
-    public void setRestTimeSeconds(int restTimeSeconds) {  
-        this.restTimeSeconds = restTimeSeconds;  
-    } 
-} 
+    // Getters y Setters
+    public int getRounds() { 
+        return rounds; 
+    }
+    public void setRounds(int rounds) { 
+        this.rounds = rounds; 
+    }
+    public int getWorkTimeSeconds() { 
+        return workTimeSeconds; 
+    }
+    public void setWorkTimeSeconds(int workTimeSeconds) { 
+        this.workTimeSeconds = workTimeSeconds; 
+    }
+    public int getRestTimeSeconds() { 
+        return restTimeSeconds; 
+    }
+    public void setRestTimeSeconds(int restTimeSeconds) { 
+        this.restTimeSeconds = restTimeSeconds; 
+    }
+}
