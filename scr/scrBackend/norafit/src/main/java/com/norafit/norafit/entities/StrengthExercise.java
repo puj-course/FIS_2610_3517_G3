@@ -40,4 +40,3 @@ public class StrengthExercise extends Exercise {
         this.series = series; 
     }
 }
-

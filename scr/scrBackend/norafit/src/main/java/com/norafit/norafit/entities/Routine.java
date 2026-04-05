@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,28 +26,41 @@ public class Routine {
 
     private String routineName;
     private float totalTimeSeconds;
+    
     @Column(name = "created_at") 
-    private LocalDate created_at;
-
-    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
-    private List<Exercises> exercises = new ArrayList<>();
+    private LocalDate createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+   
+@OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
+private List<Exercise> exercises = new ArrayList<>();
+    
 
     // Constructor vacío (Requerido por JPA)
     public Routine() {
         this.createdAt = LocalDate.now();
     }
 
+    // Constructor para creación rápida (Lógica del diagrama)
     public Routine(String routineName, User user) {
         this.routineName = routineName;
         this.user = user;
         this.createdAt = LocalDate.now();
         this.totalTimeSeconds = 0;
     }
-   // --- GETTERS Y SETTERS BÁSICOS ---
+
+    public float calculateTotalTime() {
+        return this.totalTimeSeconds;
+    }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    // --- GETTERS Y SETTERS BÁSICOS ---
     public Long getId() { 
         return id; 
     }
@@ -87,4 +101,15 @@ public class Routine {
     this.exercises.add(e);
     e.setRoutine(this); // se vincula el ejercicio a ESTA rutina
    }
+   public void removeExercise(Exercise e) {
+    if (this.exercises != null && e != null) {
+        this.exercises.remove(e);
+        e.setRoutine(null); // Desvinculamos el ejercicio de esta rutina
+    }
+    this.exercises.add(e);
+    e.setRoutine(this); // se vincula el ejercicio a ESTA rutina
+   }
+}
+
+
 }

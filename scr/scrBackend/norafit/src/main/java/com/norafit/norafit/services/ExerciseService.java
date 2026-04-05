@@ -39,6 +39,28 @@ public class ExerciseService {
     }
 
     @Transactional
+    public void deleteExercise(Long exerciseId, Long routineId) {
+        // 1. Buscamos la rutina
+        Routine routine = routineRepository.findById(routineId)
+                .orElseThrow(() -> new RuntimeException("La rutina no existe."));
+
+        // 2. Buscamos el ejercicio
+        Exercise exercise = exerciseRepository.findById(exerciseId)
+                .orElseThrow(() -> new RuntimeException("El ejercicio no existe."));
+
+        // 3. Verificamos que el ejercicio realmente pertenezca a esa rutina (Seguridad)
+        if (!exercise.getRoutine().getId().equals(routineId)) {
+            throw new RuntimeException("El ejercicio no pertenece a la rutina indicada.");
+        }
+
+        // 4. Desvinculamos en memoria
+        routine.removeExercise(exercise);
+
+        // 5. Eliminamos de la base de datos
+        exerciseRepository.delete(exercise);
+    }
+
+    @Transactional
     public Exercise renameExercise(Long exerciseId, String newName) {
         // 1. Se busca el ejercicio
         Exercise exercise = exerciseRepository.findById(exerciseId)
@@ -55,5 +77,5 @@ public class ExerciseService {
         // 4. Persistir
         return exerciseRepository.save(exercise);
     }
-}
 
+}
