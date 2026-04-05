@@ -316,7 +316,31 @@ private void handleRutinas(Scanner sc) {
         } catch (Exception e) {
             System.out.println("❌ Error al guardar: " + e.getMessage());
         }  
-    }  
+    } 
+
+private void handleRenameExercise(Scanner sc) {
+    handleShowExercises(); // Mostramos la lista para que el usuario vea los IDs actuales
+    System.out.print("\nIngrese el ID del ejercicio que desea renombrar: ");
+    
+    try {
+        Long exId = Long.parseLong(sc.nextLine().trim());
+        
+        System.out.print("Ingrese el nuevo nombre para el ejercicio: ");
+        String nuevoNombre = sc.nextLine().trim();
+
+        // Llamamos al service (que ya tiene la validación que agregaste)
+        exerciseService.renameExercise(exId, nuevoNombre);
+        
+        // Refrescamos la rutina para ver los cambios reflejados
+        this.rutinaSeleccionada = routineService.getRoutineById(rutinaSeleccionada.getId());
+        
+        System.out.println("✅ Ejercicio actualizado correctamente.");
+    } catch (NumberFormatException e) {
+        System.out.println("❌ Error: El ID debe ser un número.");
+    } catch (Exception e) {
+        System.out.println("❌ Error al renombrar: " + e.getMessage());
+    }
+}
 }
 
 
