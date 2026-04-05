@@ -1,83 +1,41 @@
 package com.norafit.norafit.services;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.norafit.norafit.entities.Exercises;
+import com.norafit.norafit.entities.Exercise;
+import com.norafit.norafit.entities.Routine;
+import com.norafit.norafit.entities.StrengthExercise;
 import com.norafit.norafit.repositories.ExerciseRepository;
+import com.norafit.norafit.repositories.RoutineRepository;
 
 @Service
 public class ExerciseService {
-
     private final ExerciseRepository exerciseRepository;
+    private final RoutineRepository routineRepository;
 
-    public ExerciseService(ExerciseRepository exerciseRepository) {
+    public ExerciseService(ExerciseRepository exerciseRepository, RoutineRepository routineRepository) {
         this.exerciseRepository = exerciseRepository;
+        this.routineRepository = routineRepository;
     }
+    
+    @Transactional
+    public Exercise addStrengthExercise(Long routineId, String name, String desc, boolean hasWeight) {
+        // 1. Se busca la rutina donde queremos meter el ejercicio
+        Routine routine = routineRepository.findById(routineId)
+            .orElseThrow(() -> new RuntimeException("Error: La rutina con ID " + routineId + " no existe."));
 
-    public Exercises saveExercise(Exercises exercise) {
-        if (exercise == null) {
-            throw new IllegalArgumentException("El ejercicio no puede ser null.");
-        }
+        // 2. se crea el objeto de fuerza (clase hija)
+        StrengthExercise sExercise = new StrengthExercise();
+        sExercise.updateBaseInfo(name, desc);
+        sExercise.setHasWeight(hasWeight);
 
-        if (exercise.getExerciseName() == null || exercise.getExerciseName().isBlank()) {
-            throw new IllegalArgumentException("El nombre del ejercicio es obligatorio.");
-        }
+        // 3. se vincula usando el método puesto en Routine.java
+        // Esto conecta al hijo con el padre en memoria
+        routine.addExercise(sExercise);
 
-        if (exercise.getCreatedAt() == null) {
-            exercise.setCreatedAt(LocalDateTime.now());
-        }
-
-        return exerciseRepository.save(exercise);
-    }
-
-    public List<Exercises> getAllExercises() {
-        return exerciseRepository.findAll();
-    }
-
-    public Exercises getExerciseById(Integer id) {
-        return exerciseRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Ejercicio no encontrado."));
-    }
-
-    public List<Exercises> getExercisesByRoutineId(Integer routineId) {
-        return exerciseRepository.findByRoutineId(routineId);
-    }
-
-   public Exercises updateExercise(Integer id, Exercises updatedExercise) {
-    if (id == null) {
-        throw new IllegalArgumentException("El id del ejercicio no puede ser null.");
-    }
-
-    if (updatedExercise == null) {
-        throw new IllegalArgumentException("Los datos actualizados no pueden ser null.");
-    }
-
-    Exercises existing = exerciseRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Ejercicio no encontrado."));
-
-    if (updatedExercise.getExerciseName() == null || updatedExercise.getExerciseName().isBlank()) {
-        throw new IllegalArgumentException("El nombre del ejercicio es obligatorio.");
-    }
-
-    existing.setExerciseName(updatedExercise.getExerciseName());
-    existing.setDescription(updatedExercise.getDescription());
-    existing.setDurationSeconds(updatedExercise.getDurationSeconds());
-    existing.setDefaultRestSeconds(updatedExercise.getDefaultRestSeconds());
-    existing.setOrdering(updatedExercise.getOrdering());
-    existing.setRoutineId(updatedExercise.getRoutineId());
-
-    return exerciseRepository.save(existing);
-}
-
-    public void deleteExercise(Integer id) {
-        if (!exerciseRepository.existsById(id)) {
-            throw new IllegalArgumentException("Ejercicio no encontrado.");
-        }
-
-        exerciseRepository.deleteById(id);
+        // 4. Guardamos el ejercicio en la base de datos
+        // JPA se encarga de llenar la tabla 'exercises' y 'strength_exercises'
+        return exerciseRepository.save(sExercise);
     }
 }
 
