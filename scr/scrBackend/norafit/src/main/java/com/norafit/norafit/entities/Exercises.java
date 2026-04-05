@@ -1,143 +1,65 @@
-package com.norafit.norafit.entities;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+package com.norafit.norafit.entities; 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Entity; 
+import jakarta.persistence.FetchType; 
+import jakarta.persistence.GeneratedValue; 
+import jakarta.persistence.GenerationType; 
+import jakarta.persistence.Id; 
+import jakarta.persistence.Inheritance; 
+import jakarta.persistence.InheritanceType; 
+import jakarta.persistence.JoinColumn; 
+import jakarta.persistence.ManyToOne; 
+import jakarta.persistence.Table; 
 
-@Entity
-@Table(name = "exercises")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Entity 
+@Table(name = "exercises") 
+@Inheritance(strategy = InheritanceType.JOINED)  
 
-public abstract class Exercises {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name ="id")
-    private Integer exerciseId;
-
-    @Column(name = "routine_id")
-    private Integer routineId;
-
-    @Column(name ="exercise_name")
-    private String exerciseName;
-
-    @Column(name="description")
-    private String description;
-
-    @Column(name = "duration_seconds")
-    private Integer durationSeconds;
-
-    @Column(name = "default_rest_seconds")
-    private Integer defaultRestSeconds;
-
-    @Column(name = "ordering")
-    private Integer ordering;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+public abstract class Exercise {  
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id;  
     
-    // Constructor vacío 
-    public Exercises() {
-    }
+    private String exerciseName; 
+    private String description; 
 
-    // Constructor sin lista
-     public Exercises(Integer exerciseId, Integer routineId, String exerciseName, String description, Integer durationSeconds, 
-     Integer defaultRestSeconds, Integer ordering, LocalDateTime createdAt) {
+    @ManyToOne(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "routine_id") 
+    private Routine routine;  
 
-        this.exerciseId = exerciseId;
-        this.routineId = routineId;
-        this.exerciseName = exerciseName;
-        this.description = description;
-        this.durationSeconds = durationSeconds;
-        this.defaultRestSeconds = defaultRestSeconds;
-        this.ordering = ordering;
-        this.createdAt = createdAt;
-    }
+    public Exercise() {} 
+    
+    public void updateBaseInfo(String name, String desc) { 
+        this.exerciseName = name; 
+        this.description = desc; 
+    } 
 
-    // Constructor completo
-    public Exercises(int exerciseId, String exerciseName, String description, List<Series> series) {
-        this.exerciseId = exerciseId;
-        this.exerciseName = exerciseName;
-        this.description = description;
-        this.series = series;
-    }
+    // Getters y Setters 
+    public Long getId() { 
+         return id; 
+    } 
+    public void setId(Long id) {  
+        this.id = id;  
+    } 
 
-    //getters y setters
-    public int getExerciseId() {
-        return exerciseId;
-    }
-    public void setExerciseId(int exerciseId) {
-        this.exerciseId = exerciseId;
-    }
+    public String getExerciseName() {  
+        return exerciseName;  
+    } 
+    public void setExerciseName(String exerciseName) {  
+        this.exerciseName = exerciseName;  
+    } 
 
-    public Integer getRoutineId() {
-        return routineId;
-    }
+    public String getDescription() {  
+        return description;  
+    } 
+    public void setDescription(String description) {  
+        this.description = description;  
+    } 
 
-    public void setRoutineId(Integer routineId) {
-        this.routineId = routineId;
-    }
-
-    public String getExerciseName() {
-        return exerciseName;
-    }
-    public void setExerciseName(String exerciseName) {
-        this.exerciseName = exerciseName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getDurationSeconds() {
-        return durationSeconds;
-    }
-
-    public void setDurationSeconds(Integer durationSeconds) {
-        this.durationSeconds = durationSeconds;
-    }
-
-    public Integer getDefaultRestSeconds() {
-        return defaultRestSeconds;
-    }
-
-    public void setDefaultRestSeconds(Integer defaultRestSeconds) {
-        this.defaultRestSeconds = defaultRestSeconds;
-    }
-
-    public Integer getOrdering() {
-        return ordering;
-    }
-
-    public void setOrdering(Integer ordering) {
-        this.ordering = ordering;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public List<Series> getSeries() {
-        return series;
-    }
-    public void setSeries(List<Series> series) {
-        this.series = series;
-    }
-
-}
+    public Routine getRoutine() {  
+        return routine;  
+    } 
+    public void setRoutine(Routine routine) {  
+        this.routine = routine;  
+    }    
+} 
