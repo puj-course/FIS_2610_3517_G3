@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 import com.norafit.norafit.entities.Exercise;
 import com.norafit.norafit.entities.Routine;
 import com.norafit.norafit.entities.User;
+import com.norafit.norafit.factory.ExerciseFactory;
+import com.norafit.norafit.factory.HIITCardioExerciseFactory;
+import com.norafit.norafit.factory.SimpleCardioExerciseFactory;
+import com.norafit.norafit.factory.StrengthExerciseFactory;
 import com.norafit.norafit.services.AuthService;
 import com.norafit.norafit.services.ExerciseService;
 import com.norafit.norafit.services.RoutineService;
@@ -292,7 +296,7 @@ public class consoleApp {
         boolean volver = false;
         while (!volver) {
             System.out.println("\n--- GESTIONANDO RUTINA: " + rutinaSeleccionada.getRoutineName() + " ---");
-            System.out.println("1) Añadir ejercicio de fuerza");
+            System.out.println("1) Añadir nuevo ejercicio");
             System.out.println("2) Ver ejercicios");
             System.out.println("3) Eliminar ejercicio");
             System.out.println("4) Renombrar ejercicio");
@@ -301,7 +305,7 @@ public class consoleApp {
 
             String opcion = sc.nextLine();
             switch (opcion) {
-                case "1" -> handleAddStrengthExercise(sc);
+                case "1" -> handleAddExercise(sc);
                 case "2" -> handleShowExercises();
                 case "3" -> handleRemoveExercise(sc);
                 case "4" -> handleRenameExercise(sc);
@@ -333,27 +337,59 @@ public class consoleApp {
         }
     }
 
-    //------------------- AÑADIR EJERCICIO DE FUERZA A LA RUTINA SELECCIONADA -----------------
-    private void handleAddStrengthExercise(Scanner sc) {
-        System.out.println("\n--- NUEVO EJERCICIO DE FUERZA ---");
-        System.out.print("Nombre del ejercicio: ");
-        String nombre = sc.nextLine();
-        
-        System.out.print("Descripción: ");
-        String desc = sc.nextLine();
-        
-        System.out.print("¿Usa peso adicional? (S/N): ");
-        boolean tienePeso = sc.nextLine().equalsIgnoreCase("S");
+    //------------------- AÑADIR NUEVO EJERCICIO -----------------
+      
+    private void handleAddExercise(Scanner sc) {
+    System.out.println("\n--- NUEVO EJERCICIO ---");
+    System.out.println("1) Fuerza");
+    System.out.println("2) Cardio Simple");
+    System.out.println("3) HIIT");
+    System.out.print("Tipo: ");
+    String tipo = sc.nextLine().trim();
 
-        try {
-            exerciseService.addStrengthExercise(rutinaSeleccionada.getId(), nombre, desc, tienePeso);
-            this.rutinaSeleccionada = routineService.getRoutineById(rutinaSeleccionada.getId());
-            
-            System.out.println("✅ Ejercicio añadido correctamente a " + rutinaSeleccionada.getRoutineName());
-        } catch (Exception e) {
-            System.out.println("❌ Error al guardar: " + e.getMessage());
-        }  
-    }  
+    System.out.print("Nombre: ");
+    String nombre = sc.nextLine();
+    System.out.print("Descripción: ");
+    String desc = sc.nextLine();
+
+    ExerciseFactory factory;
+
+    switch (tipo) {
+        case "1" -> {
+            System.out.print("¿Usa peso adicional? (S/N): ");
+            boolean peso = sc.nextLine().equalsIgnoreCase("S");
+            factory = new StrengthExerciseFactory(peso);
+        }
+        case "2" -> {
+            System.out.print("Duración (min): ");
+            int dur = Integer.parseInt(sc.nextLine());
+            System.out.print("Intensidad: ");
+            String intens = sc.nextLine();
+            factory = new SimpleCardioExerciseFactory(dur, intens);
+        }
+        case "3" -> {
+            System.out.print("Rondas: ");
+            int rounds = Integer.parseInt(sc.nextLine());
+            System.out.print("Tiempo de trabajo (seg): ");
+            int work = Integer.parseInt(sc.nextLine());
+            System.out.print("Tiempo de descanso (seg): ");
+            int rest = Integer.parseInt(sc.nextLine());
+            factory = new HIITCardioExerciseFactory(rounds, work, rest);
+        }
+        default -> {
+            System.out.println("Tipo no válido.");
+            return;
+        }
+    }
+
+    try {
+        exerciseService.addExercise(rutinaSeleccionada.getId(), factory, nombre, desc);
+        this.rutinaSeleccionada = routineService.getRoutineById(rutinaSeleccionada.getId());
+        System.out.println("✅ Ejercicio añadido con éxito.");
+    } catch (Exception e) {
+        System.out.println("❌ Error: " + e.getMessage());
+        }
+    }
     //------------------- ELIMINAR EJERCICIO DE LA RUTINA SELECCIONADA ----------------- 
      private void handleRemoveExercise(Scanner sc) {
     handleShowExercises(); // Mostramos la lista para que vea los IDs
@@ -398,7 +434,7 @@ private void handleRenameExercise(Scanner sc) {
     } catch (Exception e) {
         System.out.println("❌ Error al renombrar: " + e.getMessage());
     }
-}
+ }
 }
 
 
