@@ -1,5 +1,7 @@
 package com.norafit.norafit.entities;
 
+import com.norafit.norafit.strategy.HIITTimeStrategy;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -15,25 +17,30 @@ public class HIITCardio extends CardioExercise {
 
     public HIITCardio() {
         super();
+        this.strategy = new HIITTimeStrategy();
     }
 
-    // Getters y Setters
-    public int getRounds() { 
-        return rounds; 
+    public int getRounds() {
+        return rounds;
     }
-    public void setRounds(int rounds) { 
-        this.rounds = rounds; 
+
+    public void setRounds(int rounds) {
+        this.rounds = rounds;
     }
-    public int getWorkTimeSeconds() { 
-        return workTimeSeconds; 
+
+    public int getWorkTimeSeconds() {
+        return workTimeSeconds;
     }
-    public void setWorkTimeSeconds(int workTimeSeconds) { 
-        this.workTimeSeconds = workTimeSeconds; 
+
+    public void setWorkTimeSeconds(int workTimeSeconds) {
+        this.workTimeSeconds = workTimeSeconds;
     }
-    public int getRestTimeSeconds() { 
-        return restTimeSeconds; 
+
+    public int getRestTimeSeconds() {
+        return restTimeSeconds;
     }
-    public void setRestTimeSeconds(int restTimeSeconds) { 
-        this.restTimeSeconds = restTimeSeconds; 
+
+    public void setRestTimeSeconds(int restTimeSeconds) {
+        this.restTimeSeconds = restTimeSeconds;
     }
 }
