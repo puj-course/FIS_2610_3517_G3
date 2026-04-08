@@ -14,6 +14,7 @@ import com.norafit.norafit.factory.StrengthExerciseFactory;
 import com.norafit.norafit.services.AuthService;
 import com.norafit.norafit.services.ExerciseService;
 import com.norafit.norafit.services.RoutineService;
+import com.norafit.norafit.facade.RoutineManagementFacade;
 
 @Component
 public class consoleApp {
