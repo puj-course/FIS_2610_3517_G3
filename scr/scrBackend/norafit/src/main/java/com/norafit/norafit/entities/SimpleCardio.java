@@ -1,5 +1,7 @@
 package com.norafit.norafit.entities;
 
+import com.norafit.norafit.strategy.SimpleCardioTimeStrategy;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -15,25 +17,30 @@ public class SimpleCardio extends CardioExercise {
 
     public SimpleCardio() {
         super();
+        this.strategy = new SimpleCardioTimeStrategy();
     }
 
-    // Getters y Setters
     public float getDistanceKm() {
-         return distanceKm;
-         }
-    public void setDistanceKm(float distanceKm) { 
-        this.distanceKm = distanceKm; 
+        return distanceKm;
     }
-    public float getAverageSpeed() { 
-        return averageSpeed; 
+
+    public void setDistanceKm(float distanceKm) {
+        this.distanceKm = distanceKm;
     }
-    public void setAverageSpeed(float averageSpeed) { 
-        this.averageSpeed = averageSpeed; 
+
+    public float getAverageSpeed() {
+        return averageSpeed;
     }
-    public int getInclineLevel() { 
-        return inclineLevel; 
+
+    public void setAverageSpeed(float averageSpeed) {
+        this.averageSpeed = averageSpeed;
     }
-    public void setInclineLevel(int inclineLevel) { 
-        this.inclineLevel = inclineLevel; 
+
+    public int getInclineLevel() {
+        return inclineLevel;
+    }
+
+    public void setInclineLevel(int inclineLevel) {
+        this.inclineLevel = inclineLevel;
     }
 }
