@@ -19,31 +19,28 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "routines")
 public class Routine {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    private Long id;
 
     private String routineName;
     private float totalTimeSeconds;
-    
-    @Column(name = "created_at") 
+
+    @Column(name = "created_at")
     private LocalDate createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-   
-@OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
-private List<Exercise> exercises = new ArrayList<>();
-    
+    @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
+    private List<Exercise> exercises = new ArrayList<>();
 
-    // Constructor vacío (Requerido por JPA)
     public Routine() {
         this.createdAt = LocalDate.now();
     }
 
-    // Constructor para creación rápida (Lógica del diagrama)
     public Routine(String routineName, User user) {
         this.routineName = routineName;
         this.user = user;
@@ -51,61 +48,46 @@ private List<Exercise> exercises = new ArrayList<>();
         this.totalTimeSeconds = 0;
     }
 
+    // 🔥 MÉTODO CLAVE (Strategy aplicado)
     public float calculateTotalTime() {
-        return this.totalTimeSeconds;
+
+        float total = 0;
+
+        for (Exercise e : this.exercises) {
+            total += e.calculateTime();
+        }
+
+        this.totalTimeSeconds = total;
+
+        return total;
     }
 
     public List<Exercise> getExercises() {
         return exercises;
     }
 
-    // --- GETTERS Y SETTERS BÁSICOS ---
-    public Long getId() { 
-        return id; 
-    }
-    public void setId(Long id) { 
-        this.id = id; 
-    }
-    public String getRoutineName() {
-        return routineName; 
-    }
-    public void setRoutineName(String routineName) {
-        this.routineName = routineName;
-    }
-    public User getUser() { 
-        return user; 
-    }
-    public void setUser(User user) { 
-        this.user = user; 
-    }
-    public LocalDate getCreatedAt() {
-    return createdAt;
-}
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
-    public float getTotalTimeSeconds() {
-        return totalTimeSeconds;
-    }
-    public void setTotalTimeSeconds(float totalTimeSeconds) {
-        this.totalTimeSeconds = totalTimeSeconds;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
+    public String getRoutineName() { return routineName; }
+    public void setRoutineName(String routineName) { this.routineName = routineName; }
 
-    //se debe colocar este método en la entidad (Routine) porque es la que tiene la lista de ejercicios (exercises). Es la que "conoce" a los ejercicios, no al revés.
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public LocalDate getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDate createdAt) { this.createdAt = createdAt; }
+
+    public float getTotalTimeSeconds() { return totalTimeSeconds; }
+    public void setTotalTimeSeconds(float totalTimeSeconds) { this.totalTimeSeconds = totalTimeSeconds; }
+
     public void addExercise(Exercise e) {
-    if (this.exercises == null) {
-        this.exercises = new ArrayList<>();
+        this.exercises.add(e);
+        e.setRoutine(this);
     }
-    this.exercises.add(e);
-    e.setRoutine(this); // se vincula el ejercicio a ESTA rutina
-   }
-   public void removeExercise(Exercise e) {
-    if (this.exercises != null && e != null) {
+
+    public void removeExercise(Exercise e) {
         this.exercises.remove(e);
-        e.setRoutine(null); // Desvinculamos el ejercicio de esta rutina
+        e.setRoutine(null);
     }
-}
-
-
 }
