@@ -20,7 +20,7 @@ import com.norafit.norafit.facade.RoutineManagementFacade;
 public class consoleApp {
   
    private final AuthService authService;
-   private final RoutineService routineService;
+   private final RoutineManagementFacade routineFacade;
    private final ExerciseService exerciseService;
 
    private User usuarioActual;
