@@ -28,7 +28,7 @@ public class consoleApp {
 
    public consoleApp(AuthService authService, RoutineService routineService, ExerciseService exerciseService) {
        this.authService = authService;
-       this.routineService = routineService;
+       this.routineFacade = routineFacade;
        this.exerciseService = exerciseService;
        this.usuarioActual = null;
    }
