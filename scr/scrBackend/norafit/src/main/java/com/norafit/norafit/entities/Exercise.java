@@ -28,7 +28,7 @@ public abstract class Exercise {
     private Routine routine; 
 
     
-    public Exercises() {}
+    public Exercise() {}
 
     
     public void updateBaseInfo(String name, String desc) {
