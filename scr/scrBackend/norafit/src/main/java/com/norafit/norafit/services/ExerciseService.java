@@ -18,19 +18,7 @@ public class ExerciseService {
         this.routineRepository = routineRepository;
     }
     
-    //NUEVO METODO PARA AÑADIR EJERCICIOS USANDO FACTORY
-    @Transactional
-    public Exercise addExercise(Long routineId, ExerciseFactory factory, String name, String description) {
-        Routine routine = routineRepository.findById(routineId)
-            .orElseThrow(() -> new RuntimeException("Error: La rutina con ID " + routineId + " no existe."));
-
-        Exercise exercise = factory.createExercise(name, description);
-        
-        // igual que antes: vincula por ambos lados
-        routine.addExercise(exercise);
-
-        return exerciseRepository.save(exercise);
-    }
+    
 
     @Transactional
     public void deleteExercise(Long exerciseId, Long routineId) {
