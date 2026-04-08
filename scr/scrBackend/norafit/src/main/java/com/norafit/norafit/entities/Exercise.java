@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "exercises")
 @Inheritance(strategy = InheritanceType.JOINED) 
-public abstract class Exercises { 
+public abstract class Exercise { 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
