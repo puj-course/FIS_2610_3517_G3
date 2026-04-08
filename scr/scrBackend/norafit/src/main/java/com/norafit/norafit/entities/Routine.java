@@ -48,7 +48,7 @@ public class Routine {
         this.totalTimeSeconds = 0;
     }
 
-    // 🔥 MÉTODO CLAVE (Strategy aplicado)
+    // 🔥 MÉTODO CLAVE (Strategy aplicado) refactorización
     public float calculateTotalTime() {
 
         float total = 0;
