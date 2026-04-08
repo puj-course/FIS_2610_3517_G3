@@ -244,20 +244,22 @@ private void handleListRoutines() {
     //-------------------4) RENOMBRAR RUTINA -----------------
 
     private void handleRenameRoutine(Scanner sc) {
-        handleListRoutines(); // Mostramos IDs
-        System.out.print("\nIngresa el ID de la rutina a renombrar: ");
-        
-        try {
-            Long id = Long.parseLong(sc.nextLine());
-            System.out.print("Nuevo nombre: ");
-            String nuevoNombre = sc.nextLine();
+    handleListRoutines();
+    System.out.print("\nIngresa el ID de la rutina a renombrar: ");
 
-            routineService.renameRoutine(id, nuevoNombre, usuarioActual);
-            System.out.println("✅ Rutina actualizada con éxito.");
-        } catch (Exception e) {
-            System.out.println("X Error: " + e.getMessage());
-        }
+    try {
+        Long id = Long.parseLong(sc.nextLine());
+        System.out.print("Nuevo nombre: ");
+        String nuevoNombre = sc.nextLine();
+
+        routineFacade.renameRoutine(id, nuevoNombre, usuarioActual);
+        System.out.println(" Rutina actualizada con éxito.");
+    } catch (NumberFormatException e) {
+        System.out.println("X El ID debe ser un número válido.");
+    } catch (Exception e) {
+        System.out.println("X Error: " + e.getMessage());
     }
+}
 
     //-------------------5) SELECCIONAR RUTINA PARA GESTIONAR EJERCICIOS -----------------
 
