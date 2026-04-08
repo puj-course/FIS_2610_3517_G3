@@ -210,20 +210,19 @@ public class consoleApp {
     }
 
     //-------------------2) VER RUTINAS -----------------
-    private void handleListRoutines() {
+private void handleListRoutines() {
     System.out.println("\n--- TUS RUTINAS ---");
-    
-    var rutinas = routineService.getRoutinesByUser(usuarioActual); 
-    
+
+    var rutinas = routineFacade.listUserRoutines(usuarioActual);
+
     if (rutinas == null || rutinas.isEmpty()) {
         System.out.println("Aún no tienes rutinas creadas.");
     } else {
-        // Añadimos r.getId() al principio para que sea fácil de identificar
         rutinas.forEach(r -> System.out.println(
             "[" + r.getId() + "] " + r.getRoutineName() + " (Creada el: " + r.getCreatedAt() + ")"
         ));
-      }
     }
+}
 
     //-------------------3) ELIMINAR RUTINA -----------------
 
