@@ -1,0 +1,28 @@
+name: Daily
+description: Registro diario de avance del equipo
+title: "[Daily] "
+labels: ["daily"]
+body:
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      placeholder: Ej. Avanzar en la integración de los métodos de actualización en el sistema y comenzar el desarrollo del frontend en Flutter.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reunion
+    attributes:
+      label: Reunión
+      placeholder: Ej. Durante la reunión se trabajó en la integración de los métodos updateWeight y updateRepetitions...
+    validations:
+      required: true
+
+  - type: textarea
+    id: dudas
+    attributes:
+      label: Dudas
+      placeholder: Ej. No hay dudas.
+    validations:
+      required: true
