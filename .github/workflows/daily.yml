@@ -3,7 +3,6 @@ name: Crear Daily Automática
 on:
   schedule:
     - cron: '0 13 * * 2-4'
-  workflow_dispatch:
 
 permissions:
   issues: write
