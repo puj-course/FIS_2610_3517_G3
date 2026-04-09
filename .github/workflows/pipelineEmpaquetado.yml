@@ -1,1 +1,51 @@
+name: Pipeline Empaquetado
 
+on:
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  empaquetar:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: scr/scrBackend/norafit
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v5
+
+      - name: Configurar JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+          cache-dependency-path: scr/scrBackend/norafit/pom.xml
+
+      - name: Dar permisos al wrapper de Maven
+        run: chmod +x mvnw
+
+      - name: Empaquetar proyecto
+        run: ./mvnw clean package
+
+      - name: Verificar archivos generados
+        run: ls -lah target
+
+      - name: Probar ejecución del artefacto
+        run: |
+          timeout 20s java -jar target/*.jar || test $? -eq 124
+
+      - name: Subir artefacto generado
+        uses: actions/upload-artifact@v4
+        with:
+          name: norafit-jar
+          path: scr/scrBackend/norafit/target/*.jar
+          if-no-files-found: error
