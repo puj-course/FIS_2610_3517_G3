@@ -2,8 +2,6 @@ name: Pipeline Daily
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 14 * * 1-5'
 
 permissions:
   contents: read
@@ -12,18 +10,22 @@ permissions:
 jobs:
   crear-daily:
     runs-on: ubuntu-latest
+
     steps:
       - name: Crear issue daily con fecha
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           FECHA=$(TZ=America/Bogota date +"%Y-%m-%d")
+
           gh issue create \
             --title "[Daily] $FECHA" \
             --label "daily" \
-            --body "## ¿Qué hice ayer?
+            --body "## Objetivo
+          Avanzar en la integración de los métodos de actualización en el sistema y comenzar el desarrollo del frontend en Flutter.
 
-          ## ¿Qué haré hoy?
+          ## Reunión
+          Durante la reunión se trabajó en la integración de los métodos updateWeight y updateRepetitions. Se inició el desarrollo del frontend en Flutter, implementando la pantalla de bienvenida con el logo de NoraFit y las opciones principales de acceso. Se revisó que la estructura visual fuera coherente con el diseño planteado en los mockups.
 
-          ## Dudas o bloqueos
+          ## Dudas
           No hay dudas."
