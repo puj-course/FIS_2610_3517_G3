@@ -2,6 +2,13 @@ name: Pipeline Daily
 
 on:
   workflow_dispatch:
+    inputs:
+      confirmar:
+        description: '¿Ejecutar daily manualmente?'
+        required: true
+        default: 'si'
+  schedule:
+    - cron: '0 14 * * 1-5'
 
 permissions:
   contents: read
