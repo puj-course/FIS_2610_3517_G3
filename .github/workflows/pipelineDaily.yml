@@ -12,20 +12,18 @@ permissions:
 jobs:
   crear-daily:
     runs-on: ubuntu-latest
-
     steps:
       - name: Crear issue daily con fecha
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           FECHA=$(TZ=America/Bogota date +"%Y-%m-%d")
-
           gh issue create \
             --title "[Daily] $FECHA" \
             --label "daily" \
-            --body "## Objetivo
-         
-          ## Reunión
-       
-          ## Dudas
+            --body "## ¿Qué hice ayer?
+
+          ## ¿Qué haré hoy?
+
+          ## Dudas o bloqueos
           No hay dudas."
