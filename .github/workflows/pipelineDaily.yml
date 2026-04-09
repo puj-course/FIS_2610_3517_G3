@@ -3,7 +3,7 @@ name: Pipeline Daily Issues
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 14 * * 1-5'   # 9:00 a. m. Bogotá aprox. cuando Bogotá está en UTC-5
+    - cron: '0 14 * * 1-5'
 
 permissions:
   contents: read
