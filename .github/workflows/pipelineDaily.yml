@@ -1,4 +1,4 @@
-name: Pipeline Daily Issues
+name: Pipeline Daily
 
 on:
   workflow_dispatch:
@@ -24,10 +24,8 @@ jobs:
             --title "[Daily] $FECHA" \
             --label "daily" \
             --body "## Objetivo
-          Avanzar en la integración de los métodos de actualización en el sistema y comenzar el desarrollo del frontend en Flutter.
-
+         
           ## Reunión
-          Durante la reunión se trabajó en la integración de los métodos updateWeight y updateRepetitions. Se inició el desarrollo del frontend en Flutter, implementando la pantalla de bienvenida con el logo de NoraFit y las opciones principales de acceso. Se revisó que la estructura visual fuera coherente con el diseño planteado en los mockups.
-
+       
           ## Dudas
           No hay dudas."
