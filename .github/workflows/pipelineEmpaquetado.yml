@@ -1,11 +1,6 @@
 name: Pipeline Empaquetado
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-      - feature/pipelines
   workflow_dispatch:
 
 permissions:
