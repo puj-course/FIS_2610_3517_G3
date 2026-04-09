@@ -2,8 +2,7 @@ name: Crear Daily Automática
 
 on:
   schedule:
-    - cron: '0 13 * * 2-4'   # Martes a jueves, 13:00 UTC
-      timezone: "America/Bogota"
+    - cron: '0 13 * * 2-4'
   workflow_dispatch:
 
 permissions:
@@ -33,6 +32,16 @@ jobs:
 
             const body = `### ¿Qué hice hoy?\n\n### ¿Qué voy a hacer mañana?\n\n### Dudas\n\n`;
 
+            const labels = ['daily', 'Documentación', 'Planeación'];
+
+            const assignees = [
+              'AlvarezSS',
+              'Juanvil1840',
+              'Pochicard',
+              'Santiago1213bv',
+              'jpenab02'
+            ];
+
             const { owner, repo } = context.repo;
 
             const issues = await github.rest.issues.listForRepo({
@@ -54,7 +63,9 @@ jobs:
               repo,
               title,
               body,
-              labels: ['daily']
+              labels,
+              assignees,
+              type: 'feature'
             });
 
             console.log(`Issue creada: ${created.data.html_url}`);
