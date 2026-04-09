@@ -1,0 +1,60 @@
+name: Crear Daily Automática
+
+on:
+  schedule:
+    - cron: '0 13 * * 2-4'   # Martes a jueves, 13:00 UTC
+      timezone: "America/Bogota"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  create_daily:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Crear issue Daily
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const now = new Date();
+
+            const date = new Intl.DateTimeFormat('es-CO', {
+              timeZone: 'America/Bogota',
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+            }).format(now);
+
+            const title = `Daily - ${date}`;
+
+            const body = `### ¿Qué hice hoy?\n\n### ¿Qué voy a hacer mañana?\n\n### Dudas\n\n`;
+
+            const { owner, repo } = context.repo;
+
+            const issues = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            const alreadyExists = issues.data.some(issue => issue.title === title);
+
+            if (alreadyExists) {
+              console.log(`Ya existe una issue con el título: ${title}`);
+              return;
+            }
+
+            const created = await github.rest.issues.create({
+              owner,
+              repo,
+              title,
+              body,
+              labels: ['daily']
+            });
+
+            console.log(`Issue creada: ${created.data.html_url}`);
