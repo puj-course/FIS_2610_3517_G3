@@ -29,7 +29,7 @@ jobs:
 
             const title = `Daily - ${date}`;
 
-            const body = `### ¿Qué hice hoy?\n\n### ¿Qué voy a hacer mañana?\n\n### Dudas\n\n`;
+            const body = `**Objetivo:**\n\n**Reunión:**\n\n**Dudas:**\n\n`;
 
             const labels = ['daily', 'Documentación', 'Planeación'];
 
