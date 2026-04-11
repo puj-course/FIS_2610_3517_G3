@@ -17,6 +17,13 @@ public class RoutineManagementFacade {
         this.routineService = routineService;
     }
 
+    public Routine createRoutine(String name, User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("El usuario es obligatorio.");
+        }
+        return routineService.createRoutine(name, user);
+    }
+
     public List<Routine> listUserRoutines(User user) {
         if (user == null) {
             throw new IllegalArgumentException("El usuario es obligatorio.");
@@ -31,7 +38,23 @@ public class RoutineManagementFacade {
         if (user == null) {
             throw new IllegalArgumentException("El usuario es obligatorio.");
         }
-
         return routineService.renameRoutine(routineId, newName, user);
+    }
+
+    public void removeRoutine(Long routineId, User user) {
+        if (routineId == null) {
+            throw new IllegalArgumentException("El ID de la rutina es obligatorio.");
+        }
+        if (user == null) {
+            throw new IllegalArgumentException("El usuario es obligatorio.");
+        }
+        routineService.removeRoutine(routineId, user);
+    }
+
+    public Routine getRoutineById(Long routineId) {
+        if (routineId == null) {
+            throw new IllegalArgumentException("El ID de la rutina es obligatorio.");
+        }
+        return routineService.getRoutineById(routineId);
     }
 }
