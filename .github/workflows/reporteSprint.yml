@@ -1,0 +1,135 @@
+name: Reporte de Sprint
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 13 * * 1'  # lunes 8:00 a. m. Colombia aprox. en UTC
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  reporte:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v5
+
+      - name: Generar reporte del sprint
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const today = new Date();
+            const sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(today.getDate() - 7);
+
+            const sinceIso = sevenDaysAgo.toISOString();
+
+            // Issues abiertas
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            // Issues cerradas recientemente
+            const closedIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'closed',
+              since: sinceIso,
+              per_page: 100
+            });
+
+            // Filtrar solo issues reales (no PRs)
+            const onlyOpenIssues = openIssues.filter(item => !item.pull_request);
+            const onlyClosedIssues = closedIssues.filter(item => !item.pull_request);
+
+            // Pull requests abiertas
+            const openPRs = await github.paginate(github.rest.pulls.list, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            // Pull requests cerradas recientemente
+            const closedPRs = await github.paginate(github.rest.pulls.list, {
+              owner,
+              repo,
+              state: 'closed',
+              per_page: 100
+            });
+
+            const recentClosedPRs = closedPRs.filter(pr => {
+              if (!pr.closed_at) return false;
+              return new Date(pr.closed_at) >= sevenDaysAgo;
+            });
+
+            // Commits recientes en main
+            const commits = await github.paginate(github.rest.repos.listCommits, {
+              owner,
+              repo,
+              sha: 'main',
+              per_page: 20
+            });
+
+            const recentCommits = commits.filter(commit => {
+              const commitDate = new Date(commit.commit.author.date);
+              return commitDate >= sevenDaysAgo;
+            });
+
+            function topItems(items, limit = 10, mapper = x => x.title) {
+              return items.slice(0, limit).map(mapper);
+            }
+
+            const report = `# Reporte del Sprint
+
+            **Repositorio:** ${owner}/${repo}
+            **Fecha de generación:** ${today.toISOString()}
+            **Ventana analizada:** últimos 7 días
+
+            ## Resumen general
+            - Issues abiertas: ${onlyOpenIssues.length}
+            - Issues cerradas en los últimos 7 días: ${onlyClosedIssues.length}
+            - Pull requests abiertas: ${openPRs.length}
+            - Pull requests cerradas en los últimos 7 días: ${recentClosedPRs.length}
+            - Commits en main en los últimos 7 días: ${recentCommits.length}
+
+            ## Issues abiertas
+            ${topItems(onlyOpenIssues).length ? topItems(onlyOpenIssues).map(i => `- ${i}`).join('\n') : '- No hay issues abiertas'}
+
+            ## Issues cerradas recientemente
+            ${topItems(onlyClosedIssues).length ? topItems(onlyClosedIssues).map(i => `- ${i}`).join('\n') : '- No hay issues cerradas recientemente'}
+
+            ## Pull requests abiertas
+            ${topItems(openPRs).length ? topItems(openPRs).map(i => `- ${i}`).join('\n') : '- No hay pull requests abiertas'}
+
+            ## Pull requests cerradas recientemente
+            ${topItems(recentClosedPRs).length ? topItems(recentClosedPRs).map(i => `- ${i}`).join('\n') : '- No hay pull requests cerradas recientemente'}
+
+            ## Commits recientes en main
+            ${recentCommits.length ? recentCommits.slice(0, 10).map(c => `- ${c.commit.message.split('\n')[0]}`).join('\n') : '- No hay commits recientes'}
+            `;
+
+            const fs = require('fs');
+            fs.writeFileSync('reporte-sprint.md', report);
+
+            core.summary
+              .addHeading('Reporte del Sprint')
+              .addRaw(report)
+              .write();
+
+      - name: Subir reporte como artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-sprint
+          path: reporte-sprint.md
+          if-no-files-found: error
