@@ -17,6 +17,7 @@ import jakarta.persistence.Transient;
 @Entity
 @Table(name = "exercises")
 @Inheritance(strategy = InheritanceType.JOINED)
+    
 public abstract class Exercise {
 
     @Id
@@ -35,6 +36,7 @@ public abstract class Exercise {
     protected TimeCalculationStrategy strategy;
 
     public Exercise() {}
+    
     public int calculateTime() {
         if (strategy == null) return 0;
         return strategy.calculateTime(this);
@@ -44,15 +46,33 @@ public abstract class Exercise {
         this.exerciseName = name;
         this.description = desc;
     }
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
-    public String getExerciseName() { return exerciseName; }
-    public void setExerciseName(String exerciseName) { this.exerciseName = exerciseName; }
+    //getters y setters
+    public Long getId() { 
+        return id; 
+    }
+    public void setId(Long id) {
+        this.id = id; 
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getExerciseName() { 
+        return exerciseName; 
+    }
+    public void setExerciseName(String exerciseName) { 
+        this.exerciseName = exerciseName; 
+    }
 
-    public Routine getRoutine() { return routine; }
-    public void setRoutine(Routine routine) { this.routine = routine; }
+    public String getDescription() { 
+        return description; 
+    }
+    public void setDescription(String description) { 
+        this.description = description; 
+    }
+
+    public Routine getRoutine() {
+        return routine; 
+    }
+    public void setRoutine(Routine routine) { 
+        this.routine = routine; 
+    }
 }
