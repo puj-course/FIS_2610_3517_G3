@@ -4,6 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.norafit.norafit.entities.Exercise;
 import com.norafit.norafit.entities.Routine;
+import com.norafit.norafit.entities.StrengthExercise;
 import com.norafit.norafit.factory.ExerciseFactory;
 import com.norafit.norafit.repositories.ExerciseRepository;
 import com.norafit.norafit.repositories.RoutineRepository;
@@ -18,22 +19,25 @@ public class ExerciseService {
         this.routineRepository = routineRepository;
     }
     
-   
-
-     @Transactional
-    public Exercise addExercise(Long routineId, ExerciseFactory factory, String name, String description){
-    Routine routine = routineRepository.findById(routineId)
+    @Transactional
+    public Exercise addStrengthExercise(Long routineId, String name, String desc, boolean hasWeight) {
+        // 1. Se busca la rutina donde queremos meter el ejercicio
+        Routine routine = routineRepository.findById(routineId)
             .orElseThrow(() -> new RuntimeException("Error: La rutina con ID " + routineId + " no existe."));
 
-    Exercise exercise = factory.createExercise(name, description);
-    
-    // igual que antes: vincula por ambos lados
-    routine.addExercise(exercise);
+        // 2. se crea el objeto de fuerza (clase hija)
+        StrengthExercise sExercise = new StrengthExercise();
+        sExercise.updateBaseInfo(name, desc);
+        sExercise.setHasWeight(hasWeight);
 
-    return exerciseRepository.save(exercise);
+        // 3. se vincula usando el método puesto en Routine.java
+        // Esto conecta al hijo con el padre en memoria
+        routine.addExercise(sExercise);
+
+        // 4. Guardamos el ejercicio en la base de datos
+        // JPA se encarga de llenar la tabla 'exercises' y 'strength_exercises'
+        return exerciseRepository.save(sExercise);
     }
-
-
 
     @Transactional
     public void deleteExercise(Long exerciseId, Long routineId) {
@@ -75,4 +79,30 @@ public class ExerciseService {
         return exerciseRepository.save(exercise);
     }
 
+    @Transactional
+    public Exercise addExercise(Long routineId, ExerciseFactory factory, String name, String desc) {
+
+    if (factory == null) {
+        throw new IllegalArgumentException("La fábrica de ejercicio es obligatoria.");
+    }
+    if (name == null || name.isBlank()) {
+        throw new IllegalArgumentException("El nombre del ejercicio no puede estar vacío.");
+    }
+    if (desc == null || desc.isBlank()) {
+        throw new IllegalArgumentException("La descripción del ejercicio no puede estar vacía.");
+    }
+
+    // Buscar rutina
+    Routine routine = routineRepository.findById(routineId)
+        .orElseThrow(() -> new RuntimeException("La rutina con ID " + routineId + " no existe."));
+
+
+    Exercise exercise = factory.createExercise(name, desc);
+
+    // Vincular
+    routine.addExercise(exercise);
+
+    // Guardar
+    return exerciseRepository.save(exercise);
+}
 }
