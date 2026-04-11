@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "hiit_cardio")
 @PrimaryKeyJoinColumn(name = "cardio_exercise_id")
+    
 public class HIITCardio extends CardioExercise {
 
     private int rounds;
@@ -20,10 +21,10 @@ public class HIITCardio extends CardioExercise {
         this.strategy = new HIITTimeStrategy();
     }
 
+    //getters y setters
     public int getRounds() {
         return rounds;
     }
-
     public void setRounds(int rounds) {
         this.rounds = rounds;
     }
@@ -31,7 +32,6 @@ public class HIITCardio extends CardioExercise {
     public int getWorkTimeSeconds() {
         return workTimeSeconds;
     }
-
     public void setWorkTimeSeconds(int workTimeSeconds) {
         this.workTimeSeconds = workTimeSeconds;
     }
@@ -39,7 +39,6 @@ public class HIITCardio extends CardioExercise {
     public int getRestTimeSeconds() {
         return restTimeSeconds;
     }
-
     public void setRestTimeSeconds(int restTimeSeconds) {
         this.restTimeSeconds = restTimeSeconds;
     }
