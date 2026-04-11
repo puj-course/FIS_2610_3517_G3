@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "cardio_exercises")
 @PrimaryKeyJoinColumn(name = "exercise_id")
+    
 public abstract class CardioExercise extends Exercise {
 
     private int durationMinutes;
@@ -24,12 +25,14 @@ public abstract class CardioExercise extends Exercise {
     public void setDurationMinutes(int durationMinutes) { 
         this.durationMinutes = durationMinutes; 
     }
+    
     public String getIntensity() { 
         return intensity; 
     }
     public void setIntensity(String intensity) { 
         this.intensity = intensity; 
     }
+    
     public String getMachineType() { 
         return machineType; 
     }
