@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "strength_exercises")
 @PrimaryKeyJoinColumn(name = "exercise_id")
+    
 public class StrengthExercise extends Exercise {
 
     private boolean hasWeight;
@@ -26,10 +27,10 @@ public class StrengthExercise extends Exercise {
         this.strategy = new StrengthTimeStrategy();
     }
 
+    //getters y setters
     public List<StrengthSeries> getSeries() {
         return series;
     }
-
     public void setSeries(List<StrengthSeries> series) {
         this.series = series;
     }
@@ -37,7 +38,6 @@ public class StrengthExercise extends Exercise {
     public boolean isHasWeight() {
         return hasWeight;
     }
-
     public void setHasWeight(boolean hasWeight) {
         this.hasWeight = hasWeight;
     }
