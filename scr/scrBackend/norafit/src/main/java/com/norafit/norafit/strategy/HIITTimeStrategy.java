@@ -9,7 +9,6 @@ public class HIITTimeStrategy implements TimeCalculationStrategy {
     public int calculateTime(Exercise exercise) {
         HIITCardio ex = (HIITCardio) exercise;
 
-        return ex.getRounds() *
-              (ex.getWorkTimeSeconds() + ex.getRestTimeSeconds());
+        return ex.getRounds() * (ex.getWorkTimeSeconds() + ex.getRestTimeSeconds());
     }
 }
