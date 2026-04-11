@@ -42,37 +42,42 @@ public class StrengthSeries {
         return id; 
     }
     public void setId(Long id) {
-         this.id = id;
-         }
+        this.id = id;
+    }
+    
     public int getSeriesNumber() { 
         return seriesNumber;
-     }
+    }
     public void setSeriesNumber(int seriesNumber) { 
         this.seriesNumber = seriesNumber; 
     }
+    
     public int getRepetitions() { 
         return repetitions;
-     }
+    }
     public void setRepetitions(int repetitions) {
-         this.repetitions = repetitions; 
-        }
+        this.repetitions = repetitions; 
+    }
+    
     public float getWeight() {
-         return weight; 
-        }
+        return weight; 
+    }
     public void setWeight(float weight) {
-         this.weight = weight; 
-        }
+        this.weight = weight; 
+    }
+    
     public int getRestTimeSeconds() {
-         return restTimeSeconds; 
-        }
+        return restTimeSeconds; 
+    }
     public void setRestTimeSeconds(int restTimeSeconds) {
-         this.restTimeSeconds = restTimeSeconds;
-         }
+        this.restTimeSeconds = restTimeSeconds;
+    }
+    
     public StrengthExercise getStrengthExercise() { 
         return strengthExercise; 
     }
     public void setStrengthExercise(StrengthExercise strengthExercise) {
-         this.strengthExercise = strengthExercise;
-         }
+        this.strengthExercise = strengthExercise;
+    }
 }
 
