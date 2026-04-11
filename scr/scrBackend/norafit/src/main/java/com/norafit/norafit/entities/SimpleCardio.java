@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "simple_cardio")
 @PrimaryKeyJoinColumn(name = "cardio_exercise_id")
+    
 public class SimpleCardio extends CardioExercise {
 
     private float distanceKm;
@@ -20,10 +21,10 @@ public class SimpleCardio extends CardioExercise {
         this.strategy = new SimpleCardioTimeStrategy();
     }
 
+    //getters y setters
     public float getDistanceKm() {
         return distanceKm;
     }
-
     public void setDistanceKm(float distanceKm) {
         this.distanceKm = distanceKm;
     }
@@ -31,7 +32,6 @@ public class SimpleCardio extends CardioExercise {
     public float getAverageSpeed() {
         return averageSpeed;
     }
-
     public void setAverageSpeed(float averageSpeed) {
         this.averageSpeed = averageSpeed;
     }
@@ -39,7 +39,6 @@ public class SimpleCardio extends CardioExercise {
     public int getInclineLevel() {
         return inclineLevel;
     }
-
     public void setInclineLevel(int inclineLevel) {
         this.inclineLevel = inclineLevel;
     }
