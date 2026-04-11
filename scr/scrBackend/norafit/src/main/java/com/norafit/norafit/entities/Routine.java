@@ -36,7 +36,8 @@ public class Routine {
 
     @OneToMany(mappedBy = "routine", cascade = CascadeType.ALL)
     private List<Exercise> exercises = new ArrayList<>();
-
+    
+    //constructores
     public Routine() {
         this.createdAt = LocalDate.now();
     }
@@ -48,38 +49,16 @@ public class Routine {
         this.totalTimeSeconds = 0;
     }
 
-    // 🔥 MÉTODO CLAVE (Strategy aplicado) refactorización
+    //MÉTODO CLAVE (Strategy aplicado) refactorización
     public float calculateTotalTime() {
 
         float total = 0;
-
         for (Exercise e : this.exercises) {
             total += e.calculateTime();
         }
-
         this.totalTimeSeconds = total;
-
         return total;
     }
-
-    public List<Exercise> getExercises() {
-        return exercises;
-    }
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getRoutineName() { return routineName; }
-    public void setRoutineName(String routineName) { this.routineName = routineName; }
-
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-
-    public LocalDate getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDate createdAt) { this.createdAt = createdAt; }
-
-    public float getTotalTimeSeconds() { return totalTimeSeconds; }
-    public void setTotalTimeSeconds(float totalTimeSeconds) { this.totalTimeSeconds = totalTimeSeconds; }
 
     public void addExercise(Exercise e) {
         this.exercises.add(e);
@@ -89,5 +68,45 @@ public class Routine {
     public void removeExercise(Exercise e) {
         this.exercises.remove(e);
         e.setRoutine(null);
+    }
+
+    //getters y setters
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public Long getId() { 
+        return id; 
+    }
+    public void setId(Long id) { 
+        this.id = id; 
+    }
+
+    public String getRoutineName() { 
+        return routineName; 
+    }
+    public void setRoutineName(String routineName) { 
+        this.routineName = routineName;
+    }
+
+    public User getUser() { 
+        return user; 
+    }
+    public void setUser(User user) { 
+        this.user = user; 
+    }
+
+    public LocalDate getCreatedAt() { 
+        return createdAt; 
+    }
+    public void setCreatedAt(LocalDate createdAt) { 
+        this.createdAt = createdAt; 
+    }
+
+    public float getTotalTimeSeconds() { 
+        return totalTimeSeconds; 
+    }
+    public void setTotalTimeSeconds(float totalTimeSeconds) { 
+        this.totalTimeSeconds = totalTimeSeconds; 
     }
 }
