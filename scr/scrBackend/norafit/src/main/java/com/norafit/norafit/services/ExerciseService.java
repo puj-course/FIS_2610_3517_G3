@@ -21,7 +21,7 @@ public class ExerciseService {
    
 
      @Transactional
-    public Exercise addExercise(Long routineId, ExerciseFactory factory, String name, String description)
+    public Exercise addExercise(Long routineId, ExerciseFactory factory, String name, String description){
     Routine routine = routineRepository.findById(routineId)
             .orElseThrow(() -> new RuntimeException("Error: La rutina con ID " + routineId + " no existe."));
 

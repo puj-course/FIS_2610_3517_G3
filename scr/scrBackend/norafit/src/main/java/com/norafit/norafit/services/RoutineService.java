@@ -66,7 +66,7 @@ public Routine renameRoutine(Long routineId, String newName, User user) {
         .orElseThrow(() -> new IllegalArgumentException("La rutina no existe."));
 
     // 2. Validación de seguridad (que sea del usuario logueado)
-    if (!routine.getUser().getId().equals(user.getId())) {
+    if (routine.getUser().getId() != user.getId()) {
     throw new IllegalArgumentException("No tienes permiso para editar esta rutina.");
 }
 
