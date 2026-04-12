@@ -464,57 +464,55 @@ public class consoleApp {
         }
     }
 
-private void handleUpdateStrengthSeriesRepetitions(Scanner sc) {
-    try {
-        this.rutinaSeleccionada = routineFacade.getRoutineById(rutinaSeleccionada.getId());
+    private void handleUpdateStrengthSeriesRepetitions(Scanner sc) {
+        try {
+            this.rutinaSeleccionada = routineFacade.getRoutineById(rutinaSeleccionada.getId());
 
-        System.out.println("\n--- SERIES DE FUERZA EN: " + rutinaSeleccionada.getRoutineName() + " ---");
-        boolean foundSeries = false;
+            System.out.println("\n--- SERIES DE FUERZA EN: " + rutinaSeleccionada.getRoutineName() + " ---");
+            boolean foundSeries = false;
 
-        for (Exercise ex : rutinaSeleccionada.getExercises()) {
-            if (ex instanceof StrengthExercise strengthExercise) {
-                System.out.println("Ejercicio: [" + strengthExercise.getId() + "] " + strengthExercise.getExerciseName());
+            for (Exercise ex : rutinaSeleccionada.getExercises()) {
+                if (ex instanceof StrengthExercise strengthExercise) {
+                    System.out.println("Ejercicio: [" + strengthExercise.getId() + "] " + strengthExercise.getExerciseName());
 
-                List<StrengthSeries> seriesList = strengthSeriesService
+                    List<StrengthSeries> seriesList = strengthSeriesService
                         .getSeriesByStrengthExerciseId(strengthExercise.getId());
 
-                if (seriesList == null || seriesList.isEmpty()) {
-                    System.out.println("   Sin series registradas.");
-                } else {
-                    foundSeries = true;
-                    for (StrengthSeries series : seriesList) {
-                        System.out.println("   Serie ID: " + series.getId()
+                    if (seriesList == null || seriesList.isEmpty()) {
+                        System.out.println("   Sin series registradas.");
+                    } else {
+                        foundSeries = true;
+                        for (StrengthSeries series : seriesList) {
+                            System.out.println("   Serie ID: " + series.getId()
                                 + " | Número: " + series.getSeriesNumber()
                                 + " | Repeticiones: " + series.getRepetitions()
                                 + " | Peso: " + series.getWeight()
                                 + " | Descanso: " + series.getRestTimeSeconds() + "s");
+                        }
                     }
                 }
             }
+
+            if (!foundSeries) {
+                System.out.println("No hay StrengthSeries disponibles para modificar.");
+                return;
+            }
+
+            System.out.print("\nIngrese el ID de la StrengthSeries a modificar: ");
+            Long seriesId = Long.parseLong(sc.nextLine().trim());
+
+            System.out.print("Ingrese el nuevo numero de repeticiones: ");
+            int nuevasRepeticiones = Integer.parseInt(sc.nextLine().trim());
+
+            StrengthSeries actualizada = strengthSeriesService.updateRepetitions(seriesId, nuevasRepeticiones);
+            System.out.println(" Repeticiones actualizadas correctamente. Nuevo valor: " + actualizada.getRepetitions());
+
+        } catch (NumberFormatException e) {
+            System.out.println(" Error: Debes ingresar valores numericos validos.");
+        } catch (Exception e) {
+            System.out.println(" Error al actualizar repeticiones: " + e.getMessage());
         }
-
-        if (!foundSeries) {
-            System.out.println("No hay StrengthSeries disponibles para modificar.");
-            return;
-        }
-
-        System.out.print("\nIngrese el ID de la StrengthSeries a modificar: ");
-        Long seriesId = Long.parseLong(sc.nextLine().trim());
-
-        System.out.print("Ingrese el nuevo numero de repeticiones: ");
-        int nuevasRepeticiones = Integer.parseInt(sc.nextLine().trim());
-
-        StrengthSeries actualizada = strengthSeriesService.updateRepetitions(seriesId, nuevasRepeticiones);
-        System.out.println(" Repeticiones actualizadas correctamente. Nuevo valor: " + actualizada.getRepetitions());
-
-    } catch (NumberFormatException e) {
-        System.out.println(" Error: Debes ingresar valores numericos validos.");
-    } catch (Exception e) {
-        System.out.println(" Error al actualizar repeticiones: " + e.getMessage());
     }
- }
-
-
 }
 
 
