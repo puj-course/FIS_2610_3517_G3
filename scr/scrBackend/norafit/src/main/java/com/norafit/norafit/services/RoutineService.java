@@ -3,6 +3,7 @@ package com.norafit.norafit.services;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,7 +57,7 @@ public class RoutineService {
     routineRepository.delete(routine);
     }
     @Transactional
-public Routine renameRoutine(Long routineId, String newName, User user) {
+    public Routine renameRoutine(Long routineId, String newName, User user) {
     if (newName == null || newName.isBlank()) {
         throw new IllegalArgumentException("El nuevo nombre no puede estar vacío.");
     }
@@ -74,16 +75,18 @@ public Routine renameRoutine(Long routineId, String newName, User user) {
     routine.setRoutineName(newName);
     return routineRepository.save(routine);
  }
-    @Transactional(readOnly = true)
-    public Routine getRoutineById(Long id) {
-        Routine routine = routineRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("La rutina con ID " + id + " no existe."));
-    
-    routine.getExercises().size(); 
-    
+
+ @Transactional(readOnly = true)
+public Routine getRoutineById(Long id) {
+    Routine routine = routineRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));
+
+    Hibernate.initialize(routine.getExercises());
     return routine;
 }
 
 
 }
+    
+
     
