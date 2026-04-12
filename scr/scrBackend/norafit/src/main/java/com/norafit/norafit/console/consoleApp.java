@@ -476,7 +476,7 @@ public class consoleApp {
                     System.out.println("Ejercicio: [" + strengthExercise.getId() + "] " + strengthExercise.getExerciseName());
 
                     List<StrengthSeries> seriesList = strengthSeriesService
-                        .getSeriesByStrengthExerciseId(strengthExercise.getId());
+                            .getSeriesByStrengthExerciseId(strengthExercise.getId());
 
                     if (seriesList == null || seriesList.isEmpty()) {
                         System.out.println("   Sin series registradas.");
@@ -511,6 +511,56 @@ public class consoleApp {
             System.out.println(" Error: Debes ingresar valores numericos validos.");
         } catch (Exception e) {
             System.out.println(" Error al actualizar repeticiones: " + e.getMessage());
+        }
+    }
+
+    private void handleUpdateStrengthSeriesWeight(Scanner sc) {
+        try {
+            this.rutinaSeleccionada = routineFacade.getRoutineById(rutinaSeleccionada.getId());
+
+            System.out.println("\n--- SERIES DE FUERZA EN: " + rutinaSeleccionada.getRoutineName() + " ---");
+            boolean foundSeries = false;
+
+            for (Exercise ex : rutinaSeleccionada.getExercises()) {
+                if (ex instanceof StrengthExercise strengthExercise) {
+                    System.out.println("Ejercicio: [" + strengthExercise.getId() + "] " + strengthExercise.getExerciseName());
+
+                    List<StrengthSeries> seriesList = strengthSeriesService
+                            .getSeriesByStrengthExerciseId(strengthExercise.getId());
+
+                    if (seriesList == null || seriesList.isEmpty()) {
+                        System.out.println("   Sin series registradas.");
+                    } else {
+                        foundSeries = true;
+                        for (StrengthSeries series : seriesList) {
+                            System.out.println("   Serie ID: " + series.getId()
+                                + " | Número: " + series.getSeriesNumber()
+                                + " | Repeticiones: " + series.getRepetitions()
+                                + " | Peso: " + series.getWeight()
+                                + " | Descanso: " + series.getRestTimeSeconds() + "s");
+                        }
+                    }
+                }
+            }
+
+            if (!foundSeries) {
+                System.out.println("No hay StrengthSeries disponibles para modificar.");
+                return;
+            }
+
+            System.out.print("\nIngrese el ID de la StrengthSeries a modificar: ");
+            Long seriesId = Long.parseLong(sc.nextLine().trim());
+
+            System.out.print("Ingrese el nuevo peso: ");
+            float nuevoPeso = Float.parseFloat(sc.nextLine().trim());
+
+            StrengthSeries actualizada = strengthSeriesService.updateWeight(seriesId, nuevoPeso);
+            System.out.println(" Peso actualizado correctamente. Nuevo valor: " + actualizada.getWeight());
+
+        } catch (NumberFormatException e) {
+            System.out.println(" Error: Debes ingresar valores numericos validos.");
+        } catch (Exception e) {
+            System.out.println(" Error al actualizar peso: " + e.getMessage());
         }
     }
 }
