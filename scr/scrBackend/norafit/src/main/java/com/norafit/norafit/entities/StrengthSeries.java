@@ -79,5 +79,11 @@ public class StrengthSeries {
     public void setStrengthExercise(StrengthExercise strengthExercise) {
         this.strengthExercise = strengthExercise;
     }
+       public void updateRepetitions(int repetitions) {
+    if (repetitions <= 0) {
+        throw new IllegalArgumentException("Las repeticiones deben ser mayores a 0.");
+    }
+    this.repetitions = repetitions;
+    }
 }
 
