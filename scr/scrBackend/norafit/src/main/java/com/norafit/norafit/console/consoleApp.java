@@ -287,7 +287,8 @@ public class consoleApp {
             System.out.println("2) Ver ejercicios");
             System.out.println("3) Eliminar ejercicio");
             System.out.println("4) Renombrar ejercicio");
-            System.out.println("5) Modificar repeticiones de StrengthSeries");
+            System.out.println("5) Modificar repeticiones");
+            System.out.println("6) Modificar peso");
             System.out.println("0) Volver");
             System.out.print("Seleccione una opción: ");
 
@@ -298,6 +299,7 @@ public class consoleApp {
                 case "3" -> handleRemoveExercise(sc);
                 case "4" -> handleRenameExercise(sc);
                 case "5" -> handleUpdateStrengthSeriesRepetitions(sc);
+                case "6" -> handleUpdateStrengthSeriesWeight(sc);
                 case "0" -> volver = true;
                 default -> System.out.println("Opción no válida.");
             }
