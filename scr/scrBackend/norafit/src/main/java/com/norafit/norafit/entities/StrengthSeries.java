@@ -80,12 +80,19 @@ public class StrengthSeries {
         this.strengthExercise = strengthExercise;
     }
 
-    
+    //updates
     public void updateRepetitions(int repetitions) {
         if (repetitions <= 0) {
             throw new IllegalArgumentException("Las repeticiones deben ser mayores a 0.");
         }
         this.repetitions = repetitions;
+    }
+
+    public void updateWeight (float weight) {
+        if (weight < 0) {
+            throw new  IllegalArgumentException("El peso no puede ser negativo.");
+        }
+        this.weight = weight;
     }
 }
 
