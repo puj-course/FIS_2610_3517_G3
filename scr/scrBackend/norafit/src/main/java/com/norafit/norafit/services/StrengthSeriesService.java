@@ -19,7 +19,7 @@ public class StrengthSeriesService {
     }
 
     @Transactional
-public StrengthSeries createSeries(
+    public StrengthSeries createSeries(
         StrengthExercise strengthExercise,
         int seriesNumber,
         int repetitions,
