@@ -60,9 +60,18 @@ public class StrengthSeriesService {
     @Transactional
     public StrengthSeries updateRepetitions(Long seriesId, int newRepetitions) {
         StrengthSeries series = strengthSeriesRepository.findById(seriesId)
-                .orElseThrow(() -> new RuntimeException("No existe la serie de fuerza con ID " + seriesId));
+            .orElseThrow(() -> new RuntimeException("No existe la serie de fuerza con ID " + seriesId));
 
         series.updateRepetitions(newRepetitions);
+        return strengthSeriesRepository.save(series);
+    }
+
+    @Transactional
+    public StrenghtSeries updateWeight(Long seriesId, float newWeight) {
+        StrenghtSeries series = strengthSeriesRepository.findById(seriesId)
+            .orElseThrow(() -> new RuntimeException("No existe la serie de fuerza con ID " + seriesId));
+        
+        series.updateWeight(newWeight);
         return strengthSeriesRepository.save(series);
     }
 }
