@@ -67,8 +67,8 @@ public class StrengthSeriesService {
     }
 
     @Transactional
-    public StrenghtSeries updateWeight(Long seriesId, float newWeight) {
-        StrenghtSeries series = strengthSeriesRepository.findById(seriesId)
+    public StrengthSeries updateWeight(Long seriesId, float newWeight) {
+        StrengthSeries series = strengthSeriesRepository.findById(seriesId)
             .orElseThrow(() -> new RuntimeException("No existe la serie de fuerza con ID " + seriesId));
         
         series.updateWeight(newWeight);
