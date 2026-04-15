@@ -106,4 +106,17 @@ public class HIITExecutionService {
         }
         return false;
     }
+
+    public List<String> executeSingleExercise(HIITCardio hiit, boolean realTime) {
+    if (hiit == null) {
+        throw new IllegalArgumentException("El ejercicio HIIT es obligatorio.");
+    }
+
+    List<String> events = new ArrayList<>();
+    events.add("=== INICIO DE EJERCICIO HIIT ===");
+    events.addAll(executeExercise(hiit, 1, 1, realTime));
+    events.add("=== FIN DE EJERCICIO HIIT ===");
+
+    return events;
+}
 }
