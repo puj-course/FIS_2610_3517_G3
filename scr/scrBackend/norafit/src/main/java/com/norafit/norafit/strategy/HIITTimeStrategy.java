@@ -6,9 +6,12 @@ import com.norafit.norafit.entities.HIITCardio;
 public class HIITTimeStrategy implements TimeCalculationStrategy {
 
     @Override
-    public int calculateTime(Exercise exercise) {
-        HIITCardio ex = (HIITCardio) exercise;
+public int calculateTime(Exercise exercise) {
+    HIITCardio ex = (HIITCardio) exercise;
 
-        return ex.getRounds() * (ex.getWorkTimeSeconds() + ex.getRestTimeSeconds());
-    }
+    int totalWork = ex.getRounds() * ex.getWorkTimeSeconds();
+    int totalRest = Math.max(0, ex.getRounds() - 1) * ex.getRestTimeSeconds();
+
+    return totalWork + totalRest;
+}
 }
