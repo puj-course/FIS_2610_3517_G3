@@ -12,7 +12,7 @@ body:
   - type: input
     id: autor
     attributes:
-      label: 👤 Autor
+      label:  Autor
       description: ¿Quién propone esta historia?
       placeholder: Ej. Samuel López
     validations:
@@ -21,7 +21,7 @@ body:
   - type: textarea
     id: descripcion
     attributes:
-      label: 🧩 Descripción
+      label:  Descripción
       description: Escribe la historia en formato “Como [rol], quiero [objetivo] para [beneficio]”.
       placeholder: |
         Como padre, quiero que mi hijo reciba notificaciones automáticas de sus tareas escolares, para asegurarme de que no olvide entregarlas a tiempo.
@@ -31,7 +31,7 @@ body:
   - type: textarea
     id: criterios
     attributes:
-      label: ✅ Criterios de aceptación
+      label:  Criterios de aceptación
       description: Especifica los criterios que permitirán verificar si la historia está completa.
       placeholder: |
         1. El sistema envía una notificación cuando se crea una tarea nueva.
@@ -44,7 +44,7 @@ body:
     attributes:
       value: |
         ---
-        ### 📋 Criterios INVEST (marca que los cumple)
+        ###  Criterios INVEST (marca que los cumple)
         *La historia debe cumplir con los siguientes principios:*
 
   - type: checkboxes
@@ -68,7 +68,7 @@ body:
   - type: dropdown
     id: prioridad
     attributes:
-      label: 🚦 Prioridad
+      label:  Prioridad
       options:
         - Alta
         - Media
@@ -79,5 +79,5 @@ body:
   - type: textarea
     id: notas
     attributes:
-      label: 🗒️ Notas adicionales
+      label:  Notas adicionales
       description: Detalles opcionales, referencias o dependencias con otras historias.
