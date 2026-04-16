@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 🧾 Formulario de Historia de Usuario (Formato INVEST)
+        ##  Formulario de Historia de Usuario (Formato INVEST)
         Completa los siguientes campos. Todos son obligatorios para mantener la coherencia del backlog.
 
   - type: input
