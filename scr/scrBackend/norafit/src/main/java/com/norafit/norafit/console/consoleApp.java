@@ -18,8 +18,9 @@ import com.norafit.norafit.factory.SimpleCardioExerciseFactory;
 import com.norafit.norafit.factory.StrengthExerciseFactory;
 import com.norafit.norafit.services.AuthService;
 import com.norafit.norafit.services.ExerciseService;
-import com.norafit.norafit.services.HIITExecutionService;
+import com.norafit.norafit.services.IHIITExecutionService;
 import com.norafit.norafit.services.StrengthSeriesService;
+
 
 @Component
 public class consoleApp {
@@ -28,7 +29,7 @@ public class consoleApp {
     private final RoutineManagementFacade routineFacade;
     private final ExerciseService exerciseService;
     private final StrengthSeriesService strengthSeriesService;
-    private final HIITExecutionService hiitExecutionService;
+    private final IHIITExecutionService hiitExecutionService;
 
     private User usuarioActual;
     private Routine rutinaSeleccionada;
@@ -37,7 +38,7 @@ public class consoleApp {
         AuthService authService,
         RoutineManagementFacade routineFacade,
         ExerciseService exerciseService,
-        HIITExecutionService hiitExecutionService,
+        IHIITExecutionService hiitExecutionService,
         StrengthSeriesService strengthSeriesService) {
         this.authService = authService;
         this.routineFacade = routineFacade;
@@ -63,7 +64,7 @@ public class consoleApp {
             } catch (IllegalArgumentException e) {
                 System.out.println("X " + e.getMessage());
             } catch (Exception e) {
-                System.out.println("X Ocurrió un error inesperado: " + e.getMessage());
+                System.out.println("X Ocurrio un error inesperado: " + e.getMessage());
             }
         }
 
@@ -142,7 +143,7 @@ public class consoleApp {
 
     //----------------- MENÚ PRINCIPAL -----------------
     private boolean menuLogueado(Scanner sc) {
-        System.out.println("\n=== MENÚ (Usuario: " + usuarioActual.getUsername() + ") ===");
+        System.out.println("\n=== MENU (Usuario: " + usuarioActual.getUsername() + ") ===");
         System.out.println("1) Gestionar Rutinas");
         System.out.println("2) Cerrar sesión");
         System.out.println("0) Salir");
@@ -174,7 +175,7 @@ public class consoleApp {
         System.out.println("3) Eliminar una rutina");
         System.out.println("4) Renombrar rutina");
         System.out.println("5) Seleccionar rutina para gestionar ejercicios");
-        System.out.println("0) Volver al menú principal");
+        System.out.println("0) Volver al menu principal");
         System.out.print("Opción: ");
 
         String op = sc.nextLine().trim();
@@ -187,19 +188,19 @@ public class consoleApp {
             case "5" -> handleSelectRoutine(sc);
             case "0" -> {
             }
-            default -> System.out.println("Opción inválida.");
+            default -> System.out.println("Opcion invalida.");
         }
     }
 
     //----------------- 1) CREAR RUTINA -----------------
     private void handleCreateRoutine(Scanner sc) {
         System.out.println("\n--- NUEVA RUTINA ---");
-        System.out.print("Nombre de la rutina (ej. Día de Pecho): ");
+        System.out.print("Nombre de la rutina (ej. Dia de Pecho): ");
         String nombre = sc.nextLine();
 
         try {
             Routine nueva = routineFacade.createRoutine(nombre, usuarioActual);
-            System.out.println(" Rutina '" + nueva.getRoutineName() + "' creada con éxito.");
+            System.out.println(" Rutina '" + nueva.getRoutineName() + "' creada con exito.");
         } catch (Exception e) {
             System.out.println("X Error al crear rutina: " + e.getMessage());
         }
@@ -212,7 +213,7 @@ public class consoleApp {
         var rutinas = routineFacade.listUserRoutines(usuarioActual);
 
         if (rutinas == null || rutinas.isEmpty()) {
-            System.out.println("Aún no tienes rutinas creadas.");
+            System.out.println("Aun no tienes rutinas creadas.");
         } else {
             rutinas.forEach(r -> System.out.println(
                 "[" + r.getId() + "] " + r.getRoutineName() + " (Creada el: " + r.getCreatedAt() + ")"
@@ -230,7 +231,7 @@ public class consoleApp {
             routineFacade.removeRoutine(id, usuarioActual);
             System.out.println(" Rutina eliminada correctamente.");
         } catch (NumberFormatException e) {
-            System.out.println("X El ID debe ser un número válido.");
+            System.out.println("X El ID debe ser un numero valido.");
         } catch (Exception e) {
             System.out.println("X Error: " + e.getMessage());
         }
@@ -247,9 +248,9 @@ public class consoleApp {
             String nuevoNombre = sc.nextLine();
 
             routineFacade.renameRoutine(id, nuevoNombre, usuarioActual);
-            System.out.println("Rutina actualizada con éxito.");
+            System.out.println("Rutina actualizada con exito.");
         } catch (NumberFormatException e) {
-            System.out.println("X El ID debe ser un número válido.");
+            System.out.println("X El ID debe ser un número valido.");
         } catch (Exception e) {
             System.out.println("X Error: " + e.getMessage());
         }
@@ -276,7 +277,7 @@ public class consoleApp {
                 System.out.println(" No se encontró la rutina con ese ID.");
             }
         } catch (NumberFormatException e) {
-            System.out.println(" Error: Por favor ingresa un número válido.");
+            System.out.println(" Error: Por favor ingresa un numero valido.");
         } catch (Exception e) {
             System.out.println(" Error inesperado: " + e.getMessage());
             e.printStackTrace();
@@ -309,7 +310,7 @@ public class consoleApp {
                 case "6" -> handleUpdateStrengthSeriesWeight(sc);
                 case "7" -> handleExecuteHIITRoutine(sc);
                 case "0" -> volver = true;
-                default -> System.out.println("Opción no válida.");
+                default -> System.out.println("Opcion no valida.");
             }
         }
     }
@@ -323,7 +324,7 @@ public class consoleApp {
             List<Exercise> lista = rutinaSeleccionada.getExercises();
 
             if (lista == null || lista.isEmpty()) {
-                System.out.println("No hay ejercicios registrados en esta rutina aún.");
+                System.out.println("No hay ejercicios registrados en esta rutina aun.");
             } else {
                 for (Exercise ex : lista) {
                     System.out.println("- [" + ex.getId() + "] " + ex.getExerciseName());
@@ -346,7 +347,7 @@ public class consoleApp {
     System.out.print("Nombre: ");
     String nombre = sc.nextLine();
 
-    System.out.print("Descripción: ");
+    System.out.print("Descripcion: ");
     String desc = sc.nextLine();
 
     ExerciseFactory factory;
@@ -360,7 +361,7 @@ public class consoleApp {
             esFuerza = true;
         }
         case "2" -> {
-            System.out.print("Duración (min): ");
+            System.out.print("Duracion (min): ");
             int dur = Integer.parseInt(sc.nextLine());
             System.out.print("Intensidad: ");
             String intens = sc.nextLine();
@@ -376,7 +377,7 @@ public class consoleApp {
             factory = new HIITCardioExerciseFactory(rounds, work, rest);
         }
         default -> {
-            System.out.println("Tipo no válido.");
+            System.out.println("Tipo no valido.");
             return;
         }
     }
@@ -423,9 +424,9 @@ public class consoleApp {
         }
 
         this.rutinaSeleccionada = routineFacade.getRoutineById(rutinaSeleccionada.getId());
-        System.out.println(" Ejercicio añadido con éxito.");
+        System.out.println(" Ejercicio añadido con exito.");
     } catch (NumberFormatException e) {
-        System.out.println(" Error: Debes ingresar valores numéricos válidos.");
+        System.out.println(" Error: Debes ingresar valores numericos validos.");
     } catch (Exception e) {
         System.out.println(" Error: " + e.getMessage());
     }
@@ -442,7 +443,7 @@ public class consoleApp {
             exerciseService.deleteExercise(exId, rutinaSeleccionada.getId());
             this.rutinaSeleccionada = routineFacade.getRoutineById(rutinaSeleccionada.getId());
 
-            System.out.println(" Ejercicio eliminado con éxito.");
+            System.out.println(" Ejercicio eliminado con exito.");
         } catch (NumberFormatException e) {
             System.out.println(" ID inválido.");
         } catch (Exception e) {
@@ -466,7 +467,7 @@ public class consoleApp {
 
             System.out.println(" Ejercicio actualizado correctamente.");
         } catch (NumberFormatException e) {
-            System.out.println(" Error: El ID debe ser un número.");
+            System.out.println(" Error: El ID debe ser un numero.");
         } catch (Exception e) {
             System.out.println(" Error al renombrar: " + e.getMessage());
         }
@@ -492,7 +493,7 @@ public class consoleApp {
                         foundSeries = true;
                         for (StrengthSeries series : seriesList) {
                             System.out.println("   Serie ID: " + series.getId()
-                                + " | Número: " + series.getSeriesNumber()
+                                + " | Numero: " + series.getSeriesNumber()
                                 + " | Repeticiones: " + series.getRepetitions()
                                 + " | Peso: " + series.getWeight()
                                 + " | Descanso: " + series.getRestTimeSeconds() + "s");
@@ -542,7 +543,7 @@ public class consoleApp {
                         foundSeries = true;
                         for (StrengthSeries series : seriesList) {
                             System.out.println("   Serie ID: " + series.getId()
-                                + " | Número: " + series.getSeriesNumber()
+                                + " | Numero: " + series.getSeriesNumber()
                                 + " | Repeticiones: " + series.getRepetitions()
                                 + " | Peso: " + series.getWeight()
                                 + " | Descanso: " + series.getRestTimeSeconds() + "s");
@@ -595,7 +596,7 @@ private void handleExecuteHIITRoutine(Scanner sc) {
         System.out.println("\n--- EJECUCIÓN HIIT ---");
         System.out.println("Rutina seleccionada: " + rutinaSeleccionada.getRoutineName());
         System.out.println("1) Ejecutar todos los HIIT de la rutina");
-        System.out.println("2) Elegir un ejercicio HIIT específico");
+        System.out.println("2) Elegir un ejercicio HIIT especifico");
         System.out.print("Seleccione una opcion: ");
         String executionOption = sc.nextLine().trim();
 
