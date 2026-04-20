@@ -12,3 +12,4 @@ public interface IHIITExecutionService {
     List<String> executeSingleExercise(HIITCardio hiit, boolean realTime);
 
     boolean routineHasHIIT(Routine routine);
+}
