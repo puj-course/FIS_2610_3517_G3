@@ -9,9 +9,10 @@ import com.norafit.norafit.entities.Exercise;
 import com.norafit.norafit.entities.HIITCardio;
 import com.norafit.norafit.entities.Routine;
 
-@Service
-public class HIITExecutionService {
+@Service("baseHIITExecutionService")
+public class HIITExecutionService implements IHIITExecutionService {
 
+    @Override
     public List<String> executeRoutine(Routine routine, boolean realTime) {
         if (routine == null) {
             throw new IllegalArgumentException("La rutina es obligatoria.");
@@ -94,6 +95,7 @@ public class HIITExecutionService {
         }
     }
 
+    @Override
     public boolean routineHasHIIT(Routine routine) {
         if (routine == null || routine.getExercises() == null) {
             return false;
@@ -107,6 +109,7 @@ public class HIITExecutionService {
         return false;
     }
 
+    @Override
     public List<String> executeSingleExercise(HIITCardio hiit, boolean realTime) {
         if (hiit == null) {
             throw new IllegalArgumentException("El ejercicio HIIT es obligatorio.");
