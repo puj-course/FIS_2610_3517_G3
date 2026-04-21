@@ -8,4 +8,17 @@ public class HIITEventData {
     private final int round;
     private final int totalRounds;
     private final int secondsRemaining;
+
+    public HIITEventData(HIITEvent event, String message, String exerciseName, int round, int totalRounds, int secondsRemaining) {
+        this.event = event;
+        this.message = message;
+        this.exerciseName = exerciseName;
+        this.round = round;
+        this.totalRounds = totalRounds;
+        this.secondsRemaining = secondsRemaining;
+    }
+
+    public HIITEventData(HIITEvent event, String message) {
+        this(event, message, null, 0, 0, 0);
+    }
 }
