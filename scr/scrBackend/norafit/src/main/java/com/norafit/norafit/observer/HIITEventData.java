@@ -21,4 +21,23 @@ public class HIITEventData {
     public HIITEventData(HIITEvent event, String message) {
         this(event, message, null, 0, 0, 0);
     }
+
+    public HIITEvent getEvent(){ 
+        return event; 
+    }
+    public String getMessage(){
+        return message; 
+    }
+    public String getExerciseName(){
+        return exerciseName; 
+    }
+    public int getRound(){ 
+        return round; 
+    }
+    public int getTotalRounds(){ 
+        return totalRounds; 
+    }
+    public int getSecondsRemaining(){ 
+        return secondsRemaining; 
+    }
 }
