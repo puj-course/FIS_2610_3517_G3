@@ -10,7 +10,9 @@ import com.norafit.norafit.entities.HIITCardio;
 import com.norafit.norafit.entities.Routine;
 
 @Service("baseHIITExecutionService")
-public class HIITExecutionService implements IHIITExecutionService {
+public class HIITExecutionService implements IHIITExecutionService, IHIITObservable {
+
+    private final List<IHIITObserver> observers = new ArrayList<>();
 
     @Override
     public List<String> executeRoutine(Routine routine, boolean realTime) {
@@ -121,5 +123,22 @@ public class HIITExecutionService implements IHIITExecutionService {
         events.add("=== FIN DE EJERCICIO HIIT ===");
 
         return events;
+    }
+
+    @Override
+    public void addObserver(IHIITObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(IHIITObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(HIITEventData data) {
+        for (IHIITObserver observer : observers) {
+            observer.onEvent(data);
+        }
     }
 }
