@@ -41,6 +41,7 @@ public class HIITExecutionService implements IHIITExecutionService, IHIITObserva
 
     @Override
     public List<String> executeRoutine(Routine routine, boolean realTime) {
+        
         if (routine == null) {
             throw new IllegalArgumentException("La rutina es obligatoria.");
         }
@@ -73,6 +74,7 @@ public class HIITExecutionService implements IHIITExecutionService, IHIITObserva
 
     @Override
     public List<String> executeSingleExercise(HIITCardio hiit, boolean realTime) {
+        
         if (hiit == null) {
             throw new IllegalArgumentException("El ejercicio HIIT es obligatorio.");
         }
@@ -92,6 +94,7 @@ public class HIITExecutionService implements IHIITExecutionService, IHIITObserva
 
     @Override
     public boolean routineHasHIIT(Routine routine) {
+        
         if (routine == null || routine.getExercises() == null) return false;
         for (Exercise exercise : routine.getExercises()) {
             if (exercise instanceof HIITCardio) return true;
@@ -102,6 +105,7 @@ public class HIITExecutionService implements IHIITExecutionService, IHIITObserva
     // Lógica interna 
 
     private List<String> executeExercise(HIITCardio hiit, int exerciseNumber, int totalExercises, boolean realTime) {
+        
         validateHIITConfiguration(hiit);
 
         List<String> events = new ArrayList<>();
@@ -111,15 +115,13 @@ public class HIITExecutionService implements IHIITExecutionService, IHIITObserva
                 + ", trabajo: " + hiit.getWorkTimeSeconds() + "s"
                 + ", descanso: " + hiit.getRestTimeSeconds() + "s";
 
-        notifyObservers(new HIITEventData(HIITEvent.EXERCISE_STARTED, header,
-                hiit.getExerciseName(), 0, hiit.getRounds(), 0));
+        notifyObservers(new HIITEventData(HIITEvent.EXERCISE_STARTED, header, hiit.getExerciseName(), 0, hiit.getRounds(), 0));
         events.add(header);
         events.add(config);
 
         for (int round = 1; round <= hiit.getRounds(); round++) {
             String roundMsg = "Ronda " + round + " de " + hiit.getRounds();
-            notifyObservers(new HIITEventData(HIITEvent.ROUND_STARTED, roundMsg,
-                    hiit.getExerciseName(), round, hiit.getRounds(), 0));
+            notifyObservers(new HIITEventData(HIITEvent.ROUND_STARTED, roundMsg, hiit.getExerciseName(), round, hiit.getRounds(), 0));
             events.add(roundMsg);
 
             countdown(HIITEvent.WORK_TICK, HIITEvent.WORK_FINISHED,
@@ -143,10 +145,7 @@ public class HIITExecutionService implements IHIITExecutionService, IHIITObserva
         return events;
     }
 
-    private void countdown(HIITEvent tickEvent, HIITEvent finishedEvent,
-                           String label, int seconds,
-                           String exerciseName, int round, int totalRounds,
-                           boolean realTime, List<String> events) {
+    private void countdown(HIITEvent tickEvent, HIITEvent finishedEvent, String label, int seconds, String exerciseName, int round, int totalRounds, boolean realTime, List<String> events) {
 
         for (int remaining = seconds; remaining >= 1; remaining--) {
             notifyObservers(new HIITEventData(tickEvent,
@@ -156,9 +155,7 @@ public class HIITExecutionService implements IHIITExecutionService, IHIITObserva
             if (realTime) sleepOneSecond();
         }
 
-        notifyObservers(new HIITEventData(finishedEvent,
-                label + " finalizado",
-                exerciseName, round, totalRounds, 0));
+        notifyObservers(new HIITEventData(finishedEvent, label + " finalizado", exerciseName, round, totalRounds, 0));
     }
 
     private void validateHIITConfiguration(HIITCardio hiit) {
