@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.norafit.norafit.entities.Exercise;
 import com.norafit.norafit.entities.HIITCardio;
 import com.norafit.norafit.entities.Routine;
+import com.norafit.norafit.observer.HIITEvent;
+import com.norafit.norafit.observer.HIITEventData;
+import com.norafit.norafit.observer.IHIITObservable;
+import com.norafit.norafit.observer.IHIITObserver;
 
 @Service("baseHIITExecutionService")
 public class HIITExecutionService implements IHIITExecutionService, IHIITObservable {
