@@ -83,13 +83,19 @@ public class HIITExecutionService implements IHIITExecutionService, IHIITObserva
         }
     }
 
-    private void countdown(String state, int seconds, boolean realTime, List<String> events) {
+    private void countdown(HIITEvent tickEvent, HIITEvent finishedEvent, String label, int seconds, String exerciseName, int round, int totalRounds, boolean realTime, List<String> events) {
+
         for (int remaining = seconds; remaining >= 1; remaining--) {
-            events.add(state + " - " + remaining + "s restantes");
-            if (realTime) {
-                sleepOneSecond();
-            }
+            notifyObservers(new HIITEventData(tickEvent,
+                    label + " - " + remaining + "s restantes",
+                    exerciseName, round, totalRounds, remaining));
+            events.add(label + " - " + remaining + "s restantes");
+            if (realTime) sleepOneSecond();
         }
+
+        notifyObservers(new HIITEventData(finishedEvent,
+                label + " finalizado",
+                exerciseName, round, totalRounds, 0));
     }
 
     private void sleepOneSecond() {
