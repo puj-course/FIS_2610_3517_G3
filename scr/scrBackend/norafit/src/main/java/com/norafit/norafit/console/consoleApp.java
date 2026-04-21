@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import org.springframework.stereotype.Component;
 
+import com.norafit.norafit.builder.StrengthSeriesBuilder;
 import com.norafit.norafit.entities.Exercise;
 import com.norafit.norafit.entities.HIITCardio;
 import com.norafit.norafit.entities.Routine;
@@ -412,13 +413,15 @@ public class consoleApp {
                 System.out.print("Descanso en segundos: ");
                 int restTimeSeconds = Integer.parseInt(sc.nextLine().trim());
 
-                strengthSeriesService.createSeries(
-                        strengthExercise,
-                        i,
-                        repetitions,
-                        weight,
-                        restTimeSeconds
-                );
+                StrengthSeries serie = new StrengthSeriesBuilder()
+                .seriesNumber(i)
+                .repetitions(repetitions)
+                .weight(strengthExercise.isHasWeight() ? weight : 0)
+                .restTimeSeconds(restTimeSeconds)
+                .strengthExercise(strengthExercise)
+                .build();
+
+                strengthSeriesService.saveSeries(serie);
             }
         }
 
@@ -657,5 +660,5 @@ private void handleExecuteHIITRoutine(Scanner sc) {
     } catch (Exception e) {
         System.out.println("Error al ejecutar la rutina HIIT: " + e.getMessage());
     }
-}
+ }
 }
