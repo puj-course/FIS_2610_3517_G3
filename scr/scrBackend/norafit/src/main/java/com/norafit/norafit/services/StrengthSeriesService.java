@@ -74,4 +74,9 @@ public class StrengthSeriesService {
         series.updateWeight(newWeight);
         return strengthSeriesRepository.save(series);
     }
+
+    @Transactional
+    public StrengthSeries saveSeries(StrengthSeries serie) {
+        return strengthSeriesRepository.save(serie);
+    }
 }
