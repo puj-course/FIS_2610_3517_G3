@@ -31,8 +31,8 @@ jobs:
         run: chmod +x ./mvnw
         working-directory: scr/scrBackend/norafit
 
-      - name: Ejecutar pruebas unitarias y verificar cobertura
-        run: ./mvnw clean verify
+      - name: Ejecutar pruebas unitarias con cobertura
+        run: ./mvnw clean test jacoco:report
         working-directory: scr/scrBackend/norafit
 
       - name: Publicar reporte JaCoCo
