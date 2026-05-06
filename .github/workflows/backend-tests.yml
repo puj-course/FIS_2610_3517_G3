@@ -2,11 +2,9 @@ name: CI - Pruebas Unitarias y Cobertura
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -31,8 +29,8 @@ jobs:
         run: chmod +x ./mvnw
         working-directory: scr/scrBackend/norafit
 
-      - name: Ejecutar pruebas unitarias con cobertura
-        run: ./mvnw clean test jacoco:report
+      - name: Ejecutar pruebas unitarias y generar reporte JaCoCo
+        run: ./mvnw clean test org.jacoco:jacoco-maven-plugin:0.8.11:report
         working-directory: scr/scrBackend/norafit
 
       - name: Publicar reporte JaCoCo
