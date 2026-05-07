@@ -1,0 +1,23 @@
+name: Docker Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Construir imagen Docker
+        working-directory: scr/scrBackend/norafit
+        run: docker build -t norafit-app .
+
+      - name: Probar contenedor
+        working-directory: scr/scrBackend/norafit
+        run: |
+          docker run -d --name norafit-test -p 8080:8080 norafit-app
+          sleep 20
+          docker logs norafit-test
