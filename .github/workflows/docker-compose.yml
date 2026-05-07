@@ -2,21 +2,42 @@ name: Docker Deploy
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+      - develop
 
 jobs:
   docker:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: scr/scrBackend/norafit
+
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v4
 
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Dar permisos a Maven Wrapper
+        run: chmod +x mvnw
+
+      - name: Compilar proyecto
+        run: ./mvnw clean package -DskipTests
+
+      - name: Verificar archivos target
+        run: ls target
+
       - name: Construir imagen Docker
-        working-directory: scr/scrBackend/norafit
         run: docker build -t norafit-app .
 
-      - name: Probar contenedor
-        working-directory: scr/scrBackend/norafit
+      - name: Ejecutar contenedor
         run: |
           docker run -d --name norafit-test -p 8080:8080 norafit-app
           sleep 20
