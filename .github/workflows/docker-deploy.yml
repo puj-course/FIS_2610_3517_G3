@@ -11,10 +11,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: scr/scrBackend/norafit
-
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v4
@@ -26,16 +22,16 @@ jobs:
           java-version: 17
 
       - name: Dar permisos a Maven Wrapper
-        run: chmod +x mvnw
+        run: chmod +x scr/scrBackend/norafit/mvnw
 
       - name: Compilar proyecto
-        run: ./mvnw clean package -DskipTests
+        run: cd scr/scrBackend/norafit && ./mvnw clean package -DskipTests
 
       - name: Verificar archivos target
-        run: ls -la target
+        run: ls -la scr/scrBackend/norafit/target
 
       - name: Construir imagen Docker
-        run: docker build -t norafit-app .
+        run: docker build -f scr/scrBackend/norafit/Dockerfile -t norafit-app scr/scrBackend/norafit
 
       - name: Ejecutar contenedor de prueba
         run: |
