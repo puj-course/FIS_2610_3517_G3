@@ -11,6 +11,7 @@ import '/flutter_flow/lat_lng.dart';
 import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'serialization_util.dart';
+import '/pages/dashboard_page.dart';
 
 import '/index.dart';
 
@@ -66,7 +67,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: ForgotPasswordWidget.routeName,
           path: ForgotPasswordWidget.routePath,
           builder: (context, params) => ForgotPasswordWidget(),
-        )
+        ),
+        FFRoute(
+          name: DashboardPage.routeName,
+          path: DashboardPage.routePath,
+          builder: (context, params) => DashboardPage(),
+        ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
