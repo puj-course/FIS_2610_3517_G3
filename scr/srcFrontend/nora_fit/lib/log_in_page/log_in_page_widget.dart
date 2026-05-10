@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'log_in_page_model.dart';
 export 'log_in_page_model.dart';
+import 'package:nora_fit/services/auth_service.dart';
+import 'package:nora_fit/services/session.dart';
 
 /// This is The Login Page for NoraFit
 class LogInPageWidget extends StatefulWidget {
@@ -442,7 +444,18 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed(LogInPageWidget.routeName);
+                          try {
+                            final user = await AuthService.login(
+                              _model.textFieldEmailTextController!.text,
+                              _model.textFieldPasswordTextController!.text,
+                            );
+                            Session.save(user); // <- agrega esta línea
+                            context.pushNamed('DashboardPage');
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Error: ${e.toString()}')),
+                            );
+                          }
                         },
                         child: Container(
                           width: 200.0,
