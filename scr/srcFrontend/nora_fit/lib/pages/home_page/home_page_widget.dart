@@ -52,7 +52,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             Container(
               width: 1443.2,
               height: 919.6,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xD3FFFFFF),
               ),
               child: ClipRect(
@@ -64,11 +64,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   child: Stack(
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, -7.5),
+                        alignment: const AlignmentDirectional(0.0, -7.5),
                         child: Container(
                           width: 2641.9,
                           height: 800.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               colors: [Color(0xFF9B9F51), Color(0xFF5F9CA3)],
                               stops: [0.0, 1.0],
@@ -84,7 +84,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, -0.5),
+              alignment: const AlignmentDirectional(0.0, -0.5),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
@@ -92,14 +92,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   width: 80.0,
                   height: 80.0,
                   fit: BoxFit.cover,
-                  alignment: Alignment(0.0, 0.0),
+                  alignment: const Alignment(0.0, 0.0),
                   cacheWidth: 393,
                   cacheHeight: 852,
                 ),
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, -0.33),
+              alignment: const AlignmentDirectional(0.0, -0.33),
               child: Text(
                 'NoraFit',
                 textAlign: TextAlign.center,
@@ -112,7 +112,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 0.85),
+              alignment: const AlignmentDirectional(0.0, 0.85),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -124,7 +124,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 child: Container(
                   width: 200.0,
                   height: 45.0,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 4.0,
@@ -149,11 +149,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                   ),
                   child: Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Text(
                       'Create Account',
                       style: GoogleFonts.montserrat(
-                        color: Color(0xFFFFF9F9),
+                        color: const Color(0xFFFFF9F9),
                         fontWeight: FontWeight.w500,
                         fontSize: 18.0,
                       ),
@@ -163,7 +163,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 0.7),
+              alignment: const AlignmentDirectional(0.0, 0.7),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -175,7 +175,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 child: Container(
                   width: 200.0,
                   height: 45.0,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 4.0,
@@ -200,11 +200,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                   ),
                   child: Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Text(
                       'Log In',
                       style: GoogleFonts.montserrat(
-                        color: Color(0xFFFFF9F9),
+                        color: const Color(0xFFFFF9F9),
                         fontWeight: FontWeight.w500,
                         fontSize: 18.0,
                       ),
@@ -214,7 +214,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 0.95),
+              alignment: const AlignmentDirectional(0.0, 0.95),
               child: Text(
                 'Your trusted fitness app ;)',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
