@@ -60,13 +60,13 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
             Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFDFDCDC),
               ),
               child: Stack(
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.68, -0.87),
+                    alignment: const AlignmentDirectional(0.68, -0.87),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
@@ -78,7 +78,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-0.43, -0.79),
+                    alignment: const AlignmentDirectional(-0.43, -0.79),
                     child: Text(
                       'It\'s good to\nsee you back!',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -101,13 +101,13 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0.0, 1.31),
+              alignment: const AlignmentDirectional(0.0, 1.31),
               child: Container(
                 width: double.infinity,
                 height: 680.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       blurRadius: 4.0,
                       color: Color(0x33000000),
@@ -118,7 +118,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       spreadRadius: 4.0,
                     )
                   ],
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(50.0),
                     topRight: Radius.circular(50.0),
                   ),
@@ -126,11 +126,11 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                 child: Stack(
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(-0.84, -0.93),
+                      alignment: const AlignmentDirectional(-0.84, -0.93),
                       child: Container(
                         width: 56.9,
                         height: 56.9,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xFFDCEEF9),
                           boxShadow: [
                             BoxShadow(
@@ -148,7 +148,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                         child: Stack(
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.17, 0.09),
+                              alignment: const AlignmentDirectional(0.17, 0.09),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.asset(
@@ -164,7 +164,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.66, -0.39),
+                      alignment: const AlignmentDirectional(-0.66, -0.39),
                       child: Text(
                         'Password',
                         textAlign: TextAlign.center,
@@ -185,8 +185,8 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, -0.28),
-                      child: Container(
+                      alignment: const AlignmentDirectional(0.0, -0.28),
+                      child: SizedBox(
                         width: 300.0,
                         child: TextFormField(
                           controller: _model.textFieldPasswordTextController,
@@ -237,14 +237,14 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                                   decoration: TextDecoration.underline,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00DFDFDF),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(24.0),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -265,7 +265,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                               borderRadius: BorderRadius.circular(24.0),
                             ),
                             filled: true,
-                            fillColor: Color(0xFFDFDCDC),
+                            fillColor: const Color(0xFFDFDCDC),
                             suffixIcon: InkWell(
                               onTap: () async {
                                 safeSetState(() =>
@@ -308,8 +308,8 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, -0.57),
-                      child: Container(
+                      alignment: const AlignmentDirectional(0.0, -0.57),
+                      child: SizedBox(
                         width: 300.0,
                         child: TextFormField(
                           controller: _model.textFieldEmailTextController,
@@ -360,14 +360,14 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                                   decoration: TextDecoration.underline,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00DFDFDF),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(24.0),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -388,7 +388,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                               borderRadius: BorderRadius.circular(24.0),
                             ),
                             filled: true,
-                            fillColor: Color(0xFFDFDCDC),
+                            fillColor: const Color(0xFFDFDCDC),
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
@@ -417,7 +417,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.66, -0.68),
+                      alignment: const AlignmentDirectional(-0.66, -0.68),
                       child: Text(
                         'Email',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -437,7 +437,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, -0.02),
+                      alignment: const AlignmentDirectional(0.0, -0.02),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -460,7 +460,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                         child: Container(
                           width: 200.0,
                           height: 45.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 4.0,
@@ -485,11 +485,11 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                             ),
                           ),
                           child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               'Log In',
                               style: GoogleFonts.montserrat(
-                                color: Color(0xFFFFF9F9),
+                                color: const Color(0xFFFFF9F9),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 18.0,
                               ),
@@ -499,7 +499,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.11),
+                      alignment: const AlignmentDirectional(0.0, 0.11),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -518,7 +518,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                    color: Color(0xFF008AFF),
+                                    color: const Color(0xFF008AFF),
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
@@ -531,7 +531,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.7),
+                      alignment: const AlignmentDirectional(0.0, 0.7),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -543,7 +543,7 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                         child: Container(
                           width: 200.0,
                           height: 45.0,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 4.0,
@@ -568,11 +568,11 @@ class _LogInPageWidgetState extends State<LogInPageWidget> {
                             ),
                           ),
                           child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               'Create Account',
                               style: GoogleFonts.montserrat(
-                                color: Color(0xFFFFF9F9),
+                                color: const Color(0xFFFFF9F9),
                                 fontWeight: FontWeight.w500,
                                 fontSize: 18.0,
                               ),
