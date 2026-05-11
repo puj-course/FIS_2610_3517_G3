@@ -1,16 +1,13 @@
 name: Docker Deploy
-
 on:
   workflow_dispatch:
   push:
     branches:
       - main
       - develop
-
 jobs:
   docker:
     runs-on: ubuntu-latest
-
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v4
@@ -36,6 +33,6 @@ jobs:
       - name: Ejecutar contenedor de prueba
         run: |
           docker run -d --name norafit-test -p 8080:8080 norafit-app
-          sleep 20
+          sleep 30
           docker logs norafit-test
           docker stop norafit-test
