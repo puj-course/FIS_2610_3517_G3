@@ -58,18 +58,18 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
             Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(color: Color(0xFFDFDCDC)),
+              decoration: const BoxDecoration(color: Color(0xFFDFDCDC)),
               child: Stack(
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.68, -0.87),
+                    alignment: const AlignmentDirectional(0.68, -0.87),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset('assets/images/runny1.png', width: 93.0, height: 129.0, fit: BoxFit.cover),
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-0.43, -0.79),
+                    alignment: const AlignmentDirectional(-0.43, -0.79),
                     child: Text(
                       'Forgot your \nPassword?',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -85,30 +85,30 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
             ),
             // Panel blanco
             Align(
-              alignment: AlignmentDirectional(0.0, 1.31),
+              alignment: const AlignmentDirectional(0.0, 1.31),
               child: Container(
                 width: double.infinity,
                 height: 680.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [BoxShadow(blurRadius: 4.0, color: Color(0x33000000), offset: Offset(0.0, 2.0), spreadRadius: 4.0)],
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
+                  boxShadow: const [BoxShadow(blurRadius: 4.0, color: Color(0x33000000), offset: Offset(0.0, 2.0), spreadRadius: 4.0)],
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
                 ),
                 child: Stack(
                   children: [
                     // Logo
                     Align(
-                      alignment: AlignmentDirectional(-0.84, -0.93),
+                      alignment: const AlignmentDirectional(-0.84, -0.93),
                       child: Container(
                         width: 56.9,
                         height: 56.9,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xFFDCEEF9),
                           boxShadow: [BoxShadow(blurRadius: 4.0, color: Color(0x33000000), offset: Offset(0.0, 2.0), spreadRadius: 4.0)],
                           shape: BoxShape.circle,
                         ),
                         child: Align(
-                          alignment: AlignmentDirectional(0.17, 0.09),
+                          alignment: const AlignmentDirectional(0.17, 0.09),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset('assets/images/NorafitPeque.png', width: 40.0, height: 44.0, fit: BoxFit.cover),
@@ -119,7 +119,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
                     // Email label
                     Align(
-                      alignment: AlignmentDirectional(-0.66, -0.75),
+                      alignment: const AlignmentDirectional(-0.66, -0.75),
                       child: Text('Email',
                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                 font: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
@@ -130,8 +130,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                     ),
                     // Email field
                     Align(
-                      alignment: AlignmentDirectional(0.0, -0.65),
-                      child: Container(
+                      alignment: const AlignmentDirectional(0.0, -0.65),
+                      child: SizedBox(
                         width: 300.0,
                         child: TextFormField(
                           controller: _model.textFieldEmailTextController,
@@ -142,12 +142,12 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                             isDense: true,
                             hintText: 'User@example.com',
                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(font: GoogleFonts.montserrat(), letterSpacing: 0.0),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0x00DFDFDF), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0x00000000), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
+                            enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Color(0x00DFDFDF), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
+                            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Color(0x00000000), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             errorBorder: OutlineInputBorder(borderSide: BorderSide(color: FlutterFlowTheme.of(context).error, width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: FlutterFlowTheme.of(context).error, width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             filled: true,
-                            fillColor: Color(0xFFDFDCDC),
+                            fillColor: const Color(0xFFDFDCDC),
                           ),
                           style: FlutterFlowTheme.of(context).bodyMedium,
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
@@ -158,7 +158,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
                     // Create Password label
                     Align(
-                      alignment: AlignmentDirectional(-0.56, -0.50),
+                      alignment: const AlignmentDirectional(-0.56, -0.50),
                       child: Text('Create Password',
                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                 font: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
@@ -169,8 +169,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                     ),
                     // Password field
                     Align(
-                      alignment: AlignmentDirectional(0.0, -0.40),
-                      child: Container(
+                      alignment: const AlignmentDirectional(0.0, -0.40),
+                      child: SizedBox(
                         width: 300.0,
                         child: TextFormField(
                           controller: _model.textFieldPasswordTextController,
@@ -181,12 +181,12 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                             isDense: true,
                             hintText: 'eXamPl1294+_-QW',
                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(font: GoogleFonts.montserrat(), letterSpacing: 0.0),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0x00DFDFDF), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0x00000000), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
+                            enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Color(0x00DFDFDF), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
+                            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Color(0x00000000), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             errorBorder: OutlineInputBorder(borderSide: BorderSide(color: FlutterFlowTheme.of(context).error, width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: FlutterFlowTheme.of(context).error, width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             filled: true,
-                            fillColor: Color(0xFFDFDCDC),
+                            fillColor: const Color(0xFFDFDCDC),
                             suffixIcon: InkWell(
                               onTap: () async { safeSetState(() => _model.textFieldPasswordVisibility = !_model.textFieldPasswordVisibility); },
                               focusNode: FocusNode(skipTraversal: true),
@@ -202,7 +202,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
                     // Confirm Password label
                     Align(
-                      alignment: AlignmentDirectional(-0.56, -0.25),
+                      alignment: const AlignmentDirectional(-0.56, -0.25),
                       child: Text('Confirm Password',
                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                 font: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
@@ -213,8 +213,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                     ),
                     // Confirm Password field
                     Align(
-                      alignment: AlignmentDirectional(0.0, -0.15),
-                      child: Container(
+                      alignment: const AlignmentDirectional(0.0, -0.15),
+                      child: SizedBox(
                         width: 300.0,
                         child: TextFormField(
                           controller: _model.textFieldConfirmPasswordTextController,
@@ -225,12 +225,12 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                             isDense: true,
                             hintText: 'eXamPl1294+_-QW',
                             hintStyle: FlutterFlowTheme.of(context).labelMedium.override(font: GoogleFonts.montserrat(), letterSpacing: 0.0),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0x00DFDFDF), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0x00000000), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
+                            enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Color(0x00DFDFDF), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
+                            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Color(0x00000000), width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             errorBorder: OutlineInputBorder(borderSide: BorderSide(color: FlutterFlowTheme.of(context).error, width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: FlutterFlowTheme.of(context).error, width: 1.0), borderRadius: BorderRadius.circular(24.0)),
                             filled: true,
-                            fillColor: Color(0xFFDFDCDC),
+                            fillColor: const Color(0xFFDFDCDC),
                             suffixIcon: InkWell(
                               onTap: () async { safeSetState(() => _model.textFieldConfirmPasswordVisibility = !_model.textFieldConfirmPasswordVisibility); },
                               focusNode: FocusNode(skipTraversal: true),
@@ -246,7 +246,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
                     // Botón new password
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.15),
+                      alignment: const AlignmentDirectional(0.0, 0.15),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -255,7 +255,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                         onTap: () async {
                           if (_model.textFieldPasswordTextController!.text !=
                               _model.textFieldConfirmPasswordTextController!.text) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Las contraseñas no coinciden')));
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Las contraseñas no coinciden')));
                             return;
                           }
                           try {
@@ -263,7 +263,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                               _model.textFieldEmailTextController!.text,
                               _model.textFieldPasswordTextController!.text,
                             );
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('¡Contraseña actualizada!')));
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('¡Contraseña actualizada!')));
                             context.pushNamed(LogInPageWidget.routeName);
                           } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
@@ -273,13 +273,13 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                           width: 200.0,
                           height: 45.0,
                           decoration: BoxDecoration(
-                            boxShadow: [BoxShadow(blurRadius: 4.0, color: Color(0x33000000), offset: Offset(0.0, 8.0))],
-                            gradient: LinearGradient(colors: [Color(0xFFC67301), Color(0xFFE39501)], stops: [0.0, 1.0], begin: AlignmentDirectional(1.0, 0.0), end: AlignmentDirectional(-1.0, 0)),
+                            boxShadow: const [BoxShadow(blurRadius: 4.0, color: Color(0x33000000), offset: Offset(0.0, 8.0))],
+                            gradient: const LinearGradient(colors: [Color(0xFFC67301), Color(0xFFE39501)], stops: [0.0, 1.0], begin: AlignmentDirectional(1.0, 0.0), end: AlignmentDirectional(-1.0, 0)),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                           child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Text('new password!', style: GoogleFonts.montserrat(color: Color(0xFFFFF9F9), fontWeight: FontWeight.w500, fontSize: 18.0)),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: Text('new password!', style: GoogleFonts.montserrat(color: const Color(0xFFFFF9F9), fontWeight: FontWeight.w500, fontSize: 18.0)),
                           ),
                         ),
                       ),
@@ -287,7 +287,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
                     // Texto Log In Again
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.64),
+                      alignment: const AlignmentDirectional(0.0, 0.64),
                       child: Text('Log In Again',
                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                 font: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
@@ -299,7 +299,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
                     // Botón Log In
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.8),
+                      alignment: const AlignmentDirectional(0.0, 0.8),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -310,13 +310,13 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                           width: 200.0,
                           height: 45.0,
                           decoration: BoxDecoration(
-                            boxShadow: [BoxShadow(blurRadius: 4.0, color: Color(0x33000000), offset: Offset(0.0, 8.0))],
-                            gradient: LinearGradient(colors: [Color(0xFF0D8FCB), Color(0xFF1CB0CC)], stops: [0.0, 1.0], begin: AlignmentDirectional(1.0, 0.0), end: AlignmentDirectional(-1.0, 0)),
+                            boxShadow: const [BoxShadow(blurRadius: 4.0, color: Color(0x33000000), offset: Offset(0.0, 8.0))],
+                            gradient: const LinearGradient(colors: [Color(0xFF0D8FCB), Color(0xFF1CB0CC)], stops: [0.0, 1.0], begin: AlignmentDirectional(1.0, 0.0), end: AlignmentDirectional(-1.0, 0)),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                           child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Text('Log In', style: GoogleFonts.montserrat(color: Color(0xFFFFF9F9), fontWeight: FontWeight.w500, fontSize: 18.0)),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: Text('Log In', style: GoogleFonts.montserrat(color: const Color(0xFFFFF9F9), fontWeight: FontWeight.w500, fontSize: 18.0)),
                           ),
                         ),
                       ),
