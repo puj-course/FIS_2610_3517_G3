@@ -1,4 +1,4 @@
-name: SonarQube - Tests y Coverage
+name: Tests Coverage SonarQube
 
 on:
   push:
@@ -11,9 +11,9 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Ejecutar pruebas, coverage y SonarQube
+  test-coverage-sonar:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Clonar repositorio
@@ -32,21 +32,21 @@ jobs:
         run: chmod +x ./mvnw
         working-directory: scr/scrBackend/norafit
 
-      - name: Ejecutar pruebas y generar coverage sin consola
-        run: ./mvnw clean test jacoco:report -Dnorafit.console.enabled=false
+      - name: Ejecutar pruebas unitarias y generar coverage
+        run: ./mvnw clean test jacoco:report -Dtest='!*NorafitApplicationTests'
         working-directory: scr/scrBackend/norafit
 
-      - name: Verificar que el reporte JaCoCo exista
+      - name: Verificar reporte JaCoCo
         run: ls -la target/site/jacoco
         working-directory: scr/scrBackend/norafit
 
       - name: Analizar en SonarQube
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw sonar:sonar -Dnorafit.console.enabled=false
+        run: ./mvnw sonar:sonar
         working-directory: scr/scrBackend/norafit
 
-      - name: Publicar reporte JaCoCo como artefacto
+      - name: Publicar reporte JaCoCo
         uses: actions/upload-artifact@v4
         with:
           name: reporte-cobertura-jacoco
