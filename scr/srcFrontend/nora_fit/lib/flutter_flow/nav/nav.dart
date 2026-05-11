@@ -41,37 +41,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => HomePageWidget(),
+      errorBuilder: (context, state) => const HomePageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomePageWidget(),
+          builder: (context, _) => const HomePageWidget(),
         ),
         FFRoute(
           name: HomePageWidget.routeName,
           path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, params) => const HomePageWidget(),
         ),
         FFRoute(
           name: LogInPageWidget.routeName,
           path: LogInPageWidget.routePath,
-          builder: (context, params) => LogInPageWidget(),
+          builder: (context, params) => const LogInPageWidget(),
         ),
         FFRoute(
           name: SignUpPageWidget.routeName,
           path: SignUpPageWidget.routePath,
-          builder: (context, params) => SignUpPageWidget(),
+          builder: (context, params) => const SignUpPageWidget(),
         ),
         FFRoute(
           name: ForgotPasswordWidget.routeName,
           path: ForgotPasswordWidget.routePath,
-          builder: (context, params) => ForgotPasswordWidget(),
+          builder: (context, params) => const ForgotPasswordWidget(),
         ),
         FFRoute(
           name: DashboardPage.routeName,
           path: DashboardPage.routePath,
-          builder: (context, params) => DashboardPage(),
+          builder: (context, params) => const DashboardPage(),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -237,7 +237,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {
