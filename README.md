@@ -100,8 +100,65 @@ Configuración de base de datos
 ---
 La aplicación utiliza PostgreSQL alojado en Supabase.
 
+## Ejecución del Frontend
+
+**Prerrequisitos:**
+- Flutter SDK (versión 3.x o superior)
+- Android Studio o VS Code con extensión de Flutter
+- Un emulador Android o dispositivo físico con depuración USB activada
+
+**Pasos:**
+1. Clona el repositorio
+2. Ve a la carpeta del frontend:
+```bash
+   cd scr/scrFrontend/nora_fit
+```
+3. Instala las dependencias:
+```bash
+   flutter pub get
+```
+4. Corre la app:
+```bash
+   flutter run
+```
+
+> **Nota:** El dispositivo o emulador debe estar en la misma red WiFi que el PC donde corre el backend.
+
 La conexión a la base de datos se encuentra configurada en el archivo:
 
 `srcBackend/norafit/src/main/resources/application.properties`
+## Ejecución del Backend
+
+**Opción 1 — Con Docker (recomendado, sin instalar nada):**
+
+Requiere tener Docker Desktop instalado.
+
+Con un solo comando:
+```bash
+docker run -p 8080:8080 juanmendozamarquez/norafit-app:latest
+```
+
+O con docker-compose, creando un archivo `docker-compose.yml` con el siguiente contenido:
+```yaml
+version: "3.8"
+services:
+  app:
+    image: juanmendozamarquez/norafit-app:latest
+    ports:
+      - "8080:8080"
+```
+Y luego corriendo:
+```bash
+docker compose up
+```
+
+**Opción 2 — Sin Docker:**
+
+Requiere Java 17 y Maven.
+```bash
+cd scr/scrBackend/norafit
+./mvnw spring-boot:run -Dspring-boot.run.profiles=console
+```
+> Sin el perfil `console` el backend corre únicamente como servidor HTTP (sin la app de consola).
 ## Licencia
 Proyecto desarrollado con fines académicos
