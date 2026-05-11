@@ -27,12 +27,16 @@ jobs:
       - name: Verificar archivos target
         run: ls -la scr/scrBackend/norafit/target
 
-      - name: Construir imagen Docker
-        run: docker build -f scr/scrBackend/norafit/Dockerfile -t norafit-app scr/scrBackend/norafit
+      - name: Login en Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Ejecutar contenedor de prueba
-        run: |
-          docker run -d --name norafit-test -p 8080:8080 norafit-app
-          sleep 30
-          docker logs norafit-test
-          docker stop norafit-test
+      - name: Construir y publicar imagen
+        uses: docker/build-push-action@v5
+        with:
+          context: scr/scrBackend/norafit
+          file: scr/scrBackend/norafit/Dockerfile
+          push: true
+          tags: juanmendozamarquez/norafit-app:latest
