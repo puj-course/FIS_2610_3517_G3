@@ -38,8 +38,8 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "verified", nullable = false)
-    private boolean verified = false;
+    @Column(name = "verified")
+    private Boolean verified = false;
 
     @OneToMany(mappedBy = "user")
     @Transient
