@@ -1,4 +1,4 @@
-name: SonarQube
+name: Tests Coverage SonarCloud
 
 on:
   push:
@@ -11,9 +11,9 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build, test, coverage and analyze
+  test-coverage-sonar:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Clonar repositorio
@@ -32,13 +32,14 @@ jobs:
         run: chmod +x ./mvnw
         working-directory: scr/scrBackend/norafit
 
-      - name: Ejecutar pruebas y generar coverage
-        run: ./mvnw clean verify
+      - name: Ejecutar pruebas unitarias y generar coverage
+        run: ./mvnw clean test jacoco:report
         working-directory: scr/scrBackend/norafit
 
-      - name: Verificar jacoco.xml
+      - name: Verificar reporte JaCoCo XML
         run: |
-          find . -name "jacoco.xml"
+          echo "Contenido del reporte JaCoCo:"
+          ls -la target/site/jacoco
           test -f target/site/jacoco/jacoco.xml
         working-directory: scr/scrBackend/norafit
 
@@ -52,3 +53,9 @@ jobs:
             -Dsonar.projectKey=puj-course_FIS_2610_3517_G3 \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
         working-directory: scr/scrBackend/norafit
+
+      - name: Publicar reporte JaCoCo
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-cobertura-jacoco
+          path: scr/scrBackend/norafit/target/site/jacoco/
