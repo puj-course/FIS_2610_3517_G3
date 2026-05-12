@@ -32,7 +32,7 @@ jobs:
         working-directory: scr/scrBackend/norafit
 
       - name: Ejecutar pruebas unitarias, coverage y validar mínimo 80%
-        run: ./mvnw clean verify -Dtest='!*NorafitApplicationTests'
+        run: ./mvnw clean verify
         working-directory: scr/scrBackend/norafit
 
       - name: Verificar reporte JaCoCo
