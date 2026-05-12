@@ -22,7 +22,7 @@ jobs:
         run: chmod +x scr/scrBackend/norafit/mvnw
 
       - name: Compilar proyecto
-        run: cd scr/scrBackend/norafit && ./mvnw clean package -DskipTests
+        run: cd scr/scrBackend/norafit && ./mvnw clean package
 
       - name: Verificar archivos target
         run: ls -la scr/scrBackend/norafit/target
