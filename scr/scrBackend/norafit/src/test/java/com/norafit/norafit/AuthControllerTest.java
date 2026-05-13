@@ -1,193 +1,103 @@
 package com.norafit.norafit;
 
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import static org.mockito.ArgumentMatchers.any;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
+import com.norafit.norafit.controllers.AuthController;
+import com.norafit.norafit.dto.request.ChangePasswordRequest;
+import com.norafit.norafit.dto.request.LoginRequest;
+import com.norafit.norafit.dto.request.RegisterRequest;
+import com.norafit.norafit.dto.response.UserResponse;
 import com.norafit.norafit.entities.User;
-import com.norafit.norafit.repositories.UserRepository;
 import com.norafit.norafit.services.AuthService;
 
-@ExtendWith(MockitoExtension.class)
-class AuthServiceTest {
-
-    @Mock
-    private UserRepository userRepository;
-
-    @InjectMocks
-    private AuthService authService;
+class AuthControllerTest {
 
     @Test
-    void register_WhenDataIsValid_ShouldCreateUser() {
-        when(userRepository.existsByEmail("santi@test.com")).thenReturn(false);
-        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    void register_ShouldReturnUserResponse() {
+        AuthService authService = mock(AuthService.class);
+        AuthController controller = new AuthController(authService);
 
-        User result = authService.register("santi", "santi@test.com", "1234");
-
-        assertNotNull(result);
-        assertEquals("santi", result.getUsername());
-        assertEquals("santi@test.com", result.getEmail());
-        assertEquals("1234", result.getPassword());
-        assertEquals('U', result.getRole());
-        assertNotNull(result.getCreatedAt());
-
-        verify(userRepository).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenUsernameIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("", "santi@test.com", "1234")
-        );
-
-        assertEquals("El username es obligatorio.", exception.getMessage());
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenEmailIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("santi", "", "1234")
-        );
-
-        assertEquals("El email es obligatorio.", exception.getMessage());
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenEmailIsInvalid_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("santi", "correo-invalido", "1234")
-        );
-
-        assertEquals("Email inválido.", exception.getMessage());
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenPasswordIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("santi", "santi@test.com", "")
-        );
-
-        assertEquals("La contraseña es obligatoria.", exception.getMessage());
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenEmailAlreadyExists_ShouldThrowException() {
-        when(userRepository.existsByEmail("santi@test.com")).thenReturn(true);
-
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("santi", "santi@test.com", "1234")
-        );
-
-        assertEquals("El email ya está registrado.", exception.getMessage());
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void login_WhenCredentialsAreValid_ShouldReturnUser() {
         User user = new User();
-        user.setEmail("santi@test.com");
-        user.setPassword("1234");
-        user.setUsername("santi");
+        user.setId(1);
+        user.setUsername("Santiago");
+        user.setEmail("santiago@test.com");
+        user.setRole('U');
+        user.setCreatedAt(LocalDate.of(2026, 5, 12));
 
-        when(userRepository.findByEmail("santi@test.com")).thenReturn(Optional.of(user));
+        when(authService.register("Santiago", "santiago@test.com", "1234"))
+                .thenReturn(user);
 
-        User result = authService.login("santi@test.com", "1234");
-
-        assertEquals("santi@test.com", result.getEmail());
-        assertEquals("santi", result.getUsername());
-    }
-
-    @Test
-    void login_WhenEmailIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.login("", "1234")
+        ResponseEntity<UserResponse> response = controller.register(
+                new RegisterRequest("Santiago", "santiago@test.com", "1234")
         );
 
-        assertEquals("El email es obligatorio.", exception.getMessage());
+        assertEquals(200, response.getStatusCode().value());
+        assertNotNull(response.getBody());
+        assertEquals(1L, response.getBody().id());
+        assertEquals("Santiago", response.getBody().username());
+        assertEquals("santiago@test.com", response.getBody().email());
+        assertEquals('U', response.getBody().role());
+
+        verify(authService).register("Santiago", "santiago@test.com", "1234");
     }
 
     @Test
-    void login_WhenPasswordIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.login("santi@test.com", "")
-        );
+    void login_ShouldReturnUserResponse() {
+        AuthService authService = mock(AuthService.class);
+        AuthController controller = new AuthController(authService);
 
-        assertEquals("La contraseña es obligatoria.", exception.getMessage());
-    }
-
-    @Test
-    void login_WhenUserDoesNotExist_ShouldThrowException() {
-        when(userRepository.findByEmail("santi@test.com")).thenReturn(Optional.empty());
-
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.login("santi@test.com", "1234")
-        );
-
-        assertEquals("Usuario no encontrado", exception.getMessage());
-    }
-
-    @Test
-    void login_WhenPasswordIsIncorrect_ShouldThrowException() {
         User user = new User();
-        user.setEmail("santi@test.com");
-        user.setPassword("1234");
+        user.setId(2);
+        user.setUsername("Usuario");
+        user.setEmail("user@test.com");
+        user.setRole('U');
+        user.setCreatedAt(LocalDate.of(2026, 5, 12));
 
-        when(userRepository.findByEmail("santi@test.com")).thenReturn(Optional.of(user));
+        when(authService.login("user@test.com", "abcd"))
+                .thenReturn(user);
 
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.login("santi@test.com", "incorrecta")
+        ResponseEntity<UserResponse> response = controller.login(
+                new LoginRequest("user@test.com", "abcd")
         );
 
-        assertEquals("Contraseña incorrecta.", exception.getMessage());
+        assertEquals(200, response.getStatusCode().value());
+        assertNotNull(response.getBody());
+        assertEquals(2L, response.getBody().id());
+        assertEquals("Usuario", response.getBody().username());
+
+        verify(authService).login("user@test.com", "abcd");
     }
 
     @Test
-    void changePassword_WhenUserExists_ShouldUpdatePassword() {
+    void changePassword_ShouldReturnUserResponse() {
+        AuthService authService = mock(AuthService.class);
+        AuthController controller = new AuthController(authService);
+
         User user = new User();
-        user.setEmail("santi@test.com");
-        user.setPassword("old");
+        user.setId(3);
+        user.setUsername("Cambio");
+        user.setEmail("cambio@test.com");
+        user.setRole('U');
+        user.setCreatedAt(LocalDate.of(2026, 5, 12));
 
-        when(userRepository.findByEmail("santi@test.com")).thenReturn(Optional.of(user));
-        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(authService.changePassword("cambio@test.com", "nueva123"))
+                .thenReturn(user);
 
-        User result = authService.changePassword("santi@test.com", "new123");
-
-        assertEquals("new123", result.getPassword());
-        verify(userRepository).save(user);
-    }
-
-    @Test
-    void changePassword_WhenNewPasswordIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.changePassword("santi@test.com", "")
+        ResponseEntity<UserResponse> response = controller.changePassword(
+                new ChangePasswordRequest("cambio@test.com", "nueva123")
         );
 
-        assertEquals("La nueva contraseña es obligatoria.", exception.getMessage());
-        verify(userRepository, never()).save(any(User.class));
+        assertEquals(200, response.getStatusCode().value());
+        assertNotNull(response.getBody());
+        assertEquals(3L, response.getBody().id());
+        assertEquals("Cambio", response.getBody().username());
+
+        verify(authService).changePassword("cambio@test.com", "nueva123");
     }
 }
