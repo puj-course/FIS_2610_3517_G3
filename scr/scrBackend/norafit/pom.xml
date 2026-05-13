@@ -21,14 +21,15 @@
 <properties>
     <java.version>17</java.version>
 
-    <!-- Exclusiones SonarCloud Coverage -->
+    <!-- Exclusiones Coverage SonarCloud -->
     <sonar.coverage.exclusions>
         **/console/**,
         **/consoleApp.java,
         **/dto/**,
         **/metrics/**,
         **/*Application.java,
-        **/config/**
+        **/config/**,
+        **/observer/ConsoleObserver.java
     </sonar.coverage.exclusions>
 
     <!-- Exclusiones análisis Sonar -->
