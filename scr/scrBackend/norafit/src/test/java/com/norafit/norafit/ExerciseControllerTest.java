@@ -1,4 +1,4 @@
-package com.norafit.norafit;
+package com.norafit.norafit.controllers;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
