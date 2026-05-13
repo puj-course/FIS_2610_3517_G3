@@ -18,16 +18,25 @@
     <name>norafit</name>
     <description>NoraFit Backend</description>
 
-    <properties>
-        <java.version>17</java.version>
+<properties>
+    <java.version>17</java.version>
 
-        <!-- SONAR -->
-        <sonar.organization>puj-course</sonar.organization>
-        <sonar.projectKey>puj-course_FIS_2610_3517_G3</sonar.projectKey>
-        <sonar.coverage.jacoco.xmlReportPaths>
-            target/site/jacoco/jacoco.xml
-        </sonar.coverage.jacoco.xmlReportPaths>
-    </properties>
+    <!-- Exclusiones SonarCloud Coverage -->
+    <sonar.coverage.exclusions>
+        **/console/**,
+        **/consoleApp.java,
+        **/dto/**,
+        **/metrics/**,
+        **/*Application.java,
+        **/config/**
+    </sonar.coverage.exclusions>
+
+    <!-- Exclusiones análisis Sonar -->
+    <sonar.exclusions>
+        **/console/**,
+        **/consoleApp.java
+    </sonar.exclusions>
+</properties>
 
     <dependencies>
 
