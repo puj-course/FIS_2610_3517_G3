@@ -44,16 +44,17 @@ jobs:
         working-directory: scr/scrBackend/norafit
 
       - name: Analizar en SonarCloud
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          ./mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.organization=puj-course \
-            -Dsonar.projectKey=puj-course_FIS_2610_3517_G3 \
-            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
-            -Dsonar.coverage.exclusions=**/console/**,**/dto/**,**/metrics/**,**/*Application.java
-        working-directory: scr/scrBackend/norafit
+  env:
+    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  run: |
+    ./mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar \
+      -Dsonar.host.url=https://sonarcloud.io \
+      -Dsonar.organization=puj-course \
+      -Dsonar.projectKey=puj-course_FIS_2610_3517_G3 \
+      -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+      -Dsonar.exclusions="**/console/consoleApp.java,**/console/**" \
+      -Dsonar.coverage.exclusions="**/console/consoleApp.java,**/console/**,**/dto/**,**/metrics/**,**/*Application.java"
+  working-directory: scr/scrBackend/norafit
 
       - name: Publicar reporte JaCoCo
         uses: actions/upload-artifact@v4
