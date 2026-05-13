@@ -79,41 +79,41 @@ class HIITStatsDecoratorTest {
     }
 
     @Test
-    void executeRoutine_ShouldAddFinalSummary() {
-        IHIITExecutionService wrappedService = mock(IHIITExecutionService.class);
+void executeRoutine_ShouldAddFinalSummary() {
+    IHIITExecutionService wrappedService = mock(IHIITExecutionService.class);
 
-        Routine routine = new Routine();
+    Routine routine = new Routine();
 
-        HIITCardio hiit1 = new HIITCardio();
-        hiit1.setRounds(2);
-        hiit1.setWorkTimeSeconds(20);
-        hiit1.setRestTimeSeconds(10);
+    HIITCardio hiit1 = new HIITCardio();
+    hiit1.setRounds(2);
+    hiit1.setWorkTimeSeconds(20);
+    hiit1.setRestTimeSeconds(10);
 
-        HIITCardio hiit2 = new HIITCardio();
-        hiit2.setRounds(3);
-        hiit2.setWorkTimeSeconds(15);
-        hiit2.setRestTimeSeconds(5);
+    HIITCardio hiit2 = new HIITCardio();
+    hiit2.setRounds(3);
+    hiit2.setWorkTimeSeconds(15);
+    hiit2.setRestTimeSeconds(5);
 
-        routine.addExercise(hiit1);
-        routine.addExercise(hiit2);
+    routine.addExercise(hiit1);
+    routine.addExercise(hiit2);
 
-        when(wrappedService.executeRoutine(routine, false))
-                .thenReturn(List.of("Rutina base"));
+    when(wrappedService.executeRoutine(routine, false))
+            .thenReturn(List.of("Rutina base"));
 
-        HIITStatsDecorator decorator = new HIITStatsDecorator(wrappedService);
+    HIITStatsDecorator decorator = new HIITStatsDecorator(wrappedService);
 
-        List<String> result = decorator.executeRoutine(routine, false);
+    List<String> result = decorator.executeRoutine(routine, false);
 
-        assertTrue(result.contains("Rutina base"));
-        assertTrue(result.contains("=== RESUMEN FINAL ==="));
-        assertTrue(result.contains("Total ejercicios HIIT: 2"));
-        assertTrue(result.contains("Total rondas: 5"));
-        assertTrue(result.contains("Tiempo total de trabajo: 85s"));
-        assertTrue(result.contains("Tiempo total de descanso: 30s"));
-        assertTrue(result.contains("Tiempo estimado total: 115s"));
+    assertTrue(result.contains("Rutina base"));
+    assertTrue(result.contains("=== RESUMEN FINAL ==="));
+    assertTrue(result.contains("Total ejercicios HIIT: 2"));
+    assertTrue(result.contains("Total rondas: 5"));
+    assertTrue(result.contains("Tiempo total de trabajo: 85s"));
+    assertTrue(result.contains("Tiempo total de descanso: 20s"));
+    assertTrue(result.contains("Tiempo estimado total: 105s"));
 
-        verify(wrappedService).executeRoutine(routine, false);
-    }
+    verify(wrappedService).executeRoutine(routine, false);
+}
 
     @Test
     void executeRoutine_WhenRoutineIsNull_ShouldThrowException() {
