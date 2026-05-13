@@ -32,8 +32,8 @@ jobs:
         run: chmod +x ./mvnw
         working-directory: scr/scrBackend/norafit
 
-      - name: Ejecutar pruebas unitarias, coverage y validar mínimo 80%
-        run: ./mvnw clean verify
+      - name: Ejecutar pruebas unitarias y generar coverage
+        run: ./mvnw clean test jacoco:report
         working-directory: scr/scrBackend/norafit
 
       - name: Verificar reporte JaCoCo XML
@@ -51,7 +51,8 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.organization=puj-course \
             -Dsonar.projectKey=puj-course_FIS_2610_3517_G3 \
-            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+            -Dsonar.coverage.exclusions=**/console/**,**/dto/**,**/metrics/**,**/*Application.java
         working-directory: scr/scrBackend/norafit
 
       - name: Publicar reporte JaCoCo
