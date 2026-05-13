@@ -18,9 +18,12 @@ class CyclomaticComplexityMetricTest {
     @Test
     void testComplejidadAlta() {
         CyclomaticComplexityMetric metric = new CyclomaticComplexityMetric();
-        String codigo = "if (a) {} if (b) {} while (c) {} for (;;) {} " +
-                        "case 1: case 2: catch (Exception e) {} && || ? x : y " +
-                        "if (d) {} if (e) {} while (f) {} for (;;) {} case 3: && ||";
+        String codigo = "if (a) {} if (b) {} if (c) {} if (d) {} if (e) {} " +
+                        "while (x) {} while (y) {} while (z) {} " +
+                        "for (;;) {} for (;;) {} for (;;) {} " +
+                        "case 1: case 2: case 3: case 4: case 5: " +
+                        "catch (Exception e) {} catch (Error e) {} " +
+                        "&& && && || || ? a : b ? c : d";
         CyclomaticComplexityMetric.ComplexityResult result = metric.analyze(codigo, "metodoComplejo");
         assertTrue(result.getValue() > 20);
         assertTrue(result.getClassification().contains("ALTO"));
