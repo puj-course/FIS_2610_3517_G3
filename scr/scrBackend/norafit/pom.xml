@@ -84,13 +84,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- TWILIO SMS -->
-        <dependency>
-            <groupId>com.twilio.sdk</groupId>
-            <artifactId>twilio</artifactId>
-            <version>10.1.0</version>
-        </dependency>
-
     </dependencies>
 
     <build>
