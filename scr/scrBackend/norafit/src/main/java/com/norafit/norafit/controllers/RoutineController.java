@@ -33,17 +33,21 @@ public class RoutineController {
     }
     @Transactional
     public RoutineResponse toResponse(Routine routine) {
-    List<String> names = routine.getExercises()
-        .stream()
-        .map(e -> e.getExerciseName())
-        .toList();
-    return new RoutineResponse(
-        routine.getId(),
-        routine.getRoutineName(),
-        routine.getCreatedAt(),
-        routine.getTotalTimeSeconds(),
-        names
-    );
+        List<RoutineResponse.ExerciseInfo> exercises = routine.getExercises()
+            .stream()
+            .map(e -> new RoutineResponse.ExerciseInfo(
+                e.getId(),
+                e.getExerciseName(),
+                e.getClass().getSimpleName()
+            ))
+            .toList();
+        return new RoutineResponse(
+            routine.getId(),
+            routine.getRoutineName(),
+            routine.getCreatedAt(),
+            routine.getTotalTimeSeconds(),
+            exercises
+        );
     }
 
     // GET /routines?userId=1

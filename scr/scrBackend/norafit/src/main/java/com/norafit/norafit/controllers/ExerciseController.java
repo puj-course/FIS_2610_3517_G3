@@ -110,6 +110,12 @@ public class ExerciseController {
             series.getId(), series.getSeriesNumber(),
             series.getRepetitions(), series.getWeight(), series.getRestTimeSeconds()));
     }
+    
+    @DeleteMapping("/series/{id}")
+    public ResponseEntity<Void> deleteSeries(@PathVariable Long id) {
+        strengthSeriesService.deleteSeries(id);
+        return ResponseEntity.ok().build();
+}
 
     record AddStrengthExerciseRequest(String name, String description, boolean hasWeight) {}
     record RenameExerciseRequest(String newName) {}

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:nora_fit/services/session.dart';
 
 class RoutineService {
-  static const String _baseUrl = 'http://192.168.1.10:8080';
+  static const String _baseUrl = 'http://172.20.10.2:8080';
 
   static Future<List<Map<String, dynamic>>> getRoutines() async {
     final response = await http.get(
@@ -51,6 +51,17 @@ class RoutineService {
       return jsonDecode(response.body);
     } else {
       throw Exception('Error al renombrar rutina');
+    }
+  }
+  static Future<Map<String, dynamic>> getRoutineById(int id) async {
+    final response = await http.get(
+      Uri.parse('$_baseUrl/routines/$id'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Error al obtener rutina');
     }
   }
 }
