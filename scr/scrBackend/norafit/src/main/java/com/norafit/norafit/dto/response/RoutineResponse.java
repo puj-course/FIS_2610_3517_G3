@@ -8,5 +8,7 @@ public record RoutineResponse(
     String routineName,
     LocalDate createdAt,
     float totalTimeSeconds,
-    List<String> exerciseNames
-) {}
+    List<ExerciseInfo> exercises      
+) {
+    public record ExerciseInfo(Long id, String exerciseName, String type) {}
+}

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nora_fit/services/routine_service.dart';
 import 'package:nora_fit/services/session.dart';
 import 'package:nora_fit/flutter_flow/nav/nav.dart';
+import 'package:nora_fit/pages/routine_detail_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -44,13 +45,16 @@ class _DashboardPageState extends State<DashboardPage> {
     await showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('New Routine', style: GoogleFonts.montserrat(fontWeight: FontWeight.bold)),
+        title: Text('New Routine',
+            style: GoogleFonts.montserrat(fontWeight: FontWeight.bold)),
         content: TextField(
           controller: controller,
           decoration: const InputDecoration(hintText: 'Routine Name'),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Cancel')),
           TextButton(
             onPressed: () async {
               if (controller.text.isNotEmpty) {
@@ -71,15 +75,19 @@ class _DashboardPageState extends State<DashboardPage> {
     await showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Rename Routine', style: GoogleFonts.montserrat(fontWeight: FontWeight.bold)),
+        title: Text('Rename Routine',
+            style: GoogleFonts.montserrat(fontWeight: FontWeight.bold)),
         content: TextField(controller: controller),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Cancel')),
           TextButton(
             onPressed: () async {
               if (controller.text.isNotEmpty) {
                 Navigator.pop(ctx);
-                await RoutineService.renameRoutine(routine['id'], controller.text);
+                await RoutineService.renameRoutine(
+                    routine['id'], controller.text);
                 _loadRoutines();
               }
             },
@@ -94,17 +102,22 @@ class _DashboardPageState extends State<DashboardPage> {
     await showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Delete Routine', style: GoogleFonts.montserrat(fontWeight: FontWeight.bold)),
-        content: Text('Sure you want to delete "${routine['routineName']}"?'),
+        title: Text('Delete Routine',
+            style: GoogleFonts.montserrat(fontWeight: FontWeight.bold)),
+        content:
+            Text('Sure you want to delete "${routine['routineName']}"?'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Cancel')),
           TextButton(
             onPressed: () async {
               Navigator.pop(ctx);
               await RoutineService.deleteRoutine(routine['id']);
               _loadRoutines();
             },
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
+            child: const Text('Delete',
+                style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -124,19 +137,21 @@ class _DashboardPageState extends State<DashboardPage> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header con bordes redondeados
+            // Header
             Container(
               margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: const [BoxShadow(color: Color(0x15000000), blurRadius: 8)],
+                boxShadow: const [
+                  BoxShadow(color: Color(0x15000000), blurRadius: 8)
+                ],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Botón + azul degradado
                   GestureDetector(
                     onTap: _createRoutine,
                     child: Container(
@@ -150,20 +165,31 @@ class _DashboardPageState extends State<DashboardPage> {
                           begin: AlignmentDirectional(1.0, 0.0),
                           end: AlignmentDirectional(-1.0, 0),
                         ),
-                        boxShadow: [BoxShadow(color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 4))],
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color(0x33000000),
+                              blurRadius: 4,
+                              offset: Offset(0, 4))
+                        ],
                       ),
-                      child: const Icon(Icons.add, color: Colors.white, size: 24),
+                      child:
+                          const Icon(Icons.add, color: Colors.white, size: 24),
                     ),
                   ),
                   Column(
                     children: [
-                      Text('Your', style: GoogleFonts.montserrat(fontSize: 22, fontWeight: FontWeight.bold)),
-                      Text('Routines', style: GoogleFonts.montserrat(fontSize: 22, fontWeight: FontWeight.bold)),
+                      Text('Your',
+                          style: GoogleFonts.montserrat(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                      Text('Routines',
+                          style: GoogleFonts.montserrat(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.asset('assets/images/runny1.png', width: 50, height: 60, fit: BoxFit.cover),
+                    child: Image.asset('assets/images/runny1.png',
+                        width: 50, height: 60, fit: BoxFit.cover),
                   ),
                 ],
               ),
@@ -176,17 +202,28 @@ class _DashboardPageState extends State<DashboardPage> {
                   : _routines.isEmpty
                       ? Center(
                           child: Text(
-                            'You don\'t have any routine''.\nPress + to create one.',
+                            'You don\'t have any routine.\nPress + to create one.',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.montserrat(fontSize: 16, color: Colors.grey),
+                            style: GoogleFonts.montserrat(
+                                fontSize: 16, color: Colors.grey),
                           ),
                         )
                       : ListView.builder(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
                           itemCount: _routines.length,
                           itemBuilder: (context, index) {
                             final routine = _routines[index];
-                            final exercises = (routine['exerciseNames'] as List<dynamic>?) ?? [];
+
+                            // ← exercises ahora son objetos con id y exerciseName
+                            final rawExercises =
+                                (routine['exercises'] as List<dynamic>?) ?? [];
+                            final exerciseNames = rawExercises
+                                .map((e) =>
+                                    e['exerciseName']?.toString() ?? '')
+                                .where((name) => name.isNotEmpty)
+                                .toList();
+
                             return Container(
                               margin: const EdgeInsets.only(bottom: 12),
                               decoration: BoxDecoration(
@@ -204,55 +241,93 @@ class _DashboardPageState extends State<DashboardPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           routine['routineName'] ?? '',
-                                          style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.bold),
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                         PopupMenuButton<String>(
                                           icon: const Icon(Icons.more_horiz),
                                           onSelected: (value) {
-                                            if (value == 'rename') _renameRoutine(routine);
-                                            if (value == 'delete') _deleteRoutine(routine);
+                                            if (value == 'rename')
+                                              _renameRoutine(routine);
+                                            if (value == 'delete')
+                                              _deleteRoutine(routine);
                                           },
                                           itemBuilder: (ctx) => [
-                                            const PopupMenuItem(value: 'rename', child: Text('Rename')),
-                                            const PopupMenuItem(value: 'delete', child: Text('delete', style: TextStyle(color: Colors.red))),
+                                            const PopupMenuItem(
+                                                value: 'rename',
+                                                child: Text('Rename')),
+                                            const PopupMenuItem(
+                                                value: 'delete',
+                                                child: Text('Delete',
+                                                    style: TextStyle(
+                                                        color: Colors.red))),
                                           ],
                                         ),
                                       ],
                                     ),
-                                    if (exercises.isNotEmpty)
+
+                                    // Nombres de ejercicios debajo del título
+                                    if (exerciseNames.isNotEmpty)
                                       Padding(
-                                        padding: const EdgeInsets.only(bottom: 12),
+                                        padding:
+                                            const EdgeInsets.only(bottom: 12),
                                         child: Text(
-                                          exercises.join(', '),
-                                          style: GoogleFonts.montserrat(fontSize: 12, color: Colors.grey),
+                                          exerciseNames.join(', '),
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 12,
+                                              color: Colors.grey),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
-                                    // Botón Start verde degradado
+
+                                    const SizedBox(height: 8),
+
+                                    // Botón Start — navega a RoutineDetailPage
                                     Container(
                                       width: double.infinity,
                                       height: 45,
                                       decoration: const BoxDecoration(
                                         gradient: LinearGradient(
-                                          colors: [Color(0xFF1DB87A), Color.fromARGB(255, 28, 150, 89)],
+                                          colors: [
+                                            Color(0xFF1DB87A),
+                                            Color.fromARGB(255, 28, 150, 89)
+                                          ],
                                           stops: [0.0, 1.0],
                                           begin: AlignmentDirectional(1.0, 0.0),
                                           end: AlignmentDirectional(-1.0, 0),
                                         ),
-                                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                                        boxShadow: [BoxShadow(color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 4))],
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(25)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Color(0x33000000),
+                                              blurRadius: 4,
+                                              offset: Offset(0, 4))
+                                        ],
                                       ),
                                       child: TextButton(
-                                        onPressed: () {
-                                          // próxima pantalla
+                                        onPressed: () async {
+                                          // Navega y espera que vuelva para recargar
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) => RoutineDetailPage(
+                                                  routine: routine),
+                                            ),
+                                          );
+                                          // Al volver, refresca la lista
+                                          _loadRoutines();
                                         },
                                         child: Text(
                                           'Start',
@@ -272,14 +347,17 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
             ),
 
-            // Footer con bordes redondeados y menú de logout
+            // Footer logout
             Container(
               margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: const [BoxShadow(color: Color(0x15000000), blurRadius: 8)],
+                boxShadow: const [
+                  BoxShadow(color: Color(0x15000000), blurRadius: 8)
+                ],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -291,7 +369,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     itemBuilder: (ctx) => [
                       const PopupMenuItem(
                         value: 'logout',
-                        child: Text('Log Out', style: TextStyle(color: Colors.red)),
+                        child: Text('Log Out',
+                            style: TextStyle(color: Colors.red)),
                       ),
                     ],
                     child: Container(
@@ -305,10 +384,19 @@ class _DashboardPageState extends State<DashboardPage> {
                           end: AlignmentDirectional(-1.0, 0),
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(25)),
-                        boxShadow: [BoxShadow(color: Color(0x33000000), blurRadius: 4, offset: Offset(0, 8))],
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color(0x33000000),
+                              blurRadius: 4,
+                              offset: Offset(0, 8))
+                        ],
                       ),
                       child: const Center(
-                        child: Text('• • •', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                        child: Text('• • •',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold)),
                       ),
                     ),
                   ),

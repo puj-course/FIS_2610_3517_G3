@@ -79,4 +79,7 @@ public class StrengthSeriesService {
     public StrengthSeries saveSeries(StrengthSeries serie) {
         return strengthSeriesRepository.save(serie);
     }
+    public void deleteSeries(Long id) {
+    strengthSeriesRepository.deleteById(id);
+    }
 }
