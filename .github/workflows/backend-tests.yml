@@ -43,14 +43,6 @@ jobs:
           test -f target/site/jacoco/jacoco.xml
         working-directory: scr/scrBackend/norafit
 
-      - name: Mostrar exclusiones Sonar configuradas en pom.xml
-        run: |
-          echo "Exclusiones de coverage:"
-          grep -A 12 "sonar.coverage.exclusions" pom.xml || true
-          echo "Exclusiones de análisis:"
-          grep -A 6 "sonar.exclusions" pom.xml || true
-        working-directory: scr/scrBackend/norafit
-
       - name: Analizar en SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
