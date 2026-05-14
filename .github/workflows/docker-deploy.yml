@@ -39,4 +39,6 @@ jobs:
           context: scr/scrBackend/norafit
           file: scr/scrBackend/norafit/Dockerfile
           push: true
-          tags: juanmendozamarquez/norafit-app:latest
+          tags: |
+            juanmendozamarquez/norafit-app:latest
+            juanmendozamarquez/norafit-app:${{ github.sha }}
