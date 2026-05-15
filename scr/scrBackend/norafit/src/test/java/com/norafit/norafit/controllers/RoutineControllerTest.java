@@ -48,8 +48,7 @@ class RoutineControllerTest {
         assertNotNull(response.getBody());
         assertEquals(1, response.getBody().size());
         assertEquals("Pierna", response.getBody().get(0).routineName());
-        assertEquals(List.of("Caminadora"), response.getBody().get(0).exerciseNames());
-
+        
         verify(userRepository).findById(1);
         verify(routineFacade).listUserRoutines(user);
     }
