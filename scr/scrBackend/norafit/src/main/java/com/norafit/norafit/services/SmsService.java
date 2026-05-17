@@ -1,7 +1,7 @@
 package com.norafit.norafit.services;
 
-import java.util.Map;
 import java.security.SecureRandom;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -23,7 +23,6 @@ public class SmsService {
     private String twilioPhoneNumber;
 
     // Genera un OTP de 6 dígitos, lo guarda y envía el SMS.
-    
     public void sendVerificationCode(String toPhoneNumber) {
         String code = generateOtp();
         otpStore.put(toPhoneNumber, code);
@@ -57,7 +56,7 @@ public class SmsService {
         boolean valid = stored.equals(code);
 
         if (valid) {
-            otpStore.remove(phoneNumber); // el código se usa una sola vez
+            otpStore.remove(phoneNumber);
             log.info("[SMS] Código OTP verificado exitosamente para: {}", phoneNumber);
         } else {
             log.warn("[SMS] Código OTP incorrecto para: {} | Esperado: {} | Recibido: {}", phoneNumber, stored, code);
@@ -66,8 +65,7 @@ public class SmsService {
         return valid;
     }
 
-    // Genera un código numérico aleatorio de 6 dígitos.
-     
+    // Genera un código numérico aleatorio de 6 dígitos usando SecureRandom.
     private String generateOtp() {
         SecureRandom random = new SecureRandom();
         int code = 100000 + random.nextInt(900000);
