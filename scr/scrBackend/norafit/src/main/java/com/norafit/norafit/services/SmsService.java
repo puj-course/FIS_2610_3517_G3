@@ -1,7 +1,7 @@
 package com.norafit.norafit.services;
 
 import java.util.Map;
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
