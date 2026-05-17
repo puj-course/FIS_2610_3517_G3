@@ -12,69 +12,70 @@ import com.norafit.norafit.repositories.UserRepository;
 @Service
 public class AuthService {
 
-   private static final Logger log = LoggerFactory.getLogger(AuthService.class);
+    private static final Logger log = LoggerFactory.getLogger(AuthService.class);
 
-   private final UserRepository userRepository;
-   private final SmsService smsService;
+    private final UserRepository userRepository;
+    private final SmsService smsService;
 
-   public AuthService(UserRepository userRepository) {
-      this.userRepository = userRepository;
-      this.smsService = smsService;
-   }
-   
-   //registrar nuevo usuario
-   public User register(String username, String email, String password){
+    public AuthService(UserRepository userRepository, SmsService smsService) {
+        this.userRepository = userRepository;
+        this.smsService = smsService;
+    }
 
-       // 1) Validaciones básicas
-       if (username == null || username.isBlank()) {
-           throw new IllegalArgumentException("El username es obligatorio.");
-       }
-       if (email == null || email.isBlank()) {
-           throw new IllegalArgumentException("El email es obligatorio.");
-       }
-       if (!email.contains("@")) { // validación mínima por ahora
-           throw new IllegalArgumentException("Email inválido.");
-       }
-       if (password == null || password.isBlank()) {
-           throw new IllegalArgumentException("La contraseña es obligatoria.");
-      }
-      if (phoneNumber == null || phoneNumber.isBlank()) {
-          throw new IllegalArgumentException("El número de teléfono es obligatorio.");
-      }
+    /**
+     * Registra un nuevo usuario (sin verificar) y envía SMS con código OTP.
+     * El usuario queda con verified=false hasta completar la verificación.
+     */
+    public User register(String username, String email, String password, String phoneNumber) {
 
-      
-       // 2) Validar que el email no exista
-       if (userRepository.existsByEmail(email)) {
-           throw new IllegalArgumentException("El email ya está registrado.");
-       }
+        // 1) Validaciones básicas
+        if (username == null || username.isBlank()) {
+            throw new IllegalArgumentException("El username es obligatorio.");
+        }
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("El email es obligatorio.");
+        }
+        if (!email.contains("@")) {
+            throw new IllegalArgumentException("Email inválido.");
+        }
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("La contraseña es obligatoria.");
+        }
+        if (phoneNumber == null || phoneNumber.isBlank()) {
+            throw new IllegalArgumentException("El número de teléfono es obligatorio.");
+        }
 
+        // 2) Validar que el email no exista
+        if (userRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("El email ya está registrado.");
+        }
 
-       // 3) Crear el usuario
-       User user = new User();
-       user.setUsername(username);
-       user.setEmail(email);
-       user.setPassword(password); // luego se hashea
-       user.setRole('U');
-       user.setCreatedAt(LocalDate.now());
-       user.setPhoneNumber(phoneNumber);
-       user.setVerified(false);
+        // 3) Crear usuario no verificado
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password); // TODO: hashear en producción
+        user.setRole('U');
+        user.setCreatedAt(LocalDate.now());
+        user.setPhoneNumber(phoneNumber);
+        user.setVerified(false);
 
-       User saved = userRepository.save(user);
-       log.info("[AUTH] Usuario registrado (pendiente verificación): {} | teléfono: {}", email, phoneNumber);
-      
-      // 4) Enviar SMS de verificación
-      smsService.sendVerificationCode(phoneNumber);
+        User saved = userRepository.save(user);
+        log.info("[AUTH] Usuario registrado (pendiente verificación): {} | teléfono: {}", email, phoneNumber);
 
-      return saved;
-   }
+        // 4) Enviar SMS de verificación
+        smsService.sendVerificationCode(phoneNumber);
 
-   // Metodo register original sin el SMS, se mantiene para no romper test existentes.
-   public User register(String username, String email, String password) {
-         return register(username, email, password, "");
-   }
+        return saved;
+    }
 
-   // Verifica el codigo OTP ingresado por el usuario y verifica la cuenta. 
-   public User verifySmsCode(String phoneNumber, String code) {
+   // Método register original (sin SMS) — mantenido para no romper tests existentes. Los tests de AuthService usan esta firma.
+    public User register(String username, String email, String password) {
+        return register(username, email, password, "");
+    }
+
+    // Verifica el código OTP ingresado por el usuario. Si es correcto, marca la cuenta como verificada.
+    public User verifySmsCode(String phoneNumber, String code) {
         if (phoneNumber == null || phoneNumber.isBlank()) {
             throw new IllegalArgumentException("El teléfono es obligatorio.");
         }
@@ -98,8 +99,8 @@ public class AuthService {
 
         return saved;
     }
-
-   // Login que solo permite el acceso a cuentas si estan verificadas.
+    
+   // Login — solo permite el acceso si la cuenta está verificada.
     public User login(String email, String password) {
         if (email == null || email.isBlank()) {
             throw new IllegalArgumentException("El email es obligatorio.");
@@ -123,22 +124,20 @@ public class AuthService {
         log.info("[AUTH] Login exitoso: {}", email);
         return user;
     }
+    
+   // Cambio de contraseña.
+    public User changePassword(String email, String newPassword) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("El email es obligatorio.");
+        }
+        if (newPassword == null || newPassword.isBlank()) {
+            throw new IllegalArgumentException("La nueva contraseña es obligatoria.");
+        }
 
-// Cambio de contrasenas.
-   public User changePassword(String email, String newPassword){
-      if (email == null || email.isBlank()) {
-          throw new IllegalArgumentException("El email es obligatorio.");
-      }
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
-      if (newPassword == null || newPassword.isBlank()) {
-          throw new IllegalArgumentException("La nueva contraseña es obligatoria.");
-      }
-
-      User user = userRepository.findByEmail(email)
-          .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
-
-      user.setPassword(newPassword); // luego se hashea
-      return userRepository.save(user);
-   }
+        user.setPassword(newPassword);
+        return userRepository.save(user);
+    }
 }
-
