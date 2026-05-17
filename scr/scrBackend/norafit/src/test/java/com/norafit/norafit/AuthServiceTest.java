@@ -26,7 +26,6 @@ class AuthServiceTest {
     @Mock
     private UserRepository userRepository;
 
-    // NUEVO: necesario porque AuthService ahora depende de SmsService
     @Mock
     private SmsService smsService;
 
@@ -38,7 +37,7 @@ class AuthServiceTest {
         when(userRepository.existsByEmail("santi@test.com")).thenReturn(false);
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        User result = authService.register("santi", "santi@test.com", "1234");
+        User result = authService.register("santi", "santi@test.com", "1234", "+573000000000");
 
         assertNotNull(result);
         assertEquals("santi", result.getUsername());
@@ -100,7 +99,7 @@ class AuthServiceTest {
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> authService.register("santi", "santi@test.com", "1234")
+                () -> authService.register("santi", "santi@test.com", "1234", "+573000000000")
         );
 
         assertEquals("El email ya está registrado.", exception.getMessage());
