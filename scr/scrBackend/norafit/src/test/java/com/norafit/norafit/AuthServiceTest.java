@@ -18,12 +18,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.norafit.norafit.entities.User;
 import com.norafit.norafit.repositories.UserRepository;
 import com.norafit.norafit.services.AuthService;
+import com.norafit.norafit.services.SmsService;
 
 @ExtendWith(MockitoExtension.class)
 class AuthServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    // NUEVO: necesario porque AuthService ahora depende de SmsService
+    @Mock
+    private SmsService smsService;
 
     @InjectMocks
     private AuthService authService;
@@ -108,6 +113,7 @@ class AuthServiceTest {
         user.setEmail("santi@test.com");
         user.setPassword("1234");
         user.setUsername("santi");
+        user.setVerified(true); // NUEVO: el login requiere cuenta verificada
 
         when(userRepository.findByEmail("santi@test.com")).thenReturn(Optional.of(user));
 
@@ -154,6 +160,7 @@ class AuthServiceTest {
         User user = new User();
         user.setEmail("santi@test.com");
         user.setPassword("1234");
+        user.setVerified(true); // NUEVO: necesario para que llegue a validar la contraseña
 
         when(userRepository.findByEmail("santi@test.com")).thenReturn(Optional.of(user));
 
