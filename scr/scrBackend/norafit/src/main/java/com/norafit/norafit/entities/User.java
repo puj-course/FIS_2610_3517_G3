@@ -26,6 +26,7 @@ public class User {
 
     @Column(name = "password")
     private String password;
+    
     private char role;
 
     @Column(name = "created_at") 
@@ -33,6 +34,12 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "verified")
+    private Boolean verified = false;
 
     @OneToMany(mappedBy = "user")
     @Transient
@@ -50,6 +57,8 @@ public class User {
         this.role = role;
         this.created_at = createdAt;
         this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.verified = false;
     }
 
     // Constructor completo
@@ -120,5 +129,19 @@ public class User {
     }
     public void setRoutines(List<Routine> routines) {
         this.routines = routines;
+    }
+
+    public String getPhoneNumber() { 
+        return phoneNumber; 
+    }
+    public void setPhoneNumber(String phoneNumber) { 
+        this.phoneNumber = phoneNumber; 
+    }
+
+    public boolean isVerified() { 
+        return verified; 
+    }
+    public void setVerified(boolean verified) { 
+        this.verified = verified; 
     }
 }
