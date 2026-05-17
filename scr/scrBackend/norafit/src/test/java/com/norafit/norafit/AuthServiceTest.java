@@ -70,8 +70,9 @@ class AuthServiceTest {
     void register_WhenDataIsValid_ShouldCreateUser() {
         when(userRepository.existsByEmail("santi@test.com")).thenReturn(false);
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        doNothing().when(smsService).sendVerificationCode("+573000000000");
 
-        User result = authService.register("santi", "santi@test.com", "1234");
+        User result = authService.register("santi", "santi@test.com", "1234", "+573000000000");
 
         assertNotNull(result);
         assertEquals("santi", result.getUsername());
@@ -79,8 +80,10 @@ class AuthServiceTest {
         assertEquals("1234", result.getPassword());
         assertEquals('U', result.getRole());
         assertNotNull(result.getCreatedAt());
+        assertFalse(result.isVerified());
 
         verify(userRepository).save(any(User.class));
+        verify(smsService).sendVerificationCode("+573000000000");
     }
 
     @Test
