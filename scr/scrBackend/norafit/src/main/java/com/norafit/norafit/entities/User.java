@@ -57,8 +57,6 @@ public class User {
         this.role = role;
         this.created_at = createdAt;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.verified = false;
     }
 
     // Constructor completo
