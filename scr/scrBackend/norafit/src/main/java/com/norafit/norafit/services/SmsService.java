@@ -18,6 +18,7 @@ public class SmsService {
     private static final Logger log = LoggerFactory.getLogger(SmsService.class);
 
     private final Map<String, String> otpStore = new ConcurrentHashMap<>();
+    private final SecureRandom random = new SecureRandom();
 
     @Value("${twilio.phone-number}")
     private String twilioPhoneNumber;
@@ -67,7 +68,6 @@ public class SmsService {
 
     // Genera un código numérico aleatorio de 6 dígitos usando SecureRandom.
     private String generateOtp() {
-        SecureRandom random = new SecureRandom();
         int code = 100000 + random.nextInt(900000);
         return String.valueOf(code);
     }
