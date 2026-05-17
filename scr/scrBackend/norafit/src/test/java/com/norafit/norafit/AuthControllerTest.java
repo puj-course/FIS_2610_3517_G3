@@ -30,21 +30,23 @@ class AuthControllerTest {
         user.setRole('U');
         user.setCreatedAt(LocalDate.of(2026, 5, 12));
 
-        when(authService.register("Santiago", "santiago@test.com", "1234"))
+        // NUEVO: RegisterRequest ahora tiene 4 campos (phoneNumber añadido)
+        when(authService.register("Santiago", "santiago@test.com", "1234", "+573000000000"))
                 .thenReturn(user);
 
-        ResponseEntity<UserResponse> response = controller.register(
-                new RegisterRequest("Santiago", "santiago@test.com", "1234")
+        ResponseEntity<?> response = controller.register(
+                new RegisterRequest("Santiago", "santiago@test.com", "1234", "+573000000000")
         );
 
         assertEquals(200, response.getStatusCode().value());
         assertNotNull(response.getBody());
-        assertEquals(1L, response.getBody().id());
-        assertEquals("Santiago", response.getBody().username());
-        assertEquals("santiago@test.com", response.getBody().email());
-        assertEquals('U', response.getBody().role());
+        UserResponse body = (UserResponse) response.getBody();
+        assertEquals(1L, body.id());
+        assertEquals("Santiago", body.username());
+        assertEquals("santiago@test.com", body.email());
+        assertEquals('U', body.role());
 
-        verify(authService).register("Santiago", "santiago@test.com", "1234");
+        verify(authService).register("Santiago", "santiago@test.com", "1234", "+573000000000");
     }
 
     @Test
@@ -62,14 +64,15 @@ class AuthControllerTest {
         when(authService.login("user@test.com", "abcd"))
                 .thenReturn(user);
 
-        ResponseEntity<UserResponse> response = controller.login(
+        ResponseEntity<?> response = controller.login(
                 new LoginRequest("user@test.com", "abcd")
         );
 
         assertEquals(200, response.getStatusCode().value());
         assertNotNull(response.getBody());
-        assertEquals(2L, response.getBody().id());
-        assertEquals("Usuario", response.getBody().username());
+        UserResponse body = (UserResponse) response.getBody();
+        assertEquals(2L, body.id());
+        assertEquals("Usuario", body.username());
 
         verify(authService).login("user@test.com", "abcd");
     }
@@ -89,14 +92,15 @@ class AuthControllerTest {
         when(authService.changePassword("cambio@test.com", "nueva123"))
                 .thenReturn(user);
 
-        ResponseEntity<UserResponse> response = controller.changePassword(
+        ResponseEntity<?> response = controller.changePassword(
                 new ChangePasswordRequest("cambio@test.com", "nueva123")
         );
 
         assertEquals(200, response.getStatusCode().value());
         assertNotNull(response.getBody());
-        assertEquals(3L, response.getBody().id());
-        assertEquals("Cambio", response.getBody().username());
+        UserResponse body = (UserResponse) response.getBody();
+        assertEquals(3L, body.id());
+        assertEquals("Cambio", body.username());
 
         verify(authService).changePassword("cambio@test.com", "nueva123");
     }
