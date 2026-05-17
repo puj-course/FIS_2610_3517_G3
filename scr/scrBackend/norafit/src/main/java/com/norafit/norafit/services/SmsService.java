@@ -69,7 +69,7 @@ public class SmsService {
     // Genera un código numérico aleatorio de 6 dígitos.
      
     private String generateOtp() {
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         int code = 100000 + random.nextInt(900000);
         return String.valueOf(code);
     }
