@@ -76,14 +76,14 @@ public class BusinessRuleViolationMetric {
     }
 
     public BusinessRuleReport getReport() {
-        double brvr = totalOperations > 0 ? (double) totalViolations / totalOperations * 100.0 : 0.0;###
+        double brvr = totalOperations > 0 ? (double) totalViolations / totalOperations * 100.0 : 0.0;
         String status = brvr == 0 ? "IDEAL — Sin violaciones" :
                         brvr <= 5  ? "ACEPTABLE" :
                         brvr <= 15 ? "MODERADO — Revisar validaciones" :
                                      "CRÍTICO — Fallas sistemáticas";
         logger.info(String.format("[BusinessRuleMetric] ops=%d | violaciones=%d | BRVR=%.2f%% | %s",
             totalOperations, totalViolations, brvr, status));
-        return new BusinessRuleReport(totalOperations, totalViolations, brvr, status,###
+        return new BusinessRuleReport(totalOperations, totalViolations, brvr, status,
             Collections.unmodifiableList(violationLog));
     }
 
