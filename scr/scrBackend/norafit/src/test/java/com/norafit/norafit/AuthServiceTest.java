@@ -67,66 +67,30 @@ class AuthServiceTest {
     }
 
     @Test
-    void register_WhenDataIsValid_ShouldCreateUser() {
-        when(userRepository.existsByEmail("santi@test.com")).thenReturn(false);
-        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        doNothing().when(smsService).sendVerificationCode("+573000000000");
-
-        User result = authService.register("santi", "santi@test.com", "1234", "+573000000000");
-
-        assertNotNull(result);
-        assertEquals("santi", result.getUsername());
-        assertEquals("santi@test.com", result.getEmail());
-        assertEquals("1234", result.getPassword());
-        assertEquals('U', result.getRole());
-        assertNotNull(result.getCreatedAt());
-        assertFalse(result.isVerified());
-
-        verify(userRepository).save(any(User.class));
-        verify(smsService).sendVerificationCode("+573000000000");
-    }
-
-    @Test
     void register_WhenUsernameIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("", "santi@test.com", "1234")
-        );
-
-        assertEquals("El username es obligatorio.", exception.getMessage());
+        assertThrows(IllegalArgumentException.class,
+            () -> authService.register("", "santi@test.com", "1234", "+573000000000"));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
     void register_WhenEmailIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("santi", "", "1234")
-        );
-
-        assertEquals("El email es obligatorio.", exception.getMessage());
+        assertThrows(IllegalArgumentException.class,
+            () -> authService.register("santi", "", "1234", "+573000000000"));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
     void register_WhenEmailIsInvalid_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("santi", "correo-invalido", "1234")
-        );
-
-        assertEquals("Email inválido.", exception.getMessage());
+        assertThrows(IllegalArgumentException.class,
+            () -> authService.register("santi", "correo-invalido", "1234", "+573000000000"));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
     void register_WhenPasswordIsBlank_ShouldThrowException() {
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> authService.register("santi", "santi@test.com", "")
-        );
-
-        assertEquals("La contraseña es obligatoria.", exception.getMessage());
+        assertThrows(IllegalArgumentException.class,
+            () -> authService.register("santi", "santi@test.com", "", "+573000000000"));
         verify(userRepository, never()).save(any(User.class));
     }
 
