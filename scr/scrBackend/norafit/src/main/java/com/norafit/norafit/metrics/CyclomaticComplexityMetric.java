@@ -12,7 +12,7 @@ public class CyclomaticComplexityMetric {
 public ComplexityResult analyze(String sourceCode, String methodName) {
         if (sourceCode == null || sourceCode.isBlank())
             throw new IllegalArgumentException("El código fuente no puede estar vacío.");
-int cc = 1;
+int cc = 1; //
 cc += countOccurrences(sourceCode, "if ");
 cc += countOccurrences(sourceCode, "else if ");
 cc += countOccurrences(sourceCode, "} else {");
@@ -26,7 +26,7 @@ cc += countOccurrences(sourceCode, "? ");
 
         String classification = classify(cc);
         String recommendation = recommend(cc);
-        ComplexityResult result = new ComplexityResult(methodName, cc, classification, recommendation);
+        ComplexityResult result = new ComplexityResult(methodName, cc, classification, recommendation);//
         logger.info(String.format("[CyclomaticComplexityMetric] %s → CC=%d | %s",
             methodName, cc, classification));
         return result;
