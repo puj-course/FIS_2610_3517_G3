@@ -152,4 +152,75 @@ class StrengthSeriesServiceTest {
         assertEquals("El peso no puede ser negativo.", exception.getMessage());
         verify(strengthSeriesRepository, never()).save(any(StrengthSeries.class));
     }
+
+    @Test
+void createSeries_WhenSeriesNumberIsInvalid_ShouldThrowException() {
+    StrengthExercise exercise = new StrengthExercise();
+
+    IllegalArgumentException exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> strengthSeriesService.createSeries(exercise, 0, 12, 30, 60)
+    );
+
+    assertEquals("El número de serie debe ser mayor a 0.", exception.getMessage());
+    verify(strengthSeriesRepository, never()).save(any(StrengthSeries.class));
+}
+
+@Test
+void createSeries_WhenRestTimeIsNegative_ShouldThrowException() {
+    StrengthExercise exercise = new StrengthExercise();
+
+    IllegalArgumentException exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> strengthSeriesService.createSeries(exercise, 1, 12, 30, -1)
+    );
+
+    assertEquals("El descanso no puede ser negativo.", exception.getMessage());
+    verify(strengthSeriesRepository, never()).save(any(StrengthSeries.class));
+}
+
+@Test
+void updateRepetitions_WhenSeriesDoesNotExist_ShouldThrowException() {
+    when(strengthSeriesRepository.findById(99L)).thenReturn(Optional.empty());
+
+    RuntimeException exception = assertThrows(
+            RuntimeException.class,
+            () -> strengthSeriesService.updateRepetitions(99L, 15)
+    );
+
+    assertEquals("No existe la serie de fuerza con ID 99", exception.getMessage());
+    verify(strengthSeriesRepository, never()).save(any(StrengthSeries.class));
+}
+
+@Test
+void updateWeight_WhenSeriesDoesNotExist_ShouldThrowException() {
+    when(strengthSeriesRepository.findById(99L)).thenReturn(Optional.empty());
+
+    RuntimeException exception = assertThrows(
+            RuntimeException.class,
+            () -> strengthSeriesService.updateWeight(99L, 40)
+    );
+
+    assertEquals("No existe la serie de fuerza con ID 99", exception.getMessage());
+    verify(strengthSeriesRepository, never()).save(any(StrengthSeries.class));
+}
+
+@Test
+void saveSeries_ShouldCallRepositorySave() {
+    StrengthSeries series = new StrengthSeries();
+
+    when(strengthSeriesRepository.save(series)).thenReturn(series);
+
+    StrengthSeries result = strengthSeriesService.saveSeries(series);
+
+    assertEquals(series, result);
+    verify(strengthSeriesRepository).save(series);
+}
+
+@Test
+void deleteSeries_ShouldCallRepositoryDeleteById() {
+    strengthSeriesService.deleteSeries(10L);
+
+    verify(strengthSeriesRepository).deleteById(10L);
+}
 }
