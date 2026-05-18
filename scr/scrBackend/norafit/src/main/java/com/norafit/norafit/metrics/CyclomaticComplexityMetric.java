@@ -14,7 +14,7 @@ public class CyclomaticComplexityMetric {
         if (sourceCode == null || sourceCode.isBlank())
             throw new IllegalArgumentException("El código fuente no puede estar vacío.");
 
-        int cc = 1;
+        int cc = 1;###
         cc += countOccurrences(sourceCode, "if ");
         cc += countOccurrences(sourceCode, "else if ");
         cc += countOccurrences(sourceCode, "} else {");
