@@ -15,7 +15,7 @@ public class BusinessRuleViolationMetric {
     public static final int    MIN_REPETITIONS         = 1;
     public static final int    MAX_ROUTINES_PER_USER   = 50;
 
-    private int totalOperations = 0;###
+    private int totalOperations = 0;
     private int totalViolations = 0;
     private final List<ViolationEvent> violationLog = new ArrayList<>();
 
