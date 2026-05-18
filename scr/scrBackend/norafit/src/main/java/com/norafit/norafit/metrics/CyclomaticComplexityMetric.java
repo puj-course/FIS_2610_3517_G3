@@ -9,22 +9,20 @@ public class CyclomaticComplexityMetric {
 
     public static final int CC_LOW_THRESHOLD    = 10;
     public static final int CC_MEDIUM_THRESHOLD = 20;
-
-        public ComplexityResult analyze(String sourceCode, String methodName) {
+public ComplexityResult analyze(String sourceCode, String methodName) {
         if (sourceCode == null || sourceCode.isBlank())
             throw new IllegalArgumentException("El código fuente no puede estar vacío.");
-
-        int cc = 1;
-        cc += countOccurrences(sourceCode, "if ");
-        cc += countOccurrences(sourceCode, "else if ");
-        cc += countOccurrences(sourceCode, "} else {");
-        cc += countOccurrences(sourceCode, "while ");
-        cc += countOccurrences(sourceCode, "for ");
-        cc += countOccurrences(sourceCode, "case ");
-        cc += countOccurrences(sourceCode, "catch ");
-        cc += countOccurrences(sourceCode, "&&");
-        cc += countOccurrences(sourceCode, "||");
-        cc += countOccurrences(sourceCode, "? ");
+int cc = 1;
+cc += countOccurrences(sourceCode, "if ");
+cc += countOccurrences(sourceCode, "else if ");
+cc += countOccurrences(sourceCode, "} else {");
+cc += countOccurrences(sourceCode, "while ");
+cc += countOccurrences(sourceCode, "for ");
+cc += countOccurrences(sourceCode, "case ");
+cc += countOccurrences(sourceCode, "catch ");
+cc += countOccurrences(sourceCode, "&&");
+cc += countOccurrences(sourceCode, "||");
+cc += countOccurrences(sourceCode, "? ");
 
         String classification = classify(cc);
         String recommendation = recommend(cc);
