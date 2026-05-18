@@ -110,7 +110,7 @@ public class consoleApp {
         System.out.print("Password: ");
         String password = sc.nextLine();
 
-        User creado = authService.register(username, email, password);
+        User creado = authService.register(username, email, password, "");
         System.out.println("Usuario registrado: " + creado.getUsername());
     }
 
