@@ -15,7 +15,7 @@ public class BusinessRuleViolationMetric {
     public static final int    MIN_REPETITIONS         = 1;
     public static final int    MAX_ROUTINES_PER_USER   = 50;
 
-    private int totalOperations = 0;
+    private int totalOperations = 0;//
     private int totalViolations = 0;
     private final List<ViolationEvent> violationLog = new ArrayList<>();
 
@@ -76,7 +76,7 @@ public class BusinessRuleViolationMetric {
     }
 
     public BusinessRuleReport getReport() {
-        double brvr = totalOperations > 0 ? (double) totalViolations / totalOperations * 100.0 : 0.0;
+        double brvr = totalOperations > 0 ? (double) totalViolations / totalOperations * 100.0 : 0.0;//
         String status = brvr == 0 ? "IDEAL — Sin violaciones" :
                         brvr <= 5  ? "ACEPTABLE" :
                         brvr <= 15 ? "MODERADO — Revisar validaciones" :
@@ -84,7 +84,7 @@ public class BusinessRuleViolationMetric {
         logger.info(String.format("[BusinessRuleMetric] ops=%d | violaciones=%d | BRVR=%.2f%% | %s",
             totalOperations, totalViolations, brvr, status));
         return new BusinessRuleReport(totalOperations, totalViolations, brvr, status,
-            Collections.unmodifiableList(violationLog));
+            Collections.unmodifiableList(violationLog));//
     }
 
     public void reset() {
