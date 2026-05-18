@@ -35,8 +35,10 @@ class AuthServiceTest {
     @InjectMocks
     private AuthService authService;
 
+    // ---- REGISTER ----
+
     @Test
-    void register_WithPhone_WhenDataIsValid_ShouldCreateUserAndSendSms() {
+    void register_WhenDataIsValid_ShouldCreateUserAndSendSms() {
         when(userRepository.existsByEmail("santi@test.com")).thenReturn(false);
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
         doNothing().when(smsService).sendVerificationCode("+573000000000");
@@ -56,41 +58,57 @@ class AuthServiceTest {
     }
 
     @Test
-    void register_WithPhone_WhenPhoneIsBlank_ShouldThrowException() {
+    void register_WhenUsernameIsBlank_ShouldThrowException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> authService.register("", "santi@test.com", "1234", "+573000000000")
+        );
+
+        assertEquals("El username es obligatorio.", exception.getMessage());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void register_WhenEmailIsBlank_ShouldThrowException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> authService.register("santi", "", "1234", "+573000000000")
+        );
+
+        assertEquals("El email es obligatorio.", exception.getMessage());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void register_WhenEmailIsInvalid_ShouldThrowException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> authService.register("santi", "correo-invalido", "1234", "+573000000000")
+        );
+
+        assertEquals("Email inválido.", exception.getMessage());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void register_WhenPasswordIsBlank_ShouldThrowException() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> authService.register("santi", "santi@test.com", "", "+573000000000")
+        );
+
+        assertEquals("La contraseña es obligatoria.", exception.getMessage());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void register_WhenPhoneIsBlank_ShouldThrowException() {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> authService.register("santi", "santi@test.com", "1234", "")
         );
 
         assertEquals("El número de teléfono es obligatorio.", exception.getMessage());
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenUsernameIsBlank_ShouldThrowException() {
-        assertThrows(IllegalArgumentException.class,
-            () -> authService.register("", "santi@test.com", "1234", "+573000000000"));
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenEmailIsBlank_ShouldThrowException() {
-        assertThrows(IllegalArgumentException.class,
-            () -> authService.register("santi", "", "1234", "+573000000000"));
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenEmailIsInvalid_ShouldThrowException() {
-        assertThrows(IllegalArgumentException.class,
-            () -> authService.register("santi", "correo-invalido", "1234", "+573000000000"));
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void register_WhenPasswordIsBlank_ShouldThrowException() {
-        assertThrows(IllegalArgumentException.class,
-            () -> authService.register("santi", "santi@test.com", "", "+573000000000"));
         verify(userRepository, never()).save(any(User.class));
     }
 
@@ -106,6 +124,8 @@ class AuthServiceTest {
         assertEquals("El email ya está registrado.", exception.getMessage());
         verify(userRepository, never()).save(any(User.class));
     }
+
+    // ---- VERIFY SMS ----
 
     @Test
     void verifySmsCode_WhenCodeIsCorrect_ShouldActivateAccount() {
@@ -156,6 +176,8 @@ class AuthServiceTest {
 
         assertEquals("El código es obligatorio.", exception.getMessage());
     }
+
+    // ---- LOGIN ----
 
     @Test
     void login_WhenCredentialsAreValid_ShouldReturnUser() {
@@ -238,6 +260,8 @@ class AuthServiceTest {
 
         assertEquals("Contraseña incorrecta.", exception.getMessage());
     }
+
+    // ---- CHANGE PASSWORD ----
 
     @Test
     void changePassword_WhenUserExists_ShouldUpdatePassword() {
