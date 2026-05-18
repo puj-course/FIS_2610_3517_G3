@@ -18,7 +18,7 @@ public class PerformanceMetric {
     private final Map<String, AtomicLong>    invocationCount = new ConcurrentHashMap<>();
     private final Map<String, Long>          startTimestamps = new ConcurrentHashMap<>();
 
-   ### public void startOperation(String operationName) {
+   public void startOperation(String operationName) {
         startTimestamps.put(operationName, System.nanoTime()); ###
         invocationCount.computeIfAbsent(operationName, k -> new AtomicLong(0)).incrementAndGet();
         latencyRecords.computeIfAbsent(operationName, k -> Collections.synchronizedList(new ArrayList<>()));
@@ -37,9 +37,9 @@ public class PerformanceMetric {
     public PerformanceReport getReport(String operationName) {
         List<Long> records = latencyRecords.getOrDefault(operationName, Collections.emptyList());
         if (records.isEmpty())
-            throw new IllegalStateException("No hay registros de latencia para: " + operationName);###
+            throw new IllegalStateException("No hay registros de latencia para: " + operationName);
 
-        List<Long> sorted = new ArrayList<>(records);###
+        List<Long> sorted = new ArrayList<>(records);
         Collections.sort(sorted);
         long   min        = sorted.get(0);
         long   max        = sorted.get(sorted.size() - 1);
