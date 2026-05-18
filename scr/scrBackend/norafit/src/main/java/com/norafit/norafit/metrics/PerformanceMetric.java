@@ -19,7 +19,7 @@ public class PerformanceMetric {
     private final Map<String, Long>          startTimestamps = new ConcurrentHashMap<>();
 
    public void startOperation(String operationName) {
-        startTimestamps.put(operationName, System.nanoTime()); ###
+        startTimestamps.put(operationName, System.nanoTime());
         invocationCount.computeIfAbsent(operationName, k -> new AtomicLong(0)).incrementAndGet();
         latencyRecords.computeIfAbsent(operationName, k -> Collections.synchronizedList(new ArrayList<>()));
     }
@@ -28,7 +28,7 @@ public class PerformanceMetric {
         Long startNano = startTimestamps.get(operationName);
         if (startNano == null)
             throw new IllegalStateException("No se encontró inicio de operación para: " + operationName);
-        long elapsedMs = (System.nanoTime() - startNano) / 1_000_000L;###
+        long elapsedMs = (System.nanoTime() - startNano) / 1_000_000L;
         latencyRecords.get(operationName).add(elapsedMs);
         logger.info(String.format("[PerformanceMetric] %s → %dms", operationName, elapsedMs));
         return elapsedMs;
