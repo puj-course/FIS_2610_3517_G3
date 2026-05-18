@@ -13,6 +13,7 @@ import com.norafit.norafit.dto.request.ChangePasswordRequest;
 import com.norafit.norafit.dto.request.LoginRequest;
 import com.norafit.norafit.dto.request.RegisterRequest;
 import com.norafit.norafit.dto.response.UserResponse;
+import com.norafit.norafit.dto.request.VerifySmsRequest;
 import com.norafit.norafit.entities.User;
 import com.norafit.norafit.services.AuthService;
 
