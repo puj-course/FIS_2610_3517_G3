@@ -104,4 +104,33 @@ class AuthControllerTest {
 
         verify(authService).changePassword("cambio@test.com", "nueva123");
     }
+
+    @Test
+    void verifySms_ShouldReturnUserResponse() {
+        AuthService authService = mock(AuthService.class);
+        AuthController controller = new AuthController(authService);
+
+        User user = new User();
+        user.setId(4);
+        user.setUsername("Verificado");
+        user.setEmail("verificado@test.com");
+        user.setRole('U');
+        user.setCreatedAt(LocalDate.of(2026, 5, 12));
+        user.setVerified(true);
+
+        when(authService.verifySmsCode("+573000000000", "123456"))
+                .thenReturn(user);
+
+        ResponseEntity<?> response = controller.verifySms(
+                new VerifySmsRequest("+573000000000", "123456")
+        );
+
+        assertEquals(200, response.getStatusCode().value());
+        assertNotNull(response.getBody());
+        UserResponse body = (UserResponse) response.getBody();
+        assertEquals(4L, body.id());
+        assertEquals("Verificado", body.username());
+
+        verify(authService).verifySmsCode("+573000000000", "123456");
+    }
 }
