@@ -69,11 +69,6 @@ public class AuthService {
         return saved;
     }
 
-   // Método register original (sin SMS) — mantenido para no romper tests existentes. Los tests de AuthService usan esta firma.
-    public User register(String username, String email, String password) {
-        return register(username, email, password, "");
-    }
-
     // Verifica el código OTP ingresado por el usuario. Si es correcto, marca la cuenta como verificada.
     public User verifySmsCode(String phoneNumber, String code) {
         if (phoneNumber == null || phoneNumber.isBlank()) {
