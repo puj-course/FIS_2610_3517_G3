@@ -18,3 +18,4 @@ public class NorafitApplication {
         return args -> consoleApp.start();
     }
 }
+//comentario de prueba para bot de telegram
